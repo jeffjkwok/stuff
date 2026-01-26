@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsx",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "fetch-cards": "tsx src/scripts/fetchWotcCards.ts"
   },
   "dependencies": {
     "dotenv": "^17.2.3",
