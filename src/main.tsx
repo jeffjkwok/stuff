@@ -8,3 +8,8 @@ createRoot(document.getElementById('root')!).render(
     <App />
   </StrictMode>,
 )
+
+// To double check that App is not double invoking effects in non-dev Environments
+// createRoot(document.getElementById('root')!).render(
+//   <App />
+// )
