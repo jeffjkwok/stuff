@@ -1,0 +1,61 @@
+@use '@/styles/variables' as *;
+
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+}
+
+.error {
+  color: #ef4444;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.cardImage {
+  width: 100%;
+  display: block;
+}
+
+.cardInfo {
+  padding: 0.75rem;
+}
+
+.cardName {
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.cardSet {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.cardRarity {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #7c3aed;
+  font-weight: 500;
+}

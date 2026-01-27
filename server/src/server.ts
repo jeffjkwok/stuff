@@ -17,6 +17,10 @@ app.get('/api/health', (req, res) => {
     });
 })
 
+app.get('/api/cards', (req, res) => {
+    res.json(mockCards)
+})
+
 app.get('/api/cards/:id', async (req, res) => {
     try {
         const { id } = req.params;

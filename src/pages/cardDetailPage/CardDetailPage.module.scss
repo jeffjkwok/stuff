@@ -1,0 +1,67 @@
+@use '@/styles/variables' as *;
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+}
+
+.error {
+  color: #ef4444;
+}
+
+.backButton {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background: $primary-color;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  transition: background 0.2s;
+
+  &:hover {
+    background: darken($primary-color, 10%);
+  }
+}
+
+.cardDetail {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.largeImage {
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cardInfo {
+  flex: 1;
+
+  h2 {
+    margin-top: 0;
+    color: $text-primary;
+  }
+
+  p {
+    margin: 0.5rem 0;
+    color: $text-secondary;
+
+    strong {
+      color: $text-primary;
+    }
+  }
+}
