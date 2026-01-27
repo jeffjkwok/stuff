@@ -1,6 +1,7 @@
 import express from 'express';
-import 'dotenv/config'
-import mockCards from './data/mock-cards.json'
+import 'dotenv/config';
+import mockCards from './data/mock-cards.json';
+import nationalDex from  './data/national-dex.json';
 
 const app = express();
 const PORT = 3001;
@@ -19,6 +20,10 @@ app.get('/api/health', (req, res) => {
 
 app.get('/api/cards', (req, res) => {
     res.json(mockCards)
+})
+
+app.get('/api/nationaldex', (req, res) => {
+    res.json(nationalDex)
 })
 
 app.get('/api/cards/:id', async (req, res) => {

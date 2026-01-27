@@ -1,4 +1,5 @@
-import CardGrid from '../../components/CardGrid';
+import NationalDexGrid from '@/components/NationalDexGrid/NationalDexGrid';
+// import CardGrid from '../../components/CardGrid';
 import styles from './HomePage.module.scss'
 
 export default function HomePage() {
@@ -6,8 +7,10 @@ export default function HomePage() {
         <div>
             <header className={styles.header}>
                 <h1>PokeProject</h1>
+                <p>Nationaldex Card Tracker</p>
             </header>
-            <CardGrid />
+            {/* <CardGrid /> */}
+            <NationalDexGrid />
         </div>
     )
 }
