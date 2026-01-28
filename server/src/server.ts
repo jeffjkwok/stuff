@@ -18,7 +18,6 @@ app.get('/api/health', (req, res) => {
     });
 })
 
-
 app.get('/api/cards', (req, res) => {
     res.json(mockCards)
 })

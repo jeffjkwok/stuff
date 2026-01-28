@@ -6,6 +6,8 @@ interface Pokemon {
     name: string;
     generation: number;
     region: string;
+    sprite: string;
+    originalArtwork: string;
 }
 
 export default function NationalDexGrid() {
@@ -40,6 +42,7 @@ export default function NationalDexGrid() {
                     <div className={styles.cardInfo}>
                         <h3 className={styles.cardName}>{pokemon.name}</h3>
                         <p className={styles.cardSet}>{pokemon.id}</p>
+                        <img src={pokemon.sprite} alt="" />
                     </div>
                 </div>
             ))

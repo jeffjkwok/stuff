@@ -35,7 +35,7 @@ async function fetchAllSpritesAndUpdateJson() {
                     ...pokemon,
                     // Adjust the path here if you want a different sprite variant
                     sprite: apiData.sprites?.front_default ?? null,
-                    originArtwork: apiData.sprites?.other?.["official-artwork"]?.front_default ?? null
+                    originalArtwork: apiData.sprites?.other?.["official-artwork"]?.front_default ?? null
                 };
 
             } catch (err) {
