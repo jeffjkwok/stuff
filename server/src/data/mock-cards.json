@@ -1,1052 +1,1052 @@
 [
-    {
-      "id": "base1-4",
-      "name": "Charizard",
-      "nationalPokedexNumbers": [6],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/4.png",
-        "large": "https://images.pokemontcg.io/base1/4_hires.png"
-      },
-      "hp": "120",
-      "types": ["Fire"],
-      "number": "4",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare Holo"
+  {
+    "id": "base1-4",
+    "name": "Charizard",
+    "nationalPokedexNumbers": [6],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/4.png",
+      "large": "https://images.pokemontcg.io/base1/4_hires.png"
     },
-    {
-      "id": "base1-2",
-      "name": "Blastoise",
-      "nationalPokedexNumbers": [9],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/2.png",
-        "large": "https://images.pokemontcg.io/base1/2_hires.png"
-      },
-      "hp": "100",
-      "types": ["Water"],
-      "number": "2",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare Holo"
+    "hp": "120",
+    "types": ["Fire"],
+    "number": "4",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
     },
-    {
-      "id": "base1-15",
-      "name": "Venusaur",
-      "nationalPokedexNumbers": [3],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/15.png",
-        "large": "https://images.pokemontcg.io/base1/15_hires.png"
-      },
-      "hp": "100",
-      "types": ["Grass"],
-      "number": "15",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare Holo"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "base1-2",
+    "name": "Blastoise",
+    "nationalPokedexNumbers": [9],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/2.png",
+      "large": "https://images.pokemontcg.io/base1/2_hires.png"
     },
-    {
-      "id": "base1-58",
-      "name": "Pikachu",
-      "nationalPokedexNumbers": [25],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/58.png",
-        "large": "https://images.pokemontcg.io/base1/58_hires.png"
-      },
-      "hp": "40",
-      "types": ["Lightning"],
-      "number": "58",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Common"
+    "hp": "100",
+    "types": ["Water"],
+    "number": "2",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
     },
-    {
-      "id": "base1-1",
-      "name": "Alakazam",
-      "nationalPokedexNumbers": [65],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/1.png",
-        "large": "https://images.pokemontcg.io/base1/1_hires.png"
-      },
-      "hp": "80",
-      "types": ["Psychic"],
-      "number": "1",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare Holo"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "base1-15",
+    "name": "Venusaur",
+    "nationalPokedexNumbers": [3],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/15.png",
+      "large": "https://images.pokemontcg.io/base1/15_hires.png"
     },
-    {
-      "id": "base1-16",
-      "name": "Ninetales",
-      "nationalPokedexNumbers": [38],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/16.png",
-        "large": "https://images.pokemontcg.io/base1/16_hires.png"
-      },
-      "hp": "80",
-      "types": ["Fire"],
-      "number": "16",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare Holo"
+    "hp": "100",
+    "types": ["Grass"],
+    "number": "15",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
     },
-    {
-      "id": "base1-3",
-      "name": "Chansey",
-      "nationalPokedexNumbers": [113],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/3.png",
-        "large": "https://images.pokemontcg.io/base1/3_hires.png"
-      },
-      "hp": "120",
-      "types": ["Colorless"],
-      "number": "3",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare Holo"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "base1-58",
+    "name": "Pikachu",
+    "nationalPokedexNumbers": [25],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/58.png",
+      "large": "https://images.pokemontcg.io/base1/58_hires.png"
     },
-    {
-      "id": "base1-8",
-      "name": "Mewtwo",
-      "nationalPokedexNumbers": [150],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/8.png",
-        "large": "https://images.pokemontcg.io/base1/8_hires.png"
-      },
-      "hp": "60",
-      "types": ["Psychic"],
-      "number": "8",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare Holo"
+    "hp": "40",
+    "types": ["Lightning"],
+    "number": "58",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
     },
-    {
-      "id": "base1-7",
-      "name": "Hitmonchan",
-      "nationalPokedexNumbers": [107],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/7.png",
-        "large": "https://images.pokemontcg.io/base1/7_hires.png"
-      },
-      "hp": "70",
-      "types": ["Fighting"],
-      "number": "7",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare Holo"
+    "rarity": "Common"
+  },
+  {
+    "id": "base1-1",
+    "name": "Alakazam",
+    "nationalPokedexNumbers": [65],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/1.png",
+      "large": "https://images.pokemontcg.io/base1/1_hires.png"
     },
-    {
-      "id": "base1-10",
-      "name": "Meowth",
-      "nationalPokedexNumbers": [52],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/10.png",
-        "large": "https://images.pokemontcg.io/base1/10_hires.png"
-      },
-      "hp": "50",
-      "types": ["Colorless"],
-      "number": "10",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare Holo"
+    "hp": "80",
+    "types": ["Psychic"],
+    "number": "1",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
     },
-    {
-      "id": "base1-14",
-      "name": "Zapdos",
-      "nationalPokedexNumbers": [145],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/14.png",
-        "large": "https://images.pokemontcg.io/base1/14_hires.png"
-      },
-      "hp": "90",
-      "types": ["Lightning"],
-      "number": "14",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare Holo"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "base1-16",
+    "name": "Ninetales",
+    "nationalPokedexNumbers": [38],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/16.png",
+      "large": "https://images.pokemontcg.io/base1/16_hires.png"
     },
-    {
-      "id": "jungle-1",
-      "name": "Clefable",
-      "nationalPokedexNumbers": [36],
-      "images": {
-        "small": "https://images.pokemontcg.io/base2/1.png",
-        "large": "https://images.pokemontcg.io/base2/1_hires.png"
-      },
-      "hp": "70",
-      "types": ["Colorless"],
-      "number": "1",
-      "set": {
-        "id": "base2",
-        "name": "Jungle",
-        "series": "Base",
-        "printedTotal": 64,
-        "total": 64,
-        "releaseDate": "1999/06/16"
-      },
-      "rarity": "Rare Holo"
+    "hp": "80",
+    "types": ["Fire"],
+    "number": "16",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
     },
-    {
-      "id": "jungle-5",
-      "name": "Nidoqueen",
-      "nationalPokedexNumbers": [31],
-      "images": {
-        "small": "https://images.pokemontcg.io/base2/5.png",
-        "large": "https://images.pokemontcg.io/base2/5_hires.png"
-      },
-      "hp": "90",
-      "types": ["Grass"],
-      "number": "5",
-      "set": {
-        "id": "base2",
-        "name": "Jungle",
-        "series": "Base",
-        "printedTotal": 64,
-        "total": 64,
-        "releaseDate": "1999/06/16"
-      },
-      "rarity": "Rare Holo"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "base1-3",
+    "name": "Chansey",
+    "nationalPokedexNumbers": [113],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/3.png",
+      "large": "https://images.pokemontcg.io/base1/3_hires.png"
     },
-    {
-      "id": "jungle-7",
-      "name": "Scyther",
-      "nationalPokedexNumbers": [123],
-      "images": {
-        "small": "https://images.pokemontcg.io/base2/7.png",
-        "large": "https://images.pokemontcg.io/base2/7_hires.png"
-      },
-      "hp": "70",
-      "types": ["Grass"],
-      "number": "7",
-      "set": {
-        "id": "base2",
-        "name": "Jungle",
-        "series": "Base",
-        "printedTotal": 64,
-        "total": 64,
-        "releaseDate": "1999/06/16"
-      },
-      "rarity": "Rare Holo"
+    "hp": "120",
+    "types": ["Colorless"],
+    "number": "3",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
     },
-    {
-      "id": "jungle-11",
-      "name": "Vaporeon",
-      "nationalPokedexNumbers": [134],
-      "images": {
-        "small": "https://images.pokemontcg.io/base2/11.png",
-        "large": "https://images.pokemontcg.io/base2/11_hires.png"
-      },
-      "hp": "80",
-      "types": ["Water"],
-      "number": "11",
-      "set": {
-        "id": "base2",
-        "name": "Jungle",
-        "series": "Base",
-        "printedTotal": 64,
-        "total": 64,
-        "releaseDate": "1999/06/16"
-      },
-      "rarity": "Rare Holo"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "base1-8",
+    "name": "Mewtwo",
+    "nationalPokedexNumbers": [150],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/8.png",
+      "large": "https://images.pokemontcg.io/base1/8_hires.png"
     },
-    {
-      "id": "jungle-16",
-      "name": "Wigglytuff",
-      "nationalPokedexNumbers": [40],
-      "images": {
-        "small": "https://images.pokemontcg.io/base2/16.png",
-        "large": "https://images.pokemontcg.io/base2/16_hires.png"
-      },
-      "hp": "80",
-      "types": ["Colorless"],
-      "number": "16",
-      "set": {
-        "id": "base2",
-        "name": "Jungle",
-        "series": "Base",
-        "printedTotal": 64,
-        "total": 64,
-        "releaseDate": "1999/06/16"
-      },
-      "rarity": "Rare Holo"
+    "hp": "60",
+    "types": ["Psychic"],
+    "number": "8",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
     },
-    {
-      "id": "fossil-1",
-      "name": "Aerodactyl",
-      "nationalPokedexNumbers": [142],
-      "images": {
-        "small": "https://images.pokemontcg.io/base3/1.png",
-        "large": "https://images.pokemontcg.io/base3/1_hires.png"
-      },
-      "hp": "60",
-      "types": ["Fighting"],
-      "number": "1",
-      "set": {
-        "id": "base3",
-        "name": "Fossil",
-        "series": "Base",
-        "printedTotal": 62,
-        "total": 62,
-        "releaseDate": "1999/10/10"
-      },
-      "rarity": "Rare Holo"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "base1-7",
+    "name": "Hitmonchan",
+    "nationalPokedexNumbers": [107],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/7.png",
+      "large": "https://images.pokemontcg.io/base1/7_hires.png"
     },
-    {
-      "id": "fossil-3",
-      "name": "Dragonite",
-      "nationalPokedexNumbers": [149],
-      "images": {
-        "small": "https://images.pokemontcg.io/base3/3.png",
-        "large": "https://images.pokemontcg.io/base3/3_hires.png"
-      },
-      "hp": "100",
-      "types": ["Colorless"],
-      "number": "3",
-      "set": {
-        "id": "base3",
-        "name": "Fossil",
-        "series": "Base",
-        "printedTotal": 62,
-        "total": 62,
-        "releaseDate": "1999/10/10"
-      },
-      "rarity": "Rare Holo"
+    "hp": "70",
+    "types": ["Fighting"],
+    "number": "7",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
     },
-    {
-      "id": "fossil-8",
-      "name": "Lapras",
-      "nationalPokedexNumbers": [131],
-      "images": {
-        "small": "https://images.pokemontcg.io/base3/8.png",
-        "large": "https://images.pokemontcg.io/base3/8_hires.png"
-      },
-      "hp": "80",
-      "types": ["Water"],
-      "number": "8",
-      "set": {
-        "id": "base3",
-        "name": "Fossil",
-        "series": "Base",
-        "printedTotal": 62,
-        "total": 62,
-        "releaseDate": "1999/10/10"
-      },
-      "rarity": "Rare Holo"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "base1-10",
+    "name": "Meowth",
+    "nationalPokedexNumbers": [52],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/10.png",
+      "large": "https://images.pokemontcg.io/base1/10_hires.png"
     },
-    {
-      "id": "fossil-12",
-      "name": "Raichu",
-      "nationalPokedexNumbers": [26],
-      "images": {
-        "small": "https://images.pokemontcg.io/base3/12.png",
-        "large": "https://images.pokemontcg.io/base3/12_hires.png"
-      },
-      "hp": "80",
-      "types": ["Lightning"],
-      "number": "12",
-      "set": {
-        "id": "base3",
-        "name": "Fossil",
-        "series": "Base",
-        "printedTotal": 62,
-        "total": 62,
-        "releaseDate": "1999/10/10"
-      },
-      "rarity": "Rare Holo"
+    "hp": "50",
+    "types": ["Colorless"],
+    "number": "10",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
     },
-    {
-      "id": "base1-44",
-      "name": "Bulbasaur",
-      "nationalPokedexNumbers": [1],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/44.png",
-        "large": "https://images.pokemontcg.io/base1/44_hires.png"
-      },
-      "hp": "40",
-      "types": ["Grass"],
-      "number": "44",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Common"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "base1-14",
+    "name": "Zapdos",
+    "nationalPokedexNumbers": [145],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/14.png",
+      "large": "https://images.pokemontcg.io/base1/14_hires.png"
     },
-    {
-      "id": "base1-46",
-      "name": "Charmander",
-      "nationalPokedexNumbers": [4],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/46.png",
-        "large": "https://images.pokemontcg.io/base1/46_hires.png"
-      },
-      "hp": "50",
-      "types": ["Fire"],
-      "number": "46",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Common"
+    "hp": "90",
+    "types": ["Lightning"],
+    "number": "14",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
     },
-    {
-      "id": "base1-63",
-      "name": "Squirtle",
-      "nationalPokedexNumbers": [7],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/63.png",
-        "large": "https://images.pokemontcg.io/base1/63_hires.png"
-      },
-      "hp": "40",
-      "types": ["Water"],
-      "number": "63",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Common"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "jungle-1",
+    "name": "Clefable",
+    "nationalPokedexNumbers": [36],
+    "images": {
+      "small": "https://images.pokemontcg.io/base2/1.png",
+      "large": "https://images.pokemontcg.io/base2/1_hires.png"
     },
-    {
-      "id": "base1-35",
-      "name": "Charmeleon",
-      "nationalPokedexNumbers": [5],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/35.png",
-        "large": "https://images.pokemontcg.io/base1/35_hires.png"
-      },
-      "hp": "80",
-      "types": ["Fire"],
-      "number": "35",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Uncommon"
+    "hp": "70",
+    "types": ["Colorless"],
+    "number": "1",
+    "set": {
+      "id": "base2",
+      "name": "Jungle",
+      "series": "Base",
+      "printedTotal": 64,
+      "total": 64,
+      "releaseDate": "1999/06/16"
     },
-    {
-      "id": "base1-42",
-      "name": "Wartortle",
-      "nationalPokedexNumbers": [8],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/42.png",
-        "large": "https://images.pokemontcg.io/base1/42_hires.png"
-      },
-      "hp": "70",
-      "types": ["Water"],
-      "number": "42",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Uncommon"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "jungle-5",
+    "name": "Nidoqueen",
+    "nationalPokedexNumbers": [31],
+    "images": {
+      "small": "https://images.pokemontcg.io/base2/5.png",
+      "large": "https://images.pokemontcg.io/base2/5_hires.png"
     },
-    {
-      "id": "base1-67",
-      "name": "Ivysaur",
-      "nationalPokedexNumbers": [2],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/67.png",
-        "large": "https://images.pokemontcg.io/base1/67_hires.png"
-      },
-      "hp": "60",
-      "types": ["Grass"],
-      "number": "67",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Uncommon"
+    "hp": "90",
+    "types": ["Grass"],
+    "number": "5",
+    "set": {
+      "id": "base2",
+      "name": "Jungle",
+      "series": "Base",
+      "printedTotal": 64,
+      "total": 64,
+      "releaseDate": "1999/06/16"
     },
-    {
-      "id": "base1-54",
-      "name": "Geodude",
-      "nationalPokedexNumbers": [74],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/54.png",
-        "large": "https://images.pokemontcg.io/base1/54_hires.png"
-      },
-      "hp": "50",
-      "types": ["Fighting"],
-      "number": "54",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Common"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "jungle-7",
+    "name": "Scyther",
+    "nationalPokedexNumbers": [123],
+    "images": {
+      "small": "https://images.pokemontcg.io/base2/7.png",
+      "large": "https://images.pokemontcg.io/base2/7_hires.png"
     },
-    {
-      "id": "base1-56",
-      "name": "Machop",
-      "nationalPokedexNumbers": [66],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/56.png",
-        "large": "https://images.pokemontcg.io/base1/56_hires.png"
-      },
-      "hp": "50",
-      "types": ["Fighting"],
-      "number": "56",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Common"
+    "hp": "70",
+    "types": ["Grass"],
+    "number": "7",
+    "set": {
+      "id": "base2",
+      "name": "Jungle",
+      "series": "Base",
+      "printedTotal": 64,
+      "total": 64,
+      "releaseDate": "1999/06/16"
     },
-    {
-      "id": "base1-60",
-      "name": "Poliwag",
-      "nationalPokedexNumbers": [60],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/60.png",
-        "large": "https://images.pokemontcg.io/base1/60_hires.png"
-      },
-      "hp": "40",
-      "types": ["Water"],
-      "number": "60",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Common"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "jungle-11",
+    "name": "Vaporeon",
+    "nationalPokedexNumbers": [134],
+    "images": {
+      "small": "https://images.pokemontcg.io/base2/11.png",
+      "large": "https://images.pokemontcg.io/base2/11_hires.png"
     },
-    {
-      "id": "base1-25",
-      "name": "Electabuzz",
-      "nationalPokedexNumbers": [125],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/25.png",
-        "large": "https://images.pokemontcg.io/base1/25_hires.png"
-      },
-      "hp": "70",
-      "types": ["Lightning"],
-      "number": "25",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare"
+    "hp": "80",
+    "types": ["Water"],
+    "number": "11",
+    "set": {
+      "id": "base2",
+      "name": "Jungle",
+      "series": "Base",
+      "printedTotal": 64,
+      "total": 64,
+      "releaseDate": "1999/06/16"
     },
-    {
-      "id": "base1-17",
-      "name": "Beedrill",
-      "nationalPokedexNumbers": [15],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/17.png",
-        "large": "https://images.pokemontcg.io/base1/17_hires.png"
-      },
-      "hp": "80",
-      "types": ["Grass"],
-      "number": "17",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "jungle-16",
+    "name": "Wigglytuff",
+    "nationalPokedexNumbers": [40],
+    "images": {
+      "small": "https://images.pokemontcg.io/base2/16.png",
+      "large": "https://images.pokemontcg.io/base2/16_hires.png"
     },
-    {
-      "id": "base1-18",
-      "name": "Dragonair",
-      "nationalPokedexNumbers": [148],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/18.png",
-        "large": "https://images.pokemontcg.io/base1/18_hires.png"
-      },
-      "hp": "80",
-      "types": ["Colorless"],
-      "number": "18",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare"
+    "hp": "80",
+    "types": ["Colorless"],
+    "number": "16",
+    "set": {
+      "id": "base2",
+      "name": "Jungle",
+      "series": "Base",
+      "printedTotal": 64,
+      "total": 64,
+      "releaseDate": "1999/06/16"
     },
-    {
-      "id": "base1-20",
-      "name": "Electrode",
-      "nationalPokedexNumbers": [101],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/20.png",
-        "large": "https://images.pokemontcg.io/base1/20_hires.png"
-      },
-      "hp": "80",
-      "types": ["Lightning"],
-      "number": "20",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "fossil-1",
+    "name": "Aerodactyl",
+    "nationalPokedexNumbers": [142],
+    "images": {
+      "small": "https://images.pokemontcg.io/base3/1.png",
+      "large": "https://images.pokemontcg.io/base3/1_hires.png"
     },
-    {
-      "id": "base1-11",
-      "name": "Nidoking",
-      "nationalPokedexNumbers": [34],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/11.png",
-        "large": "https://images.pokemontcg.io/base1/11_hires.png"
-      },
-      "hp": "90",
-      "types": ["Grass"],
-      "number": "11",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare Holo"
+    "hp": "60",
+    "types": ["Fighting"],
+    "number": "1",
+    "set": {
+      "id": "base3",
+      "name": "Fossil",
+      "series": "Base",
+      "printedTotal": 62,
+      "total": 62,
+      "releaseDate": "1999/10/10"
     },
-    {
-      "id": "base1-13",
-      "name": "Poliwrath",
-      "nationalPokedexNumbers": [62],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/13.png",
-        "large": "https://images.pokemontcg.io/base1/13_hires.png"
-      },
-      "hp": "90",
-      "types": ["Water"],
-      "number": "13",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare Holo"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "fossil-3",
+    "name": "Dragonite",
+    "nationalPokedexNumbers": [149],
+    "images": {
+      "small": "https://images.pokemontcg.io/base3/3.png",
+      "large": "https://images.pokemontcg.io/base3/3_hires.png"
     },
-    {
-      "id": "base1-9",
-      "name": "Machamp",
-      "nationalPokedexNumbers": [68],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/9.png",
-        "large": "https://images.pokemontcg.io/base1/9_hires.png"
-      },
-      "hp": "100",
-      "types": ["Fighting"],
-      "number": "9",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare Holo"
+    "hp": "100",
+    "types": ["Colorless"],
+    "number": "3",
+    "set": {
+      "id": "base3",
+      "name": "Fossil",
+      "series": "Base",
+      "printedTotal": 62,
+      "total": 62,
+      "releaseDate": "1999/10/10"
     },
-    {
-      "id": "base1-12",
-      "name": "Ninetales",
-      "nationalPokedexNumbers": [38],
-      "images": {
-        "small": "https://images.pokemontcg.io/base1/12.png",
-        "large": "https://images.pokemontcg.io/base1/12_hires.png"
-      },
-      "hp": "80",
-      "types": ["Fire"],
-      "number": "12",
-      "set": {
-        "id": "base1",
-        "name": "Base",
-        "series": "Base",
-        "printedTotal": 102,
-        "total": 102,
-        "releaseDate": "1999/01/09"
-      },
-      "rarity": "Rare Holo"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "fossil-8",
+    "name": "Lapras",
+    "nationalPokedexNumbers": [131],
+    "images": {
+      "small": "https://images.pokemontcg.io/base3/8.png",
+      "large": "https://images.pokemontcg.io/base3/8_hires.png"
     },
-    {
-      "id": "jungle-4",
-      "name": "Flareon",
-      "nationalPokedexNumbers": [136],
-      "images": {
-        "small": "https://images.pokemontcg.io/base2/4.png",
-        "large": "https://images.pokemontcg.io/base2/4_hires.png"
-      },
-      "hp": "70",
-      "types": ["Fire"],
-      "number": "4",
-      "set": {
-        "id": "base2",
-        "name": "Jungle",
-        "series": "Base",
-        "printedTotal": 64,
-        "total": 64,
-        "releaseDate": "1999/06/16"
-      },
-      "rarity": "Rare Holo"
+    "hp": "80",
+    "types": ["Water"],
+    "number": "8",
+    "set": {
+      "id": "base3",
+      "name": "Fossil",
+      "series": "Base",
+      "printedTotal": 62,
+      "total": 62,
+      "releaseDate": "1999/10/10"
     },
-    {
-      "id": "jungle-6",
-      "name": "Pinsir",
-      "nationalPokedexNumbers": [127],
-      "images": {
-        "small": "https://images.pokemontcg.io/base2/6.png",
-        "large": "https://images.pokemontcg.io/base2/6_hires.png"
-      },
-      "hp": "60",
-      "types": ["Grass"],
-      "number": "6",
-      "set": {
-        "id": "base2",
-        "name": "Jungle",
-        "series": "Base",
-        "printedTotal": 64,
-        "total": 64,
-        "releaseDate": "1999/06/16"
-      },
-      "rarity": "Rare Holo"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "fossil-12",
+    "name": "Raichu",
+    "nationalPokedexNumbers": [26],
+    "images": {
+      "small": "https://images.pokemontcg.io/base3/12.png",
+      "large": "https://images.pokemontcg.io/base3/12_hires.png"
     },
-    {
-      "id": "jungle-8",
-      "name": "Snorlax",
-      "nationalPokedexNumbers": [143],
-      "images": {
-        "small": "https://images.pokemontcg.io/base2/8.png",
-        "large": "https://images.pokemontcg.io/base2/8_hires.png"
-      },
-      "hp": "90",
-      "types": ["Colorless"],
-      "number": "8",
-      "set": {
-        "id": "base2",
-        "name": "Jungle",
-        "series": "Base",
-        "printedTotal": 64,
-        "total": 64,
-        "releaseDate": "1999/06/16"
-      },
-      "rarity": "Rare Holo"
+    "hp": "80",
+    "types": ["Lightning"],
+    "number": "12",
+    "set": {
+      "id": "base3",
+      "name": "Fossil",
+      "series": "Base",
+      "printedTotal": 62,
+      "total": 62,
+      "releaseDate": "1999/10/10"
     },
-    {
-      "id": "jungle-10",
-      "name": "Venomoth",
-      "nationalPokedexNumbers": [49],
-      "images": {
-        "small": "https://images.pokemontcg.io/base2/10.png",
-        "large": "https://images.pokemontcg.io/base2/10_hires.png"
-      },
-      "hp": "70",
-      "types": ["Grass"],
-      "number": "10",
-      "set": {
-        "id": "base2",
-        "name": "Jungle",
-        "series": "Base",
-        "printedTotal": 64,
-        "total": 64,
-        "releaseDate": "1999/06/16"
-      },
-      "rarity": "Rare Holo"
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "base1-44",
+    "name": "Bulbasaur",
+    "nationalPokedexNumbers": [1],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/44.png",
+      "large": "https://images.pokemontcg.io/base1/44_hires.png"
     },
-    {
-      "id": "fossil-4",
-      "name": "Gengar",
-      "nationalPokedexNumbers": [94],
-      "images": {
-        "small": "https://images.pokemontcg.io/base3/4.png",
-        "large": "https://images.pokemontcg.io/base3/4_hires.png"
-      },
-      "hp": "80",
-      "types": ["Psychic"],
-      "number": "4",
-      "set": {
-        "id": "base3",
-        "name": "Fossil",
-        "series": "Base",
-        "printedTotal": 62,
-        "total": 62,
-        "releaseDate": "1999/10/10"
-      },
-      "rarity": "Rare Holo"
+    "hp": "40",
+    "types": ["Grass"],
+    "number": "44",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
     },
-    {
-      "id": "fossil-9",
-      "name": "Magneton",
-      "nationalPokedexNumbers": [82],
-      "images": {
-        "small": "https://images.pokemontcg.io/base3/9.png",
-        "large": "https://images.pokemontcg.io/base3/9_hires.png"
-      },
-      "hp": "60",
-      "types": ["Lightning"],
-      "number": "9",
-      "set": {
-        "id": "base3",
-        "name": "Fossil",
-        "series": "Base",
-        "printedTotal": 62,
-        "total": 62,
-        "releaseDate": "1999/10/10"
-      },
-      "rarity": "Rare Holo"
+    "rarity": "Common"
+  },
+  {
+    "id": "base1-46",
+    "name": "Charmander",
+    "nationalPokedexNumbers": [4],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/46.png",
+      "large": "https://images.pokemontcg.io/base1/46_hires.png"
     },
-    {
-      "id": "fossil-11",
-      "name": "Muk",
-      "nationalPokedexNumbers": [89],
-      "images": {
-        "small": "https://images.pokemontcg.io/base3/11.png",
-        "large": "https://images.pokemontcg.io/base3/11_hires.png"
-      },
-      "hp": "70",
-      "types": ["Grass"],
-      "number": "11",
-      "set": {
-        "id": "base3",
-        "name": "Fossil",
-        "series": "Base",
-        "printedTotal": 62,
-        "total": 62,
-        "releaseDate": "1999/10/10"
-      },
-      "rarity": "Rare Holo"
+    "hp": "50",
+    "types": ["Fire"],
+    "number": "46",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
     },
-    {
-      "id": "fossil-6",
-      "name": "Haunter",
-      "nationalPokedexNumbers": [93],
-      "images": {
-        "small": "https://images.pokemontcg.io/base3/6.png",
-        "large": "https://images.pokemontcg.io/base3/6_hires.png"
-      },
-      "hp": "60",
-      "types": ["Psychic"],
-      "number": "6",
-      "set": {
-        "id": "base3",
-        "name": "Fossil",
-        "series": "Base",
-        "printedTotal": 62,
-        "total": 62,
-        "releaseDate": "1999/10/10"
-      },
-      "rarity": "Rare Holo"
+    "rarity": "Common"
+  },
+  {
+    "id": "base1-63",
+    "name": "Squirtle",
+    "nationalPokedexNumbers": [7],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/63.png",
+      "large": "https://images.pokemontcg.io/base1/63_hires.png"
     },
-    {
-      "id": "fossil-7",
-      "name": "Hypno",
-      "nationalPokedexNumbers": [97],
-      "images": {
-        "small": "https://images.pokemontcg.io/base3/7.png",
-        "large": "https://images.pokemontcg.io/base3/7_hires.png"
-      },
-      "hp": "90",
-      "types": ["Psychic"],
-      "number": "7",
-      "set": {
-        "id": "base3",
-        "name": "Fossil",
-        "series": "Base",
-        "printedTotal": 62,
-        "total": 62,
-        "releaseDate": "1999/10/10"
-      },
-      "rarity": "Rare Holo"
+    "hp": "40",
+    "types": ["Water"],
+    "number": "63",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
     },
-    {
-      "id": "fossil-10",
-      "name": "Moltres",
-      "nationalPokedexNumbers": [146],
-      "images": {
-        "small": "https://images.pokemontcg.io/base3/10.png",
-        "large": "https://images.pokemontcg.io/base3/10_hires.png"
-      },
-      "hp": "70",
-      "types": ["Fire"],
-      "number": "10",
-      "set": {
-        "id": "base3",
-        "name": "Fossil",
-        "series": "Base",
-        "printedTotal": 62,
-        "total": 62,
-        "releaseDate": "1999/10/10"
-      },
-      "rarity": "Rare Holo"
+    "rarity": "Common"
+  },
+  {
+    "id": "base1-35",
+    "name": "Charmeleon",
+    "nationalPokedexNumbers": [5],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/35.png",
+      "large": "https://images.pokemontcg.io/base1/35_hires.png"
     },
-    {
-      "id": "fossil-2",
-      "name": "Articuno",
-      "nationalPokedexNumbers": [144],
-      "images": {
-        "small": "https://images.pokemontcg.io/base3/2.png",
-        "large": "https://images.pokemontcg.io/base3/2_hires.png"
-      },
-      "hp": "70",
-      "types": ["Water"],
-      "number": "2",
-      "set": {
-        "id": "base3",
-        "name": "Fossil",
-        "series": "Base",
-        "printedTotal": 62,
-        "total": 62,
-        "releaseDate": "1999/10/10"
-      },
-      "rarity": "Rare Holo"
+    "hp": "80",
+    "types": ["Fire"],
+    "number": "35",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
     },
-    {
-      "id": "jungle-17",
-      "name": "Eevee",
-      "nationalPokedexNumbers": [133],
-      "images": {
-        "small": "https://images.pokemontcg.io/base2/17.png",
-        "large": "https://images.pokemontcg.io/base2/17_hires.png"
-      },
-      "hp": "50",
-      "types": ["Colorless"],
-      "number": "17",
-      "set": {
-        "id": "base2",
-        "name": "Jungle",
-        "series": "Base",
-        "printedTotal": 64,
-        "total": 64,
-        "releaseDate": "1999/06/16"
-      },
-      "rarity": "Uncommon"
+    "rarity": "Uncommon"
+  },
+  {
+    "id": "base1-42",
+    "name": "Wartortle",
+    "nationalPokedexNumbers": [8],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/42.png",
+      "large": "https://images.pokemontcg.io/base1/42_hires.png"
     },
-    {
-      "id": "jungle-9",
-      "name": "Victreebel",
-      "nationalPokedexNumbers": [71],
-      "images": {
-        "small": "https://images.pokemontcg.io/base2/9.png",
-        "large": "https://images.pokemontcg.io/base2/9_hires.png"
-      },
-      "hp": "80",
-      "types": ["Grass"],
-      "number": "9",
-      "set": {
-        "id": "base2",
-        "name": "Jungle",
-        "series": "Base",
-        "printedTotal": 64,
-        "total": 64,
-        "releaseDate": "1999/06/16"
-      },
-      "rarity": "Rare Holo"
-    }
-  ]
+    "hp": "70",
+    "types": ["Water"],
+    "number": "42",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
+    },
+    "rarity": "Uncommon"
+  },
+  {
+    "id": "base1-67",
+    "name": "Ivysaur",
+    "nationalPokedexNumbers": [2],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/67.png",
+      "large": "https://images.pokemontcg.io/base1/67_hires.png"
+    },
+    "hp": "60",
+    "types": ["Grass"],
+    "number": "67",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
+    },
+    "rarity": "Uncommon"
+  },
+  {
+    "id": "base1-54",
+    "name": "Geodude",
+    "nationalPokedexNumbers": [74],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/54.png",
+      "large": "https://images.pokemontcg.io/base1/54_hires.png"
+    },
+    "hp": "50",
+    "types": ["Fighting"],
+    "number": "54",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
+    },
+    "rarity": "Common"
+  },
+  {
+    "id": "base1-56",
+    "name": "Machop",
+    "nationalPokedexNumbers": [66],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/56.png",
+      "large": "https://images.pokemontcg.io/base1/56_hires.png"
+    },
+    "hp": "50",
+    "types": ["Fighting"],
+    "number": "56",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
+    },
+    "rarity": "Common"
+  },
+  {
+    "id": "base1-60",
+    "name": "Poliwag",
+    "nationalPokedexNumbers": [60],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/60.png",
+      "large": "https://images.pokemontcg.io/base1/60_hires.png"
+    },
+    "hp": "40",
+    "types": ["Water"],
+    "number": "60",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
+    },
+    "rarity": "Common"
+  },
+  {
+    "id": "base1-25",
+    "name": "Electabuzz",
+    "nationalPokedexNumbers": [125],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/25.png",
+      "large": "https://images.pokemontcg.io/base1/25_hires.png"
+    },
+    "hp": "70",
+    "types": ["Lightning"],
+    "number": "25",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
+    },
+    "rarity": "Rare"
+  },
+  {
+    "id": "base1-17",
+    "name": "Beedrill",
+    "nationalPokedexNumbers": [15],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/17.png",
+      "large": "https://images.pokemontcg.io/base1/17_hires.png"
+    },
+    "hp": "80",
+    "types": ["Grass"],
+    "number": "17",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
+    },
+    "rarity": "Rare"
+  },
+  {
+    "id": "base1-18",
+    "name": "Dragonair",
+    "nationalPokedexNumbers": [148],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/18.png",
+      "large": "https://images.pokemontcg.io/base1/18_hires.png"
+    },
+    "hp": "80",
+    "types": ["Colorless"],
+    "number": "18",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
+    },
+    "rarity": "Rare"
+  },
+  {
+    "id": "base1-20",
+    "name": "Electrode",
+    "nationalPokedexNumbers": [101],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/20.png",
+      "large": "https://images.pokemontcg.io/base1/20_hires.png"
+    },
+    "hp": "80",
+    "types": ["Lightning"],
+    "number": "20",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
+    },
+    "rarity": "Rare"
+  },
+  {
+    "id": "base1-11",
+    "name": "Nidoking",
+    "nationalPokedexNumbers": [34],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/11.png",
+      "large": "https://images.pokemontcg.io/base1/11_hires.png"
+    },
+    "hp": "90",
+    "types": ["Grass"],
+    "number": "11",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
+    },
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "base1-13",
+    "name": "Poliwrath",
+    "nationalPokedexNumbers": [62],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/13.png",
+      "large": "https://images.pokemontcg.io/base1/13_hires.png"
+    },
+    "hp": "90",
+    "types": ["Water"],
+    "number": "13",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
+    },
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "base1-9",
+    "name": "Machamp",
+    "nationalPokedexNumbers": [68],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/9.png",
+      "large": "https://images.pokemontcg.io/base1/9_hires.png"
+    },
+    "hp": "100",
+    "types": ["Fighting"],
+    "number": "9",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
+    },
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "base1-12",
+    "name": "Ninetales",
+    "nationalPokedexNumbers": [38],
+    "images": {
+      "small": "https://images.pokemontcg.io/base1/12.png",
+      "large": "https://images.pokemontcg.io/base1/12_hires.png"
+    },
+    "hp": "80",
+    "types": ["Fire"],
+    "number": "12",
+    "set": {
+      "id": "base1",
+      "name": "Base",
+      "series": "Base",
+      "printedTotal": 102,
+      "total": 102,
+      "releaseDate": "1999/01/09"
+    },
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "jungle-4",
+    "name": "Flareon",
+    "nationalPokedexNumbers": [136],
+    "images": {
+      "small": "https://images.pokemontcg.io/base2/4.png",
+      "large": "https://images.pokemontcg.io/base2/4_hires.png"
+    },
+    "hp": "70",
+    "types": ["Fire"],
+    "number": "4",
+    "set": {
+      "id": "base2",
+      "name": "Jungle",
+      "series": "Base",
+      "printedTotal": 64,
+      "total": 64,
+      "releaseDate": "1999/06/16"
+    },
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "jungle-6",
+    "name": "Pinsir",
+    "nationalPokedexNumbers": [127],
+    "images": {
+      "small": "https://images.pokemontcg.io/base2/6.png",
+      "large": "https://images.pokemontcg.io/base2/6_hires.png"
+    },
+    "hp": "60",
+    "types": ["Grass"],
+    "number": "6",
+    "set": {
+      "id": "base2",
+      "name": "Jungle",
+      "series": "Base",
+      "printedTotal": 64,
+      "total": 64,
+      "releaseDate": "1999/06/16"
+    },
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "jungle-8",
+    "name": "Snorlax",
+    "nationalPokedexNumbers": [143],
+    "images": {
+      "small": "https://images.pokemontcg.io/base2/8.png",
+      "large": "https://images.pokemontcg.io/base2/8_hires.png"
+    },
+    "hp": "90",
+    "types": ["Colorless"],
+    "number": "8",
+    "set": {
+      "id": "base2",
+      "name": "Jungle",
+      "series": "Base",
+      "printedTotal": 64,
+      "total": 64,
+      "releaseDate": "1999/06/16"
+    },
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "jungle-10",
+    "name": "Venomoth",
+    "nationalPokedexNumbers": [49],
+    "images": {
+      "small": "https://images.pokemontcg.io/base2/10.png",
+      "large": "https://images.pokemontcg.io/base2/10_hires.png"
+    },
+    "hp": "70",
+    "types": ["Grass"],
+    "number": "10",
+    "set": {
+      "id": "base2",
+      "name": "Jungle",
+      "series": "Base",
+      "printedTotal": 64,
+      "total": 64,
+      "releaseDate": "1999/06/16"
+    },
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "fossil-4",
+    "name": "Gengar",
+    "nationalPokedexNumbers": [94],
+    "images": {
+      "small": "https://images.pokemontcg.io/base3/4.png",
+      "large": "https://images.pokemontcg.io/base3/4_hires.png"
+    },
+    "hp": "80",
+    "types": ["Psychic"],
+    "number": "4",
+    "set": {
+      "id": "base3",
+      "name": "Fossil",
+      "series": "Base",
+      "printedTotal": 62,
+      "total": 62,
+      "releaseDate": "1999/10/10"
+    },
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "fossil-9",
+    "name": "Magneton",
+    "nationalPokedexNumbers": [82],
+    "images": {
+      "small": "https://images.pokemontcg.io/base3/9.png",
+      "large": "https://images.pokemontcg.io/base3/9_hires.png"
+    },
+    "hp": "60",
+    "types": ["Lightning"],
+    "number": "9",
+    "set": {
+      "id": "base3",
+      "name": "Fossil",
+      "series": "Base",
+      "printedTotal": 62,
+      "total": 62,
+      "releaseDate": "1999/10/10"
+    },
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "fossil-11",
+    "name": "Muk",
+    "nationalPokedexNumbers": [89],
+    "images": {
+      "small": "https://images.pokemontcg.io/base3/11.png",
+      "large": "https://images.pokemontcg.io/base3/11_hires.png"
+    },
+    "hp": "70",
+    "types": ["Grass"],
+    "number": "11",
+    "set": {
+      "id": "base3",
+      "name": "Fossil",
+      "series": "Base",
+      "printedTotal": 62,
+      "total": 62,
+      "releaseDate": "1999/10/10"
+    },
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "fossil-6",
+    "name": "Haunter",
+    "nationalPokedexNumbers": [93],
+    "images": {
+      "small": "https://images.pokemontcg.io/base3/6.png",
+      "large": "https://images.pokemontcg.io/base3/6_hires.png"
+    },
+    "hp": "60",
+    "types": ["Psychic"],
+    "number": "6",
+    "set": {
+      "id": "base3",
+      "name": "Fossil",
+      "series": "Base",
+      "printedTotal": 62,
+      "total": 62,
+      "releaseDate": "1999/10/10"
+    },
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "fossil-7",
+    "name": "Hypno",
+    "nationalPokedexNumbers": [97],
+    "images": {
+      "small": "https://images.pokemontcg.io/base3/7.png",
+      "large": "https://images.pokemontcg.io/base3/7_hires.png"
+    },
+    "hp": "90",
+    "types": ["Psychic"],
+    "number": "7",
+    "set": {
+      "id": "base3",
+      "name": "Fossil",
+      "series": "Base",
+      "printedTotal": 62,
+      "total": 62,
+      "releaseDate": "1999/10/10"
+    },
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "fossil-10",
+    "name": "Moltres",
+    "nationalPokedexNumbers": [146],
+    "images": {
+      "small": "https://images.pokemontcg.io/base3/10.png",
+      "large": "https://images.pokemontcg.io/base3/10_hires.png"
+    },
+    "hp": "70",
+    "types": ["Fire"],
+    "number": "10",
+    "set": {
+      "id": "base3",
+      "name": "Fossil",
+      "series": "Base",
+      "printedTotal": 62,
+      "total": 62,
+      "releaseDate": "1999/10/10"
+    },
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "fossil-2",
+    "name": "Articuno",
+    "nationalPokedexNumbers": [144],
+    "images": {
+      "small": "https://images.pokemontcg.io/base3/2.png",
+      "large": "https://images.pokemontcg.io/base3/2_hires.png"
+    },
+    "hp": "70",
+    "types": ["Water"],
+    "number": "2",
+    "set": {
+      "id": "base3",
+      "name": "Fossil",
+      "series": "Base",
+      "printedTotal": 62,
+      "total": 62,
+      "releaseDate": "1999/10/10"
+    },
+    "rarity": "Rare Holo"
+  },
+  {
+    "id": "jungle-17",
+    "name": "Eevee",
+    "nationalPokedexNumbers": [133],
+    "images": {
+      "small": "https://images.pokemontcg.io/base2/17.png",
+      "large": "https://images.pokemontcg.io/base2/17_hires.png"
+    },
+    "hp": "50",
+    "types": ["Colorless"],
+    "number": "17",
+    "set": {
+      "id": "base2",
+      "name": "Jungle",
+      "series": "Base",
+      "printedTotal": 64,
+      "total": 64,
+      "releaseDate": "1999/06/16"
+    },
+    "rarity": "Uncommon"
+  },
+  {
+    "id": "jungle-9",
+    "name": "Victreebel",
+    "nationalPokedexNumbers": [71],
+    "images": {
+      "small": "https://images.pokemontcg.io/base2/9.png",
+      "large": "https://images.pokemontcg.io/base2/9_hires.png"
+    },
+    "hp": "80",
+    "types": ["Grass"],
+    "number": "9",
+    "set": {
+      "id": "base2",
+      "name": "Jungle",
+      "series": "Base",
+      "printedTotal": 64,
+      "total": 64,
+      "releaseDate": "1999/06/16"
+    },
+    "rarity": "Rare Holo"
+  }
+]
