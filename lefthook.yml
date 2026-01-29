@@ -1,0 +1,16 @@
+# Optional: Skip hooks with LEFTHOOK=0 git commit
+# Example: LEFTHOOK=0 git commit -m "skip hooks"
+
+pre-commit: 
+  parallel: true
+
+  commands: 
+    lint:
+      glob: "*.{js,jsx,ts,tsx}"
+      run: yarn eslint --fix {staged_files}
+      stage_fixed: true
+
+    format:
+      glob: "*.{js,jsx,ts,tsx,json,css,scss,md,html}"
+      run: yarn prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true
