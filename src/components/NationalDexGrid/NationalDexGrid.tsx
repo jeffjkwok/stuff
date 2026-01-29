@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import NationalDexFilters from "../NationalDexFilters/NationalDexFilters";
+import type { FilterState } from "../NationalDexFilters/NationalDexFilters";
 import styles from "../NationalDexGrid/NationalDexGrid.module.scss";
 
 interface Pokemon {
@@ -14,6 +16,11 @@ export default function NationalDexGrid() {
   const [allPokemon, setAllPokemon] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [filters, setFilters] = useState<FilterState>({
+    search: "",
+    generations: [],
+    regions: [],
+  });
 
   useEffect(() => {
     fetch("/api/nationaldex")
@@ -28,12 +35,32 @@ export default function NationalDexGrid() {
       });
   }, []);
 
-  if (loading) return <div className={styles.loading}>Loading cards...</div>;
+  const filteredPokemon = useMemo(() => {
+    return allPokemon.filter((pokemon) => {
+      console.log(pokemon, filters.search);
+      if (filters.search) {
+        const searchLower = filters.search.toLowerCase();
+        const matchesName = pokemon.name.toLowerCase().includes(searchLower);
+        const matchesId = pokemon.id.toString().includes(searchLower);
+        if (!matchesName && !matchesId) return false;
+      }
+
+      return true;
+    });
+  }, [allPokemon, filters]);
+
+  if (loading)
+    return <div className={styles.loading}>Loading National Dex...</div>;
   if (error) return <div className={styles.error}>Error: {error}</div>;
 
   return (
     <div className={styles.grid}>
-      {allPokemon.map((pokemon) => (
+      <NationalDexFilters
+        onFilterChange={setFilters}
+        totalCount={allPokemon.length}
+        filteredCount={filteredPokemon.length}
+      />
+      {filteredPokemon.map((pokemon) => (
         <div
           key={pokemon.id}
           className={styles.card}
