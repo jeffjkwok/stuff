@@ -37,7 +37,7 @@ export default function NationalDexGrid() {
 
   const filteredPokemon = useMemo(() => {
     return allPokemon.filter((pokemon) => {
-      console.log(pokemon, filters.search);
+      // console.log(pokemon, filters.search);
       if (filters.search) {
         const searchLower = filters.search.toLowerCase();
         const matchesName = pokemon.name.toLowerCase().includes(searchLower);
@@ -72,11 +72,13 @@ export default function NationalDexGrid() {
           <div className={styles.cardInfo}>
             <h3 className={styles.cardName}>{pokemon.name}</h3>
             <p className={styles.cardSet}>#{pokemon.id}</p>
-            <img
-              className={styles.placeholderImage}
-              src={pokemon.originalArtwork}
-              alt=""
-            />
+            <div className={styles.placeholderImageWrapper}>
+              <img
+                className={styles.placeholderImage}
+                src={pokemon.originalArtwork}
+                alt=""
+              />
+            </div>
           </div>
         </div>
       ))}

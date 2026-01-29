@@ -27,20 +27,45 @@
 }
 
 .card {
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  filter: grayscale(1);
+  position: relative;
+  display: flex;
   cursor: pointer;
+  box-shadow: 6px 6px 12px -8px rgba(0, 0, 0, 0.15);
   transition:
     transform 0.2s,
     box-shadow 0.2s;
-  display: flex;
+  filter: 0.5s;
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 8px 8px 20px -10px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    overflow: visible;
+    filter: grayscale(0);
+
+    & .placeholderImageWrapper {
+      clip-path: inset(
+        0 170px 0 -50%
+      ); //the key is the 2nd number, image subtrack the box width is the answer
+    }
+
+    & .placeholderImage {
+      transform: translate(-25%, 0);
+    }
   }
+}
+
+.placeholderImageWrapper {
+  width: 100%;
+  clip-path: inset(0 170px 0 0); //the key is the 2nd number
+  transition: clip-path 0.5s;
+}
+
+.placeholderImage {
+  display: block;
+  transform-origin: right center; // anchors to right, grows left
+  transition: transform 0.3s ease;
 }
 
 .cardImage {
@@ -48,39 +73,8 @@
   display: block;
 }
 
-.cardInfo {
-  padding: 0.75rem;
-  transition: filter 1s;
-
-  &:hover {
-    .placeholderImage {
-      transform: translate(-20%, 0);
-    }
-
-    filter: grayscale(100%);
-  }
-}
-
 .cardName {
   margin: 0 0 0.25rem 0;
   font-size: 1rem;
   font-weight: 600;
-  color: #1e293b;
-}
-
-.cardSet {
-  margin: 0 0 0.25rem 0;
-  font-size: 0.85rem;
-  color: #64748b;
-}
-
-.cardRarity {
-  margin: 0;
-  font-size: 0.75rem;
-  color: #7c3aed;
-  font-weight: 500;
-}
-
-.placeholderImage {
-  transition: transform 1s;
 }
