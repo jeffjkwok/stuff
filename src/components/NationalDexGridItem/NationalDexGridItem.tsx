@@ -14,12 +14,16 @@ export default function NationalDexGridItem({
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [dynamicClipPathValue, setDynamicClipPathValue] = useState<number>(0);
 
-  useEffect(() => {
+  const getClipPathValue = function () {
     if (cardRef.current && imageRef.current) {
       setDynamicClipPathValue(
         imageRef.current.clientWidth - cardRef.current.clientWidth,
       );
     }
+  };
+
+  useEffect(() => {
+    getClipPathValue();
   }, []);
 
   const clipPathStyle = {
@@ -52,6 +56,7 @@ export default function NationalDexGridItem({
             ref={imageRef}
             className={[styles.placeholderImage].join(" ")}
             src={pokemon.originalArtwork}
+            onLoad={() => getClipPathValue()}
             loading="lazy"
             alt=""
           />
