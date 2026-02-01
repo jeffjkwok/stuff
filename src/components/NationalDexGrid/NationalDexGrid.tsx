@@ -62,26 +62,6 @@ export default function NationalDexGrid() {
         filteredCount={filteredPokemon.length}
       />
       {filteredPokemon.map((pokemon) => (
-        // <div
-        //   key={pokemon.id}
-        //   className={styles.card}
-        //   onClick={() =>
-        //     console.log(`This is #${pokemon.id}, ${pokemon.name} `)
-        //   }
-        // >
-        //   {/* <div className={styles.cardInfo} style={{ "filter": "grayscale(100%)" }}> */}
-        //   <div className={styles.cardInfo}>
-        //     <h3 className={styles.cardName}>{pokemon.name}</h3>
-        //     <p className={styles.cardSet}>#{pokemon.id}</p>
-        //     <div className={styles.placeholderImageWrapper}>
-        //       <img
-        //         className={styles.placeholderImage}
-        //         src={pokemon.originalArtwork}
-        //         alt=""
-        //       />
-        //     </div>
-        //   </div>
-        // </div>
         <NationalDexGridItem pokemon={pokemon} />
       ))}
     </div>

@@ -16,6 +16,7 @@
   grid-template-columns: repeat(3, minmax(200px, 1fr));
   gap: 1.5rem;
   padding: 1rem 0;
+  overflow: hidden;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(5, minmax(200px, 1fr));

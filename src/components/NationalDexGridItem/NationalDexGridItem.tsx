@@ -24,6 +24,15 @@ export default function NationalDexGridItem({
 
   useEffect(() => {
     getClipPathValue();
+
+    const handleResize = () => {
+      getClipPathValue();
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const clipPathStyle = {
