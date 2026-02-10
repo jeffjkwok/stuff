@@ -14,11 +14,31 @@ export default function NationalDexGridItem({
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [dynamicClipPathValue, setDynamicClipPathValue] = useState<number>(0);
 
+  const [acquisitionState, setAcquisitionState] = useState<boolean>(
+    pokemon.acquired,
+  );
+
   const getClipPathValue = function () {
     if (cardRef.current && imageRef.current) {
       setDynamicClipPathValue(
         imageRef.current.clientWidth - cardRef.current.clientWidth,
       );
+    }
+  };
+
+  const updateAcquistion = async (dexNumber: number) => {
+    try {
+      const response = await fetch(`/api/collection/acquired/${dexNumber}`, {
+        method: "POST",
+      });
+
+      const data = await response.json();
+      // rudimentary update local state to true
+      if (data.acquired) {
+        setAcquisitionState(true);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -46,9 +66,11 @@ export default function NationalDexGridItem({
   return (
     <div
       key={pokemon.id}
-      className={`${styles.card} ${pokemon.acquired ? styles.acquired : ""}`}
+      className={`${styles.card} ${acquisitionState ? styles.acquired : ""}`}
       onClick={() => {
-        console.log(`This is #${pokemon.id}, ${pokemon.name} `);
+        console.log(
+          `This should open a modal/drawer #${pokemon.id}, ${pokemon.name} `,
+        );
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -57,6 +79,15 @@ export default function NationalDexGridItem({
       <div className={styles.cardInfo}>
         <h3 className={styles.cardName}>{pokemon.name}</h3>
         <p className={styles.cardSet}>#{pokemon.id}</p>
+        {!acquisitionState && (
+          <button
+            onClick={() => {
+              updateAcquistion(Number(pokemon.id));
+            }}
+          >
+            Acquired?
+          </button>
+        )}
         <div
           className={styles.placeholderImageWrapper}
           style={isHovered ? clipPathHoverStyle : clipPathStyle}

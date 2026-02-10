@@ -4,7 +4,7 @@ import express from "express";
 import "dotenv/config";
 import mockCards from "./data/mock-cards.json";
 import nationalDex from "./data/updatedDex.json";
-import { getCollection, updateCollection } from "./googleSheets";
+import { getCollection, toggleAcquistion } from "./googleSheets";
 
 const app = express();
 const PORT = 3001;
@@ -39,10 +39,19 @@ app.get("/api/collection", async (req, res) => {
   }
 });
 
-app.post("/api/collection/:id", async (req, res) => {
+app.post("/api/collection/acquired/:dexNumber", async (req, res) => {
   // UPDATE LOGIC HERE
-  console.log(req, res);
-  console.log(await updateCollection());
+  // console.log(req,res)
+  try {
+    const dexNumber = parseInt(req.params.dexNumber);
+    const newStatus = await toggleAcquistion(dexNumber);
+    res.json({ success: true, acquired: newStatus });
+  } catch (error) {
+    console.error("Error toggling pokemon:", error);
+    res
+      .status(500)
+      .json({ error: "Failed to update acquistion status of pokemon" });
+  }
 });
 
 app.get("/api/pokemon/sprite/:pokeId", async (req, res) => {

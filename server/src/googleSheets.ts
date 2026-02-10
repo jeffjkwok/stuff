@@ -52,6 +52,34 @@ export async function getCollection(): Promise<CollectionCard[]> {
   }));
 }
 
-export async function updateCollection(): Promise<void> {
-  // UPDATE LOGIC HERE
+export async function updateCollection(
+  dexNumber: number,
+  acquired: boolean,
+): Promise<void> {
+  // Only Supports Acquired update
+  const rowNumber = dexNumber + 1;
+
+  await sheets.spreadsheets.values.update({
+    spreadsheetId: SPREADSHEET_ID,
+    range: `MyCollection!C${rowNumber}`,
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values: [[acquired.toString().toUpperCase()]],
+    },
+  });
+}
+
+export async function toggleAcquistion(dexNumber: number): Promise<boolean> {
+  const collection = await getCollection();
+  const pokemon = collection.find((p) => p.dex_number == dexNumber);
+
+  if (!pokemon) {
+    throw new Error(`Pokeon #${dexNumber} not found`);
+  }
+
+  const newStatus = !pokemon.acquired;
+
+  await updateCollection(dexNumber, newStatus);
+
+  return newStatus;
 }
