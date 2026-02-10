@@ -22,6 +22,10 @@
   }
 }
 
+.acquired {
+  filter: grayscale(0);
+}
+
 .placeholderImageWrapper {
   width: 100%;
   transition: clip-path 0.5s;

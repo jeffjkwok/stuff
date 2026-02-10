@@ -41,7 +41,7 @@ export async function getCollection(): Promise<CollectionCard[]> {
   return rows.map((row) => ({
     dex_number: parseInt(row[0] || "0"),
     card_name: row[1] || "",
-    acquired: row[2] ? true : false,
+    acquired: row[2] == "TRUE" ? true : false,
     card_id: row[3] || "",
     set_name: row[4] || "",
     rarity: row[5] || "",
@@ -50,4 +50,8 @@ export async function getCollection(): Promise<CollectionCard[]> {
     notes: row[8] || "",
     upgrade_target: row[9] || "",
   }));
+}
+
+export async function updateCollection(): Promise<void> {
+  // UPDATE LOGIC HERE
 }

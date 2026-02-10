@@ -11,10 +11,12 @@ export interface Pokemon {
   region: string;
   sprite: string;
   originalArtwork: string;
+  acquired: boolean;
 }
 
 export default function NationalDexGrid() {
   const [allPokemon, setAllPokemon] = useState<Pokemon[]>([]);
+  const [collection, setCollection] = useState<object[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState<FilterState>({
@@ -24,10 +26,13 @@ export default function NationalDexGrid() {
   });
 
   useEffect(() => {
-    fetch("/api/nationaldex")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllPokemon(data);
+    Promise.all([
+      fetch("/api/nationaldex").then((res) => res.json()),
+      fetch("/api/collection").then((res) => res.json()),
+    ])
+      .then(([nationaldexData, collectionData]) => {
+        setAllPokemon(nationaldexData);
+        setCollection(collectionData);
         setLoading(false);
       })
       .catch((err) => {
@@ -36,9 +41,18 @@ export default function NationalDexGrid() {
       });
   }, []);
 
+  const acquiredByDexNumber = useMemo(() => {
+    const map = new Map<number, boolean>();
+    collection.forEach((entry) => {
+      if (entry.acquired) {
+        map.set(entry.dex_number, true);
+      }
+    });
+    return map;
+  }, [collection]);
+
   const filteredPokemon = useMemo(() => {
     return allPokemon.filter((pokemon) => {
-      // console.log(pokemon, filters.search);
       if (filters.search) {
         const searchLower = filters.search.toLowerCase();
         const matchesName = pokemon.name.toLowerCase().includes(searchLower);
@@ -61,9 +75,11 @@ export default function NationalDexGrid() {
         totalCount={allPokemon.length}
         filteredCount={filteredPokemon.length}
       />
-      {filteredPokemon.map((pokemon) => (
-        <NationalDexGridItem pokemon={pokemon} />
-      ))}
+      {filteredPokemon.map((pokemon) => {
+        const acquired = acquiredByDexNumber.get(Number(pokemon.id)) ?? false;
+
+        return <NationalDexGridItem pokemon={{ ...pokemon, acquired }} />;
+      })}
     </div>
   );
 }

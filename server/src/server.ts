@@ -1,7 +1,10 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
 import express from "express";
 import "dotenv/config";
 import mockCards from "./data/mock-cards.json";
 import nationalDex from "./data/updatedDex.json";
+import { getCollection, updateCollection } from "./googleSheets";
 
 const app = express();
 const PORT = 3001;
@@ -26,6 +29,22 @@ app.get("/api/nationaldex", (req, res) => {
   res.json(nationalDex);
 });
 
+app.get("/api/collection", async (req, res) => {
+  try {
+    const collection = await getCollection();
+    res.json(collection);
+  } catch (error) {
+    console.error("Error fetching collection:", error);
+    res.status(500).json({ error: "Failed tofetch colleciton" });
+  }
+});
+
+app.post("/api/collection/:id", async (req, res) => {
+  // UPDATE LOGIC HERE
+  console.log(req, res);
+  console.log(await updateCollection());
+});
+
 app.get("/api/pokemon/sprite/:pokeId", async (req, res) => {
   try {
     const { pokeId } = req.params;
@@ -38,8 +57,6 @@ app.get("/api/pokemon/sprite/:pokeId", async (req, res) => {
         error: "Pokemon not found",
       });
     }
-
-    console.log("asdf hello");
 
     const data = await response.json();
     console.log(data);

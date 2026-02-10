@@ -46,7 +46,7 @@ export default function NationalDexGridItem({
   return (
     <div
       key={pokemon.id}
-      className={styles.card}
+      className={`${styles.card} ${pokemon.acquired ? styles.acquired : ""}`}
       onClick={() => {
         console.log(`This is #${pokemon.id}, ${pokemon.name} `);
       }}
