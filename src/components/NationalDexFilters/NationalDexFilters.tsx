@@ -11,6 +11,7 @@ export interface FilterState {
   search: string;
   generations: number[];
   regions: string[];
+  acquired: boolean | null;
 }
 
 // const GENERATIONS = [
@@ -46,10 +47,12 @@ export default function NationalDexFilters({
     search: "",
     generations: [],
     regions: [],
+    acquired: null,
   });
 
   const updateFilters = (newFilters: Partial<FilterState>) => {
     const updated = { ...filters, ...newFilters };
+    console.log(updated);
     setFilters(updated);
     onFilterChange(updated);
   };
@@ -67,13 +70,15 @@ export default function NationalDexFilters({
   const hasActiveFilters =
     filters.search ||
     filters.generations.length > 0 ||
-    filters.regions.length > 0;
+    filters.regions.length > 0 ||
+    filters.acquired !== null;
 
   const clearAllFilters = () => {
     updateFilters({
       search: "",
       generations: [],
       regions: [],
+      acquired: null,
     });
   };
 
@@ -85,6 +90,35 @@ export default function NationalDexFilters({
           <span>
             Showing {filteredCount} of {totalCount} Pokemon
           </span>
+        </div>
+        <div className={styles.acquiredFilter}>
+          <label>
+            <input
+              name="acquiredFilter"
+              type="radio"
+              checked={filters.acquired === null}
+              onChange={() => updateFilters({ acquired: null })}
+            />
+            All
+          </label>
+          <label>
+            <input
+              name="acquiredFilter"
+              type="radio"
+              checked={filters.acquired === true}
+              onChange={() => updateFilters({ acquired: true })}
+            />
+            Acquired
+          </label>
+          <label>
+            <input
+              name="acquiredFilter"
+              type="radio"
+              checked={filters.acquired === false}
+              onChange={() => updateFilters({ acquired: false })}
+            />
+            Missing
+          </label>
         </div>
         <div className={styles.searchContainer}>
           {/* Text Search for Name or # */}

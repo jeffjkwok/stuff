@@ -17,12 +17,27 @@ export interface Pokemon {
 
 export interface CollectionData {
   num_acquired: number;
-  collection: object[];
+  collection: CollectionEntry[];
+}
+
+interface CollectionEntry {
+  dex_number: number;
+  acquired: boolean;
+  [key: string]: unknown;
+}
+
+interface PokemonData {
+  id: string;
+  name: string;
+  generation?: number;
+  region?: string;
+  sprite?: string;
+  originalArtwork?: string;
+  [key: string]: unknown;
 }
 
 export default function NationalDexGrid() {
   const [allPokemon, setAllPokemon] = useState<Pokemon[]>([]);
-  const [collection, setCollection] = useState<object[]>([]);
   const [acquiredCount, setAcquiredCount] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [loading, setLoading] = useState(true);
@@ -31,6 +46,7 @@ export default function NationalDexGrid() {
     search: "",
     generations: [],
     regions: [],
+    acquired: null,
   });
 
   useEffect(() => {
@@ -38,31 +54,51 @@ export default function NationalDexGrid() {
       fetch("/api/nationaldex").then((res) => res.json()),
       fetch("/api/collection").then((res) => res.json()),
     ])
-      .then(([nationaldexData, collectionData]) => {
-        setAllPokemon(nationaldexData);
-        setCollection(collectionData.collection);
-        setAcquiredCount(collectionData.num_acquired);
-        setTotalCount(collectionData.collection.length);
-        setLoading(false);
-      })
+      .then(
+        ([nationaldexData, collectionData]: [
+          PokemonData[],
+          CollectionData,
+        ]) => {
+          // Create a map of dex_number -> acquired status for fast lookup
+          const acquiredMap = new Map<number, boolean>();
+          collectionData.collection.forEach((entry: CollectionEntry) => {
+            acquiredMap.set(entry.dex_number, entry.acquired || false);
+          });
+
+          // Merge collection data into pokemon data
+          const mergedPokemon: Pokemon[] = nationaldexData.map(
+            (pokemon: PokemonData): Pokemon => ({
+              id: pokemon.id,
+              name: pokemon.name,
+              generation: (pokemon.generation as number) ?? 0,
+              region: (pokemon.region as string) ?? "",
+              sprite: (pokemon.sprite as string) ?? "",
+              originalArtwork: (pokemon.originalArtwork as string) ?? "",
+              acquired: acquiredMap.get(Number(pokemon.id)) ?? false,
+            }),
+          );
+
+          setAllPokemon(mergedPokemon);
+          setAcquiredCount(collectionData.num_acquired);
+          setTotalCount(collectionData.collection.length);
+
+          setLoading(false);
+        },
+      )
       .catch((err) => {
         setError(err.message);
         setLoading(false);
       });
   }, []);
 
-  const acquiredByDexNumber = useMemo(() => {
-    const map = new Map<number, boolean>();
-    collection.forEach((entry) => {
-      if (entry.acquired) {
-        map.set(entry.dex_number, true);
-      }
-    });
-    return map;
-  }, [collection]);
-
   const filteredPokemon = useMemo(() => {
     return allPokemon.filter((pokemon) => {
+      // Filter by acquired status
+      if (filters.acquired !== null && pokemon.acquired !== filters.acquired) {
+        return false;
+      }
+
+      // Filter by search
       if (filters.search) {
         const searchLower = filters.search.toLowerCase();
         const matchesName = pokemon.name.toLowerCase().includes(searchLower);
@@ -81,7 +117,10 @@ export default function NationalDexGrid() {
   return (
     <>
       <div>
-        <p>{`${acquiredCount}/${totalCount} - ${Math.floor((acquiredCount / totalCount) * 100)}%`}</p>
+        <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
+          <b>Completion</b>
+          <p>{`${acquiredCount}/${totalCount} - ${Math.floor((acquiredCount / totalCount) * 100)}%`}</p>
+        </div>
         <ProgressBar
           progress={Math.floor((acquiredCount / totalCount) * 100)}
         />
@@ -92,16 +131,9 @@ export default function NationalDexGrid() {
         filteredCount={filteredPokemon.length}
       />
       <div className={styles.grid}>
-        {filteredPokemon.map((pokemon) => {
-          const acquired = acquiredByDexNumber.get(Number(pokemon.id)) ?? false;
-
-          return (
-            <NationalDexGridItem
-              key={pokemon.id}
-              pokemon={{ ...pokemon, acquired }}
-            />
-          );
-        })}
+        {filteredPokemon.map((pokemon) => (
+          <NationalDexGridItem key={pokemon.id} pokemon={pokemon} />
+        ))}
       </div>
     </>
   );

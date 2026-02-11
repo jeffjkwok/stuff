@@ -1,23 +1,34 @@
-const ProgressBar = ({ progress }) => {
+import styles from "./ProgressBar.module.scss";
+
+interface ProgressProps {
+  progress: number;
+}
+
+import { useEffect, useState } from "react";
+
+const ProgressBar = ({ progress }: ProgressProps) => {
   // Ensure progress is between 0 and 100
   const validProgress = Math.min(100, Math.max(0, progress));
 
+  // Animate on mount by transitioning from 0% to the real value.
+  const [animatedProgress, setAnimatedProgress] = useState(0);
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => setAnimatedProgress(validProgress));
+    return () => cancelAnimationFrame(raf);
+  }, [validProgress]);
+
+  const progressBarColor =
+    validProgress > 80 ? "#4caf50" : validProgress < 41 ? "#d03118" : "#f4bd53";
+
   return (
-    <div
-      style={{
-        width: "100%",
-        backgroundColor: "#e0e0e0",
-        borderRadius: "8px",
-        maxWidth: "425px",
-      }}
-    >
+    <div className={styles.progressBar}>
       <div
         style={{
-          width: `${validProgress}%`,
+          width: `${animatedProgress}%`,
           height: "20px",
-          backgroundColor: "#4caf50",
+          backgroundColor: progressBarColor,
           borderRadius: "8px",
-          transition: "width 0.3s ease-in-out", // Smooth animation
+          transition: "width 1s ease-in-out", // Smooth animation
         }}
       />
     </div>
