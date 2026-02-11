@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import styles from "@/NationalDexFilters.module.scss";
+import styles from "./NationalDexFilters.module.scss";
 
 interface FilterProps {
   onFilterChange: (filters: FilterState) => void;
@@ -79,24 +79,26 @@ export default function NationalDexFilters({
 
   return (
     <div>
-      <div>
-        <h2>Filters</h2>
-        <div>
-          Showing {filteredCount} of {totalCount} Pokemon
+      <div className={styles.filters}>
+        <div className={styles.header}>
+          <h2>Filters</h2>
+          <span>
+            Showing {filteredCount} of {totalCount} Pokemon
+          </span>
         </div>
-        {hasActiveFilters && (
-          <button onClick={clearAllFilters}>Clear All</button>
-        )}
-      </div>
-      <div>
-        {/* Text Search for Name or # */}
-        <label>Search by Name or #</label>
-        <input
-          type="text"
-          placeholder="e.g. Pikachu or 25"
-          value={filters.search}
-          onChange={(e) => updateFilters({ search: e.target.value })}
-        />
+        <div className={styles.searchContainer}>
+          {/* Text Search for Name or # */}
+          <label>Search by Name or #</label>
+          <input
+            type="text"
+            placeholder="e.g. Pikachu or 25"
+            value={filters.search}
+            onChange={(e) => updateFilters({ search: e.target.value })}
+          />
+          {hasActiveFilters && (
+            <button onClick={clearAllFilters}>Clear All</button>
+          )}
+        </div>
       </div>
     </div>
   );
