@@ -116,20 +116,29 @@ export default function NationalDexGrid() {
 
   return (
     <>
-      <div>
-        <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
-          <b>Completion</b>
-          <p>{`${acquiredCount}/${totalCount} - ${Math.floor((acquiredCount / totalCount) * 100)}%`}</p>
+      <div className={styles.headers}>
+        <div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "1rem",
+              alignItems: "center",
+            }}
+          >
+            <h2>Completion</h2>
+            <p>{`${acquiredCount}/${totalCount} - ${Math.floor((acquiredCount / totalCount) * 100)}%`}</p>
+          </div>
+          <ProgressBar
+            progress={Math.floor((acquiredCount / totalCount) * 100)}
+          />
         </div>
-        <ProgressBar
-          progress={Math.floor((acquiredCount / totalCount) * 100)}
+        <NationalDexFilters
+          onFilterChange={setFilters}
+          totalCount={allPokemon.length}
+          filteredCount={filteredPokemon.length}
         />
       </div>
-      <NationalDexFilters
-        onFilterChange={setFilters}
-        totalCount={allPokemon.length}
-        filteredCount={filteredPokemon.length}
-      />
       <div className={styles.grid}>
         {filteredPokemon.map((pokemon) => (
           <NationalDexGridItem key={pokemon.id} pokemon={pokemon} />

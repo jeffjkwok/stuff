@@ -122,15 +122,24 @@ export default function NationalDexFilters({
         </div>
         <div className={styles.searchContainer}>
           {/* Text Search for Name or # */}
-          <label>Search by Name or #</label>
+          <label>
+            <b> Search by Name or #</b>
+          </label>
           <input
+            style={{
+              borderRadius: ".5rem",
+              height: "1.5rem",
+              fontSize: "1rem",
+            }}
             type="text"
             placeholder="e.g. Pikachu or 25"
             value={filters.search}
             onChange={(e) => updateFilters({ search: e.target.value })}
           />
           {hasActiveFilters && (
-            <button onClick={clearAllFilters}>Clear All</button>
+            <button style={{}} onClick={clearAllFilters}>
+              Clear All
+            </button>
           )}
         </div>
       </div>

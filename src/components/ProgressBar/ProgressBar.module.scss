@@ -13,3 +13,9 @@
     max-width: 25%;
   }
 }
+
+.progress {
+  border-radius: 0.5rem;
+  height: 1.25rem;
+  transition: "width 1s ease-in-out"; // Smooth animation
+}

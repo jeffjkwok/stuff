@@ -23,12 +23,10 @@ const ProgressBar = ({ progress }: ProgressProps) => {
   return (
     <div className={styles.progressBar}>
       <div
+        className={styles.progress}
         style={{
           width: `${animatedProgress}%`,
-          height: "20px",
           backgroundColor: progressBarColor,
-          borderRadius: "8px",
-          transition: "width 1s ease-in-out", // Smooth animation
         }}
       />
     </div>
