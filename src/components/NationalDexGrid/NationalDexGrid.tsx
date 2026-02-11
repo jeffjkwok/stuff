@@ -1,95 +1,27 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import NationalDexFilters from "../NationalDexFilters/NationalDexFilters";
 import NationalDexGridItem from "../NationalDexGridItem/NationalDexGridItem";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import type { FilterState } from "../NationalDexFilters/NationalDexFilters";
 import styles from "../NationalDexGrid/NationalDexGrid.module.scss";
+import type { Pokemon } from "../../pages/homepage/HomePage"; // move the interface/type to a type folder
 
-export interface Pokemon {
-  id: string;
-  name: string;
-  generation: number;
-  region: string;
-  sprite: string;
-  originalArtwork: string;
-  acquired: boolean;
+interface NationalDexGridProps {
+  allPokemon: Pokemon[];
+  acquiredCount: number;
 }
 
-export interface CollectionData {
-  num_acquired: number;
-  collection: CollectionEntry[];
-}
-
-interface CollectionEntry {
-  dex_number: number;
-  acquired: boolean;
-  [key: string]: unknown;
-}
-
-interface PokemonData {
-  id: string;
-  name: string;
-  generation?: number;
-  region?: string;
-  sprite?: string;
-  originalArtwork?: string;
-  [key: string]: unknown;
-}
-
-export default function NationalDexGrid() {
-  const [allPokemon, setAllPokemon] = useState<Pokemon[]>([]);
-  const [acquiredCount, setAcquiredCount] = useState<number>(0);
-  const [totalCount, setTotalCount] = useState<number>(0);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export default function NationalDexGrid({
+  allPokemon,
+  acquiredCount,
+}: NationalDexGridProps) {
+  const [totalCount] = useState<number>(allPokemon.length);
   const [filters, setFilters] = useState<FilterState>({
     search: "",
     generations: [],
     regions: [],
     acquired: null,
   });
-
-  useEffect(() => {
-    Promise.all([
-      fetch("/api/nationaldex").then((res) => res.json()),
-      fetch("/api/collection").then((res) => res.json()),
-    ])
-      .then(
-        ([nationaldexData, collectionData]: [
-          PokemonData[],
-          CollectionData,
-        ]) => {
-          // Create a map of dex_number -> acquired status for fast lookup
-          const acquiredMap = new Map<number, boolean>();
-          collectionData.collection.forEach((entry: CollectionEntry) => {
-            acquiredMap.set(entry.dex_number, entry.acquired || false);
-          });
-
-          // Merge collection data into pokemon data
-          const mergedPokemon: Pokemon[] = nationaldexData.map(
-            (pokemon: PokemonData): Pokemon => ({
-              id: pokemon.id,
-              name: pokemon.name,
-              generation: (pokemon.generation as number) ?? 0,
-              region: (pokemon.region as string) ?? "",
-              sprite: (pokemon.sprite as string) ?? "",
-              originalArtwork: (pokemon.originalArtwork as string) ?? "",
-              acquired: acquiredMap.get(Number(pokemon.id)) ?? false,
-            }),
-          );
-
-          setAllPokemon(mergedPokemon);
-          setAcquiredCount(collectionData.num_acquired);
-          setTotalCount(collectionData.collection.length);
-
-          setLoading(false);
-        },
-      )
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []);
 
   const filteredPokemon = useMemo(() => {
     return allPokemon.filter((pokemon) => {
@@ -109,10 +41,6 @@ export default function NationalDexGrid() {
       return true;
     });
   }, [allPokemon, filters]);
-
-  if (loading)
-    return <div className={styles.loading}>Loading National Dex...</div>;
-  if (error) return <div className={styles.error}>Error: {error}</div>;
 
   return (
     <>
@@ -135,7 +63,7 @@ export default function NationalDexGrid() {
         </div>
         <NationalDexFilters
           onFilterChange={setFilters}
-          totalCount={allPokemon.length}
+          totalCount={totalCount}
           filteredCount={filteredPokemon.length}
         />
       </div>
