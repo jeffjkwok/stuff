@@ -1,4 +1,4 @@
-import type { Pokemon } from "../NationalDexGrid/NationalDexGrid";
+import type { Pokemon } from "../../pages/homepage/HomePage";
 import styles from "./NationalDexGridItem.module.scss";
 import { useEffect, useRef, useState } from "react";
 

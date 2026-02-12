@@ -1,6 +1,8 @@
 import NationalDexGrid from "@/components/NationalDexGrid/NationalDexGrid";
+import NationalDexGridMobile from "@/components/NationalDexGridMobile/NationalDexGridMobile";
 import { useState, useEffect } from "react";
 import styles from "./HomePage.module.scss";
+import { useResponsive } from "@/hooks/useResponsive";
 
 export interface Pokemon {
   id: string;
@@ -38,6 +40,8 @@ export default function HomePage() {
   const [acquiredCount, setAcquiredCount] = useState<number>(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const { isMobile } = useResponsive();
 
   useEffect(() => {
     Promise.all([
@@ -90,7 +94,17 @@ export default function HomePage() {
         <h1>PokeProject</h1>
         <p>Nationaldex Card Tracker</p>
       </header>
-      <NationalDexGrid allPokemon={allPokemon} acquiredCount={acquiredCount} />
+      {isMobile ? (
+        <NationalDexGridMobile
+          allPokemon={allPokemon}
+          acquiredCount={acquiredCount}
+        />
+      ) : (
+        <NationalDexGrid
+          allPokemon={allPokemon}
+          acquiredCount={acquiredCount}
+        />
+      )}
     </div>
   );
 }

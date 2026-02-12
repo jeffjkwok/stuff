@@ -1,0 +1,26 @@
+.card {
+  border: 1px solid black;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  filter: grayscale(1);
+  display: flex;
+}
+
+.acquired {
+  filter: grayscale(0);
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 0.25rem;
+  width: 100%;
+}
+
+.imageContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

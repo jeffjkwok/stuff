@@ -20,9 +20,9 @@
 .searchContainer {
   display: flex;
   flex-direction: column;
-  max-width: 425px;
   gap: 0.5rem;
   width: 100%;
+  max-width: 100%;
 
   @media (min-width: 768px) {
     max-width: 33%;

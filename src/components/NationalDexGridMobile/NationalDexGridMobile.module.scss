@@ -1,0 +1,25 @@
+@use "@/styles/variables" as *;
+
+.loading,
+.error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+}
+
+.error {
+  color: #ef4444;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.headers {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
