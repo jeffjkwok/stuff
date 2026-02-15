@@ -1,12 +1,63 @@
 .progressBar {
+  // Pixel-art step: small = 1 unit, large = 2 units. Change --pixel-step to scale the look (e.g. 2px, 3px, 4px).
+  --pixel-step: 2.5px;
+  --pixel-step-2: calc(var(--pixel-step) * 2);
+
   max-width: 100%;
   width: 100%;
-  background-color: #e0e0e0;
-  border-radius: 0.5rem;
-  overflow: hidden;
+  position: relative;
+  height: 20px;
+
+  // Shared clip-path for stepped corners (uses --pixel-step)
+  --clip-polygon: polygon(
+    0 var(--pixel-step-2),
+    var(--pixel-step) var(--pixel-step-2),
+    var(--pixel-step) var(--pixel-step),
+    var(--pixel-step-2) var(--pixel-step),
+    var(--pixel-step-2) 0,
+    calc(100% - var(--pixel-step-2)) 0,
+    calc(100% - var(--pixel-step-2)) var(--pixel-step),
+    calc(100% - var(--pixel-step)) var(--pixel-step),
+    calc(100% - var(--pixel-step)) var(--pixel-step-2),
+    100% var(--pixel-step-2),
+    100% calc(100% - var(--pixel-step-2)),
+    calc(100% - var(--pixel-step)) calc(100% - var(--pixel-step-2)),
+    calc(100% - var(--pixel-step)) calc(100% - var(--pixel-step)),
+    calc(100% - var(--pixel-step-2)) calc(100% - var(--pixel-step)),
+    calc(100% - var(--pixel-step-2)) 100%,
+    var(--pixel-step-2) 100%,
+    var(--pixel-step-2) calc(100% - var(--pixel-step)),
+    var(--pixel-step) calc(100% - var(--pixel-step)),
+    var(--pixel-step) calc(100% - var(--pixel-step-2)),
+    0 calc(100% - var(--pixel-step-2))
+  );
+
+  // Black border layer
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -2px; // this is the border width of the progress bar
+    background-color: #000;
+    clip-path: var(--clip-polygon);
+    z-index: 0;
+  }
+
+  // Gray background layer
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: #e0e0e0;
+    clip-path: var(--clip-polygon);
+    z-index: 1;
+  }
 
   @media (min-width: 768px) {
-    max-width: 33%;
+    max-width: 50%;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 40%;
   }
 
   @media (min-width: 1440px) {
@@ -14,8 +65,10 @@
   }
 }
 
-.progress {
-  border-radius: 0.5rem;
-  height: 1.25rem;
-  transition: "width 1s ease-in-out"; // Smooth animation
+.progressBarFill {
+  height: 100%;
+  transition: width 0.75s ease;
+  position: relative;
+  z-index: 2;
+  clip-path: var(--clip-polygon);
 }

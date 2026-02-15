@@ -12,6 +12,7 @@ const ProgressBar = ({ progress }: ProgressProps) => {
 
   // Animate on mount by transitioning from 0% to the real value.
   const [animatedProgress, setAnimatedProgress] = useState(0);
+
   useEffect(() => {
     const raf = requestAnimationFrame(() => setAnimatedProgress(validProgress));
     return () => cancelAnimationFrame(raf);
@@ -23,7 +24,7 @@ const ProgressBar = ({ progress }: ProgressProps) => {
   return (
     <div className={styles.progressBar}>
       <div
-        className={styles.progress}
+        className={styles.progressBarFill}
         style={{
           width: `${animatedProgress}%`,
           backgroundColor: progressBarColor,

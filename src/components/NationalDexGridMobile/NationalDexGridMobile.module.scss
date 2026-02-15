@@ -11,15 +11,31 @@
   color: #ef4444;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.gridMobile {
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
   padding: 1rem 0;
+  width: 100%;
 }
 
-.headers {
+.gridHeadersMobile {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.gridProgressBarLabelMobile {
+  display: flex;
+  flex-direction: "row";
+  justify-content: space-between;
+  align-items: baseline;
+
+  @media (min-width: 768px) {
+    max-width: 50%;
+  }
+
+  @media (min-width: 1440px) {
+    max-width: 25%;
+  }
 }

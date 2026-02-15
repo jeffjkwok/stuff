@@ -84,14 +84,14 @@ export default function NationalDexFilters({
 
   return (
     <div>
-      <div className={styles.filters}>
-        <div className={styles.header}>
+      <div className={styles.nationalDexFilters}>
+        <div className={styles.nationalDexHeader}>
           <h2>Filters</h2>
           <span>
             Showing {filteredCount} of {totalCount} Pokemon
           </span>
         </div>
-        <div className={styles.acquiredFilter}>
+        <div className={styles.nationalDexAcquiredFilter}>
           <label>
             <input
               name="acquiredFilter"
@@ -120,17 +120,12 @@ export default function NationalDexFilters({
             Missing
           </label>
         </div>
-        <div className={styles.searchContainer}>
+        <div className={styles.nationalDexSearchContainer}>
           {/* Text Search for Name or # */}
           <label>
             <b> Search by Name or #</b>
           </label>
           <input
-            style={{
-              borderRadius: ".5rem",
-              height: "1.5rem",
-              fontSize: "1rem",
-            }}
             type="text"
             placeholder="e.g. Pikachu or 25"
             value={filters.search}

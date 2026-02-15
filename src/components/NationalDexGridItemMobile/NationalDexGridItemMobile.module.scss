@@ -1,16 +1,35 @@
-.card {
-  border: 1px solid black;
+:root {
+  --border-thickness: 2px;
+  --corner-width: 4px;
+  --corner-length-y: 1rem;
+  --corner-length-x: 1rem;
+}
+
+.itemCardMobile {
+  border: var(--border-thickness) dashed black;
   padding: 1rem;
-  border-radius: 0.5rem;
   filter: grayscale(1);
   display: flex;
+  flex: 1;
+  min-width: 165px;
+
+  button {
+    width: 100%;
+    background-color: transparent;
+    padding: 0 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #d8d8d8 !important;
+    }
+  }
 }
 
 .acquired {
   filter: grayscale(0);
 }
 
-.cardInfo {
+.itemCardInfoMobile {
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -18,9 +37,46 @@
   width: 100%;
 }
 
-.imageContainer {
+.itemImageContainerMobile {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.itemCardNameMobile,
+.itemCardNumberMobile,
+button {
+  font-family: "undefined";
+}
+
+.itemCardNameMobile {
+  font-size: 1.25rem;
+  margin-bottom: 0;
+}
+
+.twoCorners {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: calc(var(--border-thickness) * -1);
+    right: calc(var(--border-thickness) * -1);
+    width: var(--corner-length-x);
+    height: var(--corner-length-y);
+    border-top: var(--corner-width) solid #000;
+    border-right: var(--corner-width) solid #000;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: calc(var(--border-thickness) * -1); //tied to border width
+    left: calc(var(--border-thickness) * -1);
+    width: var(--corner-length-x);
+    height: var(--corner-length-y);
+    border-bottom: var(--corner-width) solid #000;
+    border-left: var(--corner-width) solid #000;
+  }
 }

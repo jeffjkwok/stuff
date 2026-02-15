@@ -78,7 +78,7 @@ export default function NationalDexGridItem({
     >
       <div className={styles.cardInfo}>
         <h3 className={styles.cardName}>{pokemon.name}</h3>
-        <p className={styles.cardSet}>#{pokemon.id}</p>
+        <p className={styles.cardNumber}>#{pokemon.id}</p>
         {!acquisitionState && (
           <button
             onClick={() => {

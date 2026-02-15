@@ -43,7 +43,12 @@
 }
 
 .cardName {
-  margin: 0 0 0.25rem 0;
-  font-size: 1rem;
+  margin: 0;
+  font-size: 1.25rem;
   font-weight: 600;
+}
+
+.cardName,
+.cardNumber {
+  font-family: "undefined";
 }

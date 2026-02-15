@@ -44,16 +44,9 @@ export default function NationalDexGridMobile({
 
   return (
     <>
-      <div className={styles.headers}>
+      <div className={styles.gridHeaderMobile}>
         <div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              gap: "1rem",
-              alignItems: "center",
-            }}
-          >
+          <div className={styles.gridProgressBarLabelMobile}>
             <h2>Completion</h2>
             <p>{`${acquiredCount}/${totalCount} - ${Math.floor((acquiredCount / totalCount) * 100)}%`}</p>
           </div>
@@ -67,7 +60,7 @@ export default function NationalDexGridMobile({
           filteredCount={filteredPokemon.length}
         />
       </div>
-      <div className={styles.grid}>
+      <div className={styles.gridMobile}>
         {filteredPokemon.map((pokemon) => (
           <NationalDexGridItemMobile key={pokemon.id} pokemon={pokemon} />
         ))}

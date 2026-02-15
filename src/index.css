@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "undefined";
+  src: url("./assets/fonts/undefined-medium.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,4 +17,26 @@ body {
     -apple-system,
     sans-serif;
   padding: 2rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+b {
+  font-family: "undefined";
+}
+
+p,
+span,
+input[type="text"],
+input[type="radio"] {
+  font-family: "Inter", sans-serif;
+  font-weight: 200;
+}
+
+input[type="text"]::placeholder {
+  font-style: italic;
 }

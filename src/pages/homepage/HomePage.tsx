@@ -41,7 +41,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const { isMobile } = useResponsive();
+  const { isDesktop } = useResponsive();
 
   useEffect(() => {
     Promise.all([
@@ -90,11 +90,11 @@ export default function HomePage() {
 
   return (
     <div>
-      <header className={styles.header}>
-        <h1>PokeProject</h1>
+      <header className={styles.homepageHeader}>
+        <h1>PokéProject</h1>
         <p>Nationaldex Card Tracker</p>
       </header>
-      {isMobile ? (
+      {!isDesktop ? (
         <NationalDexGridMobile
           allPokemon={allPokemon}
           acquiredCount={acquiredCount}

@@ -1,15 +1,41 @@
-.filters {
+.nationalDexFilters {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  max-width: 100%;
+
+  @media (min-width: 768px) {
+    max-width: 50%;
+  }
+
+  @media (min-width: 1024px) {
+    justify-content: inherit;
+    max-width: 40%;
+  }
+
+  @media (min-width: 1440px) {
+    max-width: 25%;
+  }
+
+  button {
+    background-color: transparent;
+    padding: 0 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #d8d8d8 !important;
+    }
+  }
 }
 
-.acquiredFilter {
+.nationalDexAcquiredFilter {
   display: flex;
   gap: 1rem;
   align-items: center;
 
   label {
+    font-family: "Inter";
+    font-weight: 200;
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
@@ -17,25 +43,29 @@
   }
 }
 
-.searchContainer {
+.nationalDexSearchContainer {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
   max-width: 100%;
 
-  @media (min-width: 768px) {
-    max-width: 33%;
-  }
-
-  @media (min-width: 1440px) {
-    max-width: 25%;
+  input {
+    // border-radius: .5rem;
+    border: 1px solid black;
+    padding: 0.5rem;
+    height: 1.5rem;
   }
 }
 
-.header {
+.nationalDexHeader {
   display: inline-flex;
   flex-direction: row;
   align-items: baseline;
   gap: 1rem;
+  justify-content: space-between;
+
+  @media (min-width: 1024px) {
+    justify-content: inherit;
+  }
 }

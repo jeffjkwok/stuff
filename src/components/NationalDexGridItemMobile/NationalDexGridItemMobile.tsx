@@ -32,7 +32,7 @@ export default function NationalDexGridItemMobile({
   return (
     <div
       key={pokemon.id}
-      className={`${styles.card} ${acquisitionState ? styles.acquired : ""}`}
+      className={`${styles.itemCardMobile} ${acquisitionState ? styles.acquired : ""} ${styles.twoCorners}`}
       onClick={() => {
         console.log(
           `This should open a modal/drawer #${pokemon.id}, ${pokemon.name} `,
@@ -40,27 +40,22 @@ export default function NationalDexGridItemMobile({
       }}
     >
       <div className={""} style={{ width: "100%" }}>
-        <div className={styles.cardInfo}>
-          <h3 className={styles.cardName}>{pokemon.name}</h3>
-          <p className={styles.cardSet}>#{pokemon.id}</p>
-          {!acquisitionState && (
-            <button
-              onClick={() => {
-                updateAcquistion(Number(pokemon.id));
-              }}
-            >
-              Acquired?
-            </button>
-          )}
+        <div className={styles.itemCardInfoMobile}>
+          <h3 className={styles.itemCardNameMobile}>{pokemon.name}</h3>
+          <p className={styles.itemCardNumberMobile}>#{pokemon.id}</p>
         </div>
-        <div className={styles.imageContainer}>
-          <img
-            className={[styles.sprite].join(" ")}
-            src={pokemon.sprite}
-            loading="lazy"
-            alt=""
-          />
+        <div className={styles.itemImageContainerMobile}>
+          <img src={pokemon.sprite} loading="lazy" alt="" />
         </div>
+        {!acquisitionState && (
+          <button
+            onClick={() => {
+              updateAcquistion(Number(pokemon.id));
+            }}
+          >
+            Acquired?
+          </button>
+        )}
       </div>
     </div>
   );

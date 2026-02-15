@@ -51,7 +51,7 @@ export default function NationalDexGrid({
               display: "flex",
               flexDirection: "row",
               gap: "1rem",
-              alignItems: "center",
+              alignItems: "baseline",
             }}
           >
             <h2>Completion</h2>
