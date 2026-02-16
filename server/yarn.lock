@@ -2,32 +2,6 @@
 # yarn lockfile v1
 
 
-"@cachex/core@^1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@cachex/core/-/core-1.0.1.tgz#195caa132384db56f6fdf021aa2362225be17af0"
-  integrity sha512-sHynwjF9hKIvwg8rTUdvA7MOUMcUC5Mq0dpynPBILRS+IPvsHcE4Cb2uRSs0/I2nxO7NQp9p+xHYistdfJJSwg==
-  dependencies:
-    "@dzeio/object-util" "^1.8.3"
-
-"@cachex/memory@^1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@cachex/memory/-/memory-1.0.1.tgz#f4ec809c24b3aec99d0f0d55b965a6b52bc28292"
-  integrity sha512-KWUTdCCXhIlAkJaVZMhUh9kD0uq8PxC3Z34Q3lMGZOAV6FXP/cOMW89ALrWX3VkoRrrM4R6MIMO+amZNOvEqgw==
-  dependencies:
-    "@cachex/core" "^1"
-
-"@cachex/web-storage@^1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@cachex/web-storage/-/web-storage-1.0.1.tgz#ed25a7011b0968b4e114d3328e786bf2837f7b60"
-  integrity sha512-E8Xa9qDZgNgr+lcj3eixowg7PH2CVZbp3huuoc5xVVTtwYrZi5YqbHBG12yG3r6C6Fts/2Yoq6cbVBSm6c8VRA==
-  dependencies:
-    "@cachex/core" "^1"
-
-"@dzeio/object-util@^1", "@dzeio/object-util@^1.8.3":
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/@dzeio/object-util/-/object-util-1.9.2.tgz#0ffefb82230cf5c69e058c3c8f0db04a7515bdf8"
-  integrity sha512-L3EBaHnDmf/+LAC61eCgWzcGXjbaOoFB4ml3eeOFxKlVlO6IZ2BpdstoqgAfLNKqdy4Ixp7TlP5z4ohdPxfSLg==
-
 "@esbuild/aix-ppc64@0.27.2":
   version "0.27.2"
   resolved "https://registry.yarnpkg.com/@esbuild/aix-ppc64/-/aix-ppc64-0.27.2.tgz#521cbd968dcf362094034947f76fa1b18d2d403c"
@@ -158,6 +132,11 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.27.2.tgz#9e585ab6086bef994c6e8a5b3a0481219ada862b"
   integrity sha512-sRdU18mcKf7F+YgheI/zGf5alZatMUTKj/jNS6l744f9u3WFu4v7twcUI9vu4mknF4Y9aDlblIie0IM+5xxaqQ==
 
+"@graphql-typed-document-node/core@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/core/-/core-3.2.0.tgz#5f3d96ec6b2354ad6d8a28bf216a1d97b5426861"
+  integrity sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==
+
 "@isaacs/cliui@^8.0.2":
   version "8.0.2"
   resolved "https://registry.yarnpkg.com/@isaacs/cliui/-/cliui-8.0.2.tgz#b37667b7bc181c168782259bab42474fbf52b550"
@@ -174,15 +153,6 @@
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
-
-"@tcgdex/sdk@^2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@tcgdex/sdk/-/sdk-2.7.1.tgz#c9fe50fd47d971f1cd042ea0688d824a7f6dcabd"
-  integrity sha512-wPXdCLLQ0pLcJvvKaZFllhO4cagSsnWeWyzjtZKknySKpSTLwazKxzXW7IpsdEi1+IGIOhNYa51ZDOOGT7KVfw==
-  dependencies:
-    "@cachex/memory" "^1"
-    "@cachex/web-storage" "^1"
-    "@dzeio/object-util" "^1"
 
 "@types/body-parser@*":
   version "1.19.6"
@@ -713,6 +683,18 @@ gopd@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/gopd/-/gopd-1.2.0.tgz#89f56b8217bdbc8802bd299df6d7f1081d7e51a1"
   integrity sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==
+
+graphql-request@^7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/graphql-request/-/graphql-request-7.4.0.tgz#97a1fc871e79f682d816963446ac6b7f99c963f9"
+  integrity sha512-xfr+zFb/QYbs4l4ty0dltqiXIp07U6sl+tOKAb0t50/EnQek6CVVBLjETXi+FghElytvgaAWtIOt3EV7zLzIAQ==
+  dependencies:
+    "@graphql-typed-document-node/core" "^3.2.0"
+
+graphql@^16.12.0:
+  version "16.12.0"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-16.12.0.tgz#28cc2462435b1ac3fdc6976d030cef83a0c13ac7"
+  integrity sha512-DKKrynuQRne0PNpEbzuEdHlYOMksHSUI8Zc9Unei5gTsMNA2/vMpoMz/yKba50pejK56qj98qM0SjYxAKi13gQ==
 
 gtoken@^8.0.0:
   version "8.0.0"

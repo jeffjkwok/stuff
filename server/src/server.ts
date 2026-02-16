@@ -1,34 +1,14 @@
-/* eslint-disable  @typescript-eslint/no-explicit-any */
-
 import express from "express";
 import "dotenv/config";
 import mockCards from "./data/mock-cards.json";
 import nationalDex from "./data/updatedDex.json";
 import { getCollection, toggleAcquistion } from "./googleSheets";
-import TCGdex, { Query } from "@tcgdex/sdk";
+import { getCard, getCardsByName } from "./graphQL/tcgdex";
 
 const app = express();
 const PORT = 3001;
 
 app.use(express.json());
-
-const tcgdex = new TCGdex("en");
-
-const responseCircularFormatter = (response: any) => {
-  const seen = new WeakSet();
-  return JSON.parse(
-    JSON.stringify(response, (_key, value) => {
-      if (_key == "sdk") return;
-      if (typeof value === "object" && value !== null) {
-        if (seen.has(value)) {
-          return undefined;
-        }
-        seen.add(value);
-      }
-      return value;
-    }),
-  );
-};
 
 app.get("/api/health", (req, res) => {
   res.json({
@@ -40,14 +20,18 @@ app.get("/api/health", (req, res) => {
 
 app.get("/api/search/:name", async (req, res) => {
   try {
-    // const response = await tcgdex.card.get('swsh3-136');
-    const response = await tcgdex.card.list(
-      Query.create().contains("name", req.params.name),
-    );
+    const response = await getCardsByName(req.params.name);
+    res.json(response);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
-    const formattedData = responseCircularFormatter(response);
-
-    res.json(formattedData);
+app.get("/api/card/:cardId", async (req, res) => {
+  try {
+    console.log(req.params.cardId);
+    const response = await getCard(req.params.cardId);
+    res.json(response);
   } catch (error) {
     console.log(error);
   }
