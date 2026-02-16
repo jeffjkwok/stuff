@@ -12,6 +12,7 @@
     "fetch-sprites": "tsx src/scripts/fetchSprites.ts"
   },
   "dependencies": {
+    "@tcgdex/sdk": "^2.7.1",
     "dotenv": "^17.2.4",
     "express": "^5.2.1",
     "googleapis": "^171.4.0"
