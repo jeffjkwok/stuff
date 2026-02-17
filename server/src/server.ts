@@ -3,7 +3,8 @@ import "dotenv/config";
 import mockCards from "./data/mock-cards.json";
 import nationalDex from "./data/updatedDex.json";
 import { getCollection, toggleAcquistion } from "./googleSheets";
-import { getCard, getCardsByName } from "./graphQL/tcgdex";
+// import { getCard, getCardsByName } from "./graphQL/tcgdex";
+import { getCachedCard, getCachedQueryByName } from "./redis/tcgdexCache";
 
 const app = express();
 const PORT = 3001;
@@ -20,7 +21,7 @@ app.get("/api/health", (req, res) => {
 
 app.get("/api/search/:name", async (req, res) => {
   try {
-    const response = await getCardsByName(req.params.name);
+    const response = await getCachedQueryByName(req.params.name);
     res.json(response);
   } catch (error) {
     console.log(error);
@@ -30,7 +31,7 @@ app.get("/api/search/:name", async (req, res) => {
 app.get("/api/card/:cardId", async (req, res) => {
   try {
     console.log(req.params.cardId);
-    const response = await getCard(req.params.cardId);
+    const response = await getCachedCard(req.params.cardId);
     res.json(response);
   } catch (error) {
     console.log(error);

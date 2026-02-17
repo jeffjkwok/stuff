@@ -21,9 +21,12 @@ const GET_CARD_QUERY = gql`
 
 const GET_CARDS_BY_NAME_QUERY = gql`
   query GetCardsByName($name: String!) {
-    cards(filters: { name: $name }) {
+    cards(
+      filters: { name: $name, image: "not:tcgp", category: "not:trainer" }
+    ) {
       id
       name
+      category
       image
       illustrator
       rarity
@@ -33,6 +36,9 @@ const GET_CARDS_BY_NAME_QUERY = gql`
         name
         logo
         symbol
+        cardCount {
+          official
+        }
       }
     }
   }

@@ -26,6 +26,12 @@
       background-color: #d8d8d8 !important;
     }
   }
+
+  h2 {
+    @media (max-width: 424px) {
+      font-size: 1.25rem;
+    }
+  }
 }
 
 .nationalDexAcquiredFilter {

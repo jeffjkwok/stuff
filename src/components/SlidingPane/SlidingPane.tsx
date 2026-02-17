@@ -21,7 +21,7 @@ export default function SlidingPane({
           className={`${styles.slidingPane} ${isOpen ? styles.slidingPaneOpen : ""}`}
         >
           <button onClick={onClose}>Close</button>
-          <div>{children}</div>
+          <div className={styles.slidingPaneContent}>{children}</div>
         </aside>
       </div>
     </>

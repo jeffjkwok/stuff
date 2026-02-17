@@ -5,10 +5,13 @@
   right: 0;
   width: 100%;
   max-width: 100%;
-  height: 100%;
+  height: 92.5%;
   background-color: white;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 
   /* Start off-screen below*/
   transform: translateY(100%);
@@ -17,6 +20,13 @@
 
 .slidingPaneOpen {
   transform: translateY(10%);
+}
+
+.slidingPaneContent {
+  flex: 1;
+  min-height: 0; // allow nested overflow to scroll
+  display: flex;
+  flex-direction: column;
 }
 
 .slidingPaneOverlay {

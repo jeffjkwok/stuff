@@ -5,6 +5,7 @@ import styles from "./HomePage.module.scss";
 import { useResponsive } from "@/hooks/useResponsive";
 import SlidingPane from "@/components/SlidingPane/SlidingPane";
 import mysterSrc from "../../assets/mystery.png";
+import cardBackSrc from "../../assets/pokemonback.png";
 
 export interface Pokemon {
   id: string;
@@ -23,8 +24,15 @@ export interface CollectionData {
 
 interface CollectionEntry {
   dex_number: number;
+  card_id: string;
+  card_name: string;
+  set_name: string;
+  rarity: string;
+  acquired_date: string;
+  cost: number;
+  notes: string;
+  upgrade_target: string;
   acquired: boolean;
-  [key: string]: unknown;
 }
 
 interface PokemonData {
@@ -52,6 +60,7 @@ interface PokemonSetQueryData {
   name: string;
   logo: string;
   symbol: string;
+  cardCount: { official: string };
 }
 
 export default function HomePage() {
@@ -183,6 +192,7 @@ export default function HomePage() {
                 maxWidth: "33%",
                 height: "auto",
                 filter: "grayscale(1)",
+                maxHeight: "250px",
               }}
               src={mysterSrc}
               alt=""
@@ -196,6 +206,10 @@ export default function HomePage() {
               gap: "1.5rem",
               width: "100%",
               marginTop: "2rem",
+              flex: 1,
+              minHeight: 0,
+              overflowY: "auto",
+              justifyContent: "center",
             }}
           >
             {pokemonQuery.map((card) => (
@@ -203,32 +217,54 @@ export default function HomePage() {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  maxWidth: "45%",
+                  width: "165px",
+                  flex: "0 0 165px",
                 }}
               >
-                <img className="" src={`${card.image}/low.webp`} />
-                <div>
+                <img
+                  className=""
+                  style={{
+                    width: "100%",
+                    maxHeight: "250px",
+                    borderRadius: ".5rem",
+                    objectFit: "contain",
+                  }}
+                  src={`${card.image ? card.image + "/low.webp" : cardBackSrc}`}
+                />
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: ".5rem",
+                    justifyContent: "space-between",
+                    flex: "1",
+                  }}
+                >
+                  <div style={{ flex: "1" }}>
+                    <b
+                      style={{
+                        whiteSpace: "normal",
+                        overflowWrap: "anywhere",
+                        wordBreak: "break-word",
+                        maxWidth: "100%",
+                        display: "block",
+                      }}
+                      title={card.set.name}
+                    >
+                      Set: {card.set.name}
+                    </b>
+                  </div>
                   <div
                     style={{
+                      marginTop: "auto",
                       display: "flex",
                       flexDirection: "column",
                       gap: ".5rem",
                     }}
                   >
                     <b>
-                      {card.name}
-                      {card.set.symbol && (
-                        <img
-                          style={{
-                            maxWidth: "1.5rem",
-                            height: "auto",
-                          }}
-                          src={`${card.set.symbol}.webp`}
-                        />
-                      )}
+                      {card.localId}/{card.set.cardCount.official}{" "}
                     </b>
-                    <b>Set: {card.set.name}</b>
-                    <b>Set Number: {card.localId} </b>
                     <button>Add to Collection?</button>
                   </div>
                 </div>

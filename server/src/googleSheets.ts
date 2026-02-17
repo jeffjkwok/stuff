@@ -37,18 +37,18 @@ export interface CollectionData {
 
 const nationalDexColumnMap = {
   dexNumber: "A" as ColumnLetter,
-  cardName: "B",
+  cardName: "B" as ColumnLetter,
   acquired: "C" as ColumnLetter,
-  cardId: "D",
-  setName: "E",
-  setNumber: "F",
-  rarity: "G",
-  symbol: "H",
-  image: "I",
-  acquired_date: "J",
-  cost: "K",
-  notes: "L",
-  upgrade_target: "M",
+  cardId: "D" as ColumnLetter,
+  setName: "E" as ColumnLetter,
+  setNumber: "F" as ColumnLetter,
+  rarity: "G" as ColumnLetter,
+  symbol: "H" as ColumnLetter,
+  image: "I" as ColumnLetter,
+  acquired_date: "J" as ColumnLetter,
+  cost: "K" as ColumnLetter,
+  notes: "L" as ColumnLetter,
+  upgrade_target: "M" as ColumnLetter,
 };
 
 export async function getCollection(): Promise<CollectionData> {

@@ -11,9 +11,13 @@
   margin-bottom: 2rem;
 
   h1 {
-    font-size: 3rem;
-    letter-spacing: 0.125rem;
+    font-size: 2rem;
     font-weight: 200;
+
+    @media (min-width: 475px) {
+      font-size: 3rem;
+      letter-spacing: 0.125rem;
+    }
   }
 }
 
