@@ -6,7 +6,7 @@ interface ProgressProps {
 
 import { useEffect, useState } from "react";
 
-const ProgressBar = ({ progress }: ProgressProps) => {
+export default function ProgressBar({ progress }: ProgressProps) {
   // Ensure progress is between 0 and 100
   const validProgress = Math.min(100, Math.max(0, progress));
 
@@ -32,6 +32,4 @@ const ProgressBar = ({ progress }: ProgressProps) => {
       />
     </div>
   );
-};
-
-export default ProgressBar;
+}

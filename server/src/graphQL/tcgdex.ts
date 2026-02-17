@@ -27,6 +27,7 @@ const GET_CARDS_BY_NAME_QUERY = gql`
       image
       illustrator
       rarity
+      localId
       set {
         id
         name

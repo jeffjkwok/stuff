@@ -4,10 +4,12 @@ import { useState } from "react";
 
 interface NationalDexGridItemProps {
   pokemon: Pokemon;
+  openPane: (pokemon: Pokemon) => void;
 }
 
 export default function NationalDexGridItemMobile({
   pokemon,
+  openPane,
 }: NationalDexGridItemProps) {
   const [acquisitionState, setAcquisitionState] = useState<boolean>(
     pokemon.acquired,
@@ -34,9 +36,7 @@ export default function NationalDexGridItemMobile({
       key={pokemon.id}
       className={`${styles.itemCardMobile} ${acquisitionState ? styles.acquired : ""} ${styles.twoCorners}`}
       onClick={() => {
-        console.log(
-          `This should open a modal/drawer #${pokemon.id}, ${pokemon.name} `,
-        );
+        openPane(pokemon);
       }}
     >
       <div className={""} style={{ width: "100%" }}>

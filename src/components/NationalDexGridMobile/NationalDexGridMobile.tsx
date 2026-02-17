@@ -9,11 +9,13 @@ import NationalDexGridItemMobile from "../NationalDexGridItemMobile/NationalDexG
 interface NationalDexGridProps {
   allPokemon: Pokemon[];
   acquiredCount: number;
+  openCardPaneCallback: (pokemon: Pokemon) => void;
 }
 
 export default function NationalDexGridMobile({
   allPokemon,
   acquiredCount,
+  openCardPaneCallback,
 }: NationalDexGridProps) {
   const [totalCount] = useState<number>(allPokemon.length);
   const [filters, setFilters] = useState<FilterState>({
@@ -62,7 +64,11 @@ export default function NationalDexGridMobile({
       </div>
       <div className={styles.gridMobile}>
         {filteredPokemon.map((pokemon) => (
-          <NationalDexGridItemMobile key={pokemon.id} pokemon={pokemon} />
+          <NationalDexGridItemMobile
+            key={pokemon.id}
+            pokemon={pokemon}
+            openPane={openCardPaneCallback}
+          />
         ))}
       </div>
     </>
