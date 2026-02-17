@@ -18,7 +18,7 @@ export default function SlidingPane({
         className={`${styles.slidingPaneOverlay} ${isOpen ? styles.slidingPaneActive : ""}`}
       >
         <aside
-          className={`${styles.slidingPane} ${isOpen ? styles.slidingPaneOpen : "close"}`}
+          className={`${styles.slidingPane} ${isOpen ? styles.slidingPaneOpen : ""}`}
         >
           <button onClick={onClose}>Close</button>
           <div>{children}</div>

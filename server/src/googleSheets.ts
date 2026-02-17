@@ -35,10 +35,26 @@ export interface CollectionData {
   collection: CollectionCard[];
 }
 
+const nationalDexColumnMap = {
+  dexNumber: "A" as ColumnLetter,
+  cardName: "B",
+  acquired: "C" as ColumnLetter,
+  cardId: "D",
+  setName: "E",
+  setNumber: "F",
+  rarity: "G",
+  symbol: "H",
+  image: "I",
+  acquired_date: "J",
+  cost: "K",
+  notes: "L",
+  upgrade_target: "M",
+};
+
 export async function getCollection(): Promise<CollectionData> {
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
-    range: "MyCollection!A2:C",
+    range: "MyCollection!A2:I",
   });
 
   const rows = response.data.values || [];
@@ -49,17 +65,21 @@ export async function getCollection(): Promise<CollectionData> {
       num_acquired++;
     }
 
+    // Card ID, Set Name, Set Number, Rarity, Image, Symbol come from TCGDex
     return {
       dex_number: parseInt(row[0] || "0"),
       card_name: row[1] || "",
       acquired: row[2] == "TRUE" ? true : false,
       card_id: row[3] || "",
       set_name: row[4] || "",
-      rarity: row[5] || "",
-      acquired_date: row[6] || "",
-      cost: parseFloat(row[7] || "0"),
-      notes: row[8] || "",
-      upgrade_target: row[9] || "",
+      set_number: row[5] || "",
+      rarity: row[6] || "",
+      symbol: row[7] || "",
+      image: row[8] || "",
+      acquired_date: row[9] || "",
+      cost: parseFloat(row[10] || "0"),
+      notes: row[11] || "",
+      upgrade_target: row[12] || "",
     };
   });
 
@@ -69,19 +89,58 @@ export async function getCollection(): Promise<CollectionData> {
   };
 }
 
-export async function updateCollection(
+export async function clearAcquisition(dexNumber: number): Promise<void> {
+  await updateCell(dexNumber, nationalDexColumnMap.acquired, "FALSE");
+}
+
+// MyCollection columns: A=dex, B=card_name, C=acquired, D=card_id, E=set_name, ...
+type ColumnLetter =
+  | "A"
+  | "B"
+  | "C"
+  | "D"
+  | "E"
+  | "F"
+  | "G"
+  | "H"
+  | "I"
+  | "J"
+  | "K"
+  | "L"
+  | "M";
+
+/** Update a single cell in MyCollection by dex number and column. */
+export async function updateCell(
   dexNumber: number,
-  acquired: boolean,
+  column: ColumnLetter,
+  value: string | number | boolean,
 ): Promise<void> {
-  // Only Supports Acquired update
   const rowNumber = dexNumber + 1;
+  const range = `MyCollection!${column}${rowNumber}`;
 
   await sheets.spreadsheets.values.update({
     spreadsheetId: SPREADSHEET_ID,
-    range: `MyCollection!C${rowNumber}`,
+    range,
     valueInputOption: "USER_ENTERED",
     requestBody: {
-      values: [[acquired.toString().toUpperCase()]],
+      values: [[String(value)]],
+    },
+  });
+}
+
+export async function updateCellAcquisition(
+  dexNumber: number,
+  acquired: boolean,
+): Promise<void> {
+  const rowNumber = dexNumber + 1;
+  const range = `MyCollection!C${rowNumber}`;
+
+  await sheets.spreadsheets.values.update({
+    spreadsheetId: SPREADSHEET_ID,
+    range,
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values: [[acquired.toString()]],
     },
   });
 }
@@ -98,7 +157,7 @@ export async function toggleAcquistion(dexNumber: number): Promise<boolean> {
 
   const newStatus = !pokemon.acquired;
 
-  await updateCollection(dexNumber, newStatus);
+  await updateCellAcquisition(dexNumber, newStatus);
 
   return newStatus;
 }

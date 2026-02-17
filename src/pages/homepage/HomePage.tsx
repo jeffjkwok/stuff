@@ -229,6 +229,7 @@ export default function HomePage() {
                     </b>
                     <b>Set: {card.set.name}</b>
                     <b>Set Number: {card.localId} </b>
+                    <button>Add to Collection?</button>
                   </div>
                 </div>
               </div>

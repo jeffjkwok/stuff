@@ -35,9 +35,6 @@ export default function NationalDexGridItemMobile({
     <div
       key={pokemon.id}
       className={`${styles.itemCardMobile} ${acquisitionState ? styles.acquired : ""} ${styles.twoCorners}`}
-      onClick={() => {
-        openPane(pokemon);
-      }}
     >
       <div className={""} style={{ width: "100%" }}>
         <div className={styles.itemCardInfoMobile}>
@@ -47,15 +44,28 @@ export default function NationalDexGridItemMobile({
         <div className={styles.itemImageContainerMobile}>
           <img src={pokemon.sprite} loading="lazy" alt="" />
         </div>
-        {!acquisitionState && (
+        <div className={styles.itemCardCTAs}>
           <button
             onClick={() => {
-              updateAcquistion(Number(pokemon.id));
+              openPane(pokemon);
+            }}
+            style={{
+              backgroundColor: "#363636",
+              color: "white",
             }}
           >
-            Acquired?
+            View
           </button>
-        )}
+          {!acquisitionState && (
+            <button
+              onClick={() => {
+                updateAcquistion(Number(pokemon.id));
+              }}
+            >
+              Acquired?
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

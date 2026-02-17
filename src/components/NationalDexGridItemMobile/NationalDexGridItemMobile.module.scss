@@ -21,6 +21,7 @@
 
     &:hover {
       background-color: #d8d8d8 !important;
+      color: #000 !important;
     }
   }
 }
@@ -53,6 +54,12 @@ button {
 .itemCardNameMobile {
   font-size: 1.25rem;
   margin-bottom: 0;
+}
+
+.itemCardCTAs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .twoCorners {
