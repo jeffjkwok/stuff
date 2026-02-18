@@ -1,0 +1,29 @@
+.cardQueryItemMobile {
+  display: flex;
+  flex-direction: column;
+  width: 165px;
+  flex: 0 0 165px;
+
+  img {
+    width: 100%;
+    max-height: 250px;
+    border-radius: 0.5rem;
+    object-fit: contain;
+  }
+}
+
+.cardQueryItemInfoMobile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.cardQueryItemSetName {
+  white-space: norma;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-width: 100%;
+  display: block;
+}

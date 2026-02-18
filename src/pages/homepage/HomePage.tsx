@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import styles from "./HomePage.module.scss";
 import { useResponsive } from "@/hooks/useResponsive";
 import SlidingPane from "@/components/SlidingPane/SlidingPane";
-import mysterSrc from "../../assets/mystery.png";
-import cardBackSrc from "../../assets/pokemonback.png";
+import CardProfile from "@/components/CardProfile/CardProfile";
 
 export interface Pokemon {
   id: string;
@@ -45,24 +44,6 @@ interface PokemonData {
   [key: string]: unknown;
 }
 
-interface PokemonQueryData {
-  id: string;
-  name: string;
-  image: string;
-  illustrator: string;
-  rarity: string;
-  localId: string;
-  set: PokemonSetQueryData;
-}
-
-interface PokemonSetQueryData {
-  id: string;
-  name: string;
-  logo: string;
-  symbol: string;
-  cardCount: { official: string };
-}
-
 export default function HomePage() {
   const [allPokemon, setAllPokemon] = useState<Pokemon[]>([]);
   const [acquiredCount, setAcquiredCount] = useState<number>(0);
@@ -70,7 +51,6 @@ export default function HomePage() {
   const [error, setError] = useState<string | null>(null);
   const [isPaneOpen, setIsPaneOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<Pokemon | null>(null);
-  const [pokemonQuery, setPokemonQuery] = useState<PokemonQueryData[]>([]);
 
   const { isDesktop } = useResponsive();
 
@@ -131,19 +111,9 @@ export default function HomePage() {
     };
   }, [isPaneOpen]);
 
-  const openCardPane = async (pokemon: Pokemon) => {
-    try {
-      const res = await fetch(`/api/search/${pokemon.name}`);
-      if (!res.ok) throw new Error(res.statusText);
-      const query = await res.json();
-      // console.log(query)
-      setPokemonQuery(Array.isArray(query.cards) ? query.cards : []);
-      setSelected(pokemon);
-      setIsPaneOpen(true);
-      console.log(pokemonQuery);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load cards");
-    }
+  const openCardPane = (pokemon: Pokemon) => {
+    setSelected(pokemon);
+    setIsPaneOpen(true);
   };
 
   if (loading)
@@ -170,7 +140,7 @@ export default function HomePage() {
           />
         )}
       </div>
-      {selected && (
+      {selected && !isDesktop && (
         <SlidingPane
           isOpen={isPaneOpen}
           onClose={() => {
@@ -178,99 +148,7 @@ export default function HomePage() {
             setSelected(null);
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              marginBottom: "2rem",
-            }}
-          >
-            <h2>{selected!.name}</h2>
-            <img
-              style={{
-                maxWidth: "33%",
-                height: "auto",
-                filter: "grayscale(1)",
-                maxHeight: "250px",
-              }}
-              src={mysterSrc}
-              alt=""
-            />
-          </div>
-          <hr />
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "1.5rem",
-              width: "100%",
-              marginTop: "2rem",
-              flex: 1,
-              minHeight: 0,
-              overflowY: "auto",
-              justifyContent: "center",
-            }}
-          >
-            {pokemonQuery.map((card) => (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "165px",
-                  flex: "0 0 165px",
-                }}
-              >
-                <img
-                  className=""
-                  style={{
-                    width: "100%",
-                    maxHeight: "250px",
-                    borderRadius: ".5rem",
-                    objectFit: "contain",
-                  }}
-                  src={`${card.image ? card.image + "/low.webp" : cardBackSrc}`}
-                />
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: ".5rem",
-                    justifyContent: "space-between",
-                    flex: "1",
-                  }}
-                >
-                  <div style={{ flex: "1" }}>
-                    <b
-                      style={{
-                        whiteSpace: "normal",
-                        overflowWrap: "anywhere",
-                        wordBreak: "break-word",
-                        maxWidth: "100%",
-                        display: "block",
-                      }}
-                      title={card.set.name}
-                    >
-                      Set: {card.set.name}
-                    </b>
-                  </div>
-                  <div
-                    style={{
-                      marginTop: "auto",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: ".5rem",
-                    }}
-                  >
-                    <b>
-                      {card.localId}/{card.set.cardCount.official}{" "}
-                    </b>
-                    <button>Add to Collection?</button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <CardProfile pokemon={selected} />
         </SlidingPane>
       )}
     </>

@@ -1,0 +1,11 @@
+.cardQueryMobile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  width: 100%;
+  margin-top: 2rem;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  justify-content: center;
+}
