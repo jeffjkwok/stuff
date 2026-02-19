@@ -12,11 +12,23 @@ export default function CardQueryItem({
   nationalDexNumber,
 }: CardQueryItemProps) {
   const saveCardInfo = async (nationalDexNumber: number) => {
+    const cardData = {
+      cardId: card.id,
+      setName: card.set.name,
+      setNumber: card.localId,
+      rarity: card.rarity,
+      image: card.image,
+    };
+
     try {
       const response = await fetch(
         `/api/collection/card/${nationalDexNumber}`,
         {
           method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(cardData),
         },
       );
 

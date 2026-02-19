@@ -21,7 +21,7 @@ export interface CollectionData {
   collection: CollectionEntry[];
 }
 
-interface CollectionEntry {
+export interface CollectionEntry {
   dex_number: number;
   card_id: string;
   card_name: string;
@@ -112,6 +112,9 @@ export default function HomePage() {
   }, [isPaneOpen]);
 
   const openCardPane = (pokemon: Pokemon) => {
+    // await query
+    // await collectionEntry
+
     setSelected(pokemon);
     setIsPaneOpen(true);
   };

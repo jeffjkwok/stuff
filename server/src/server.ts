@@ -2,7 +2,11 @@ import express from "express";
 import "dotenv/config";
 import mockCards from "./data/mock-cards.json";
 import nationalDex from "./data/updatedDex.json";
-import { getCollection, toggleAcquistion } from "./googleSheets";
+import {
+  getCollection,
+  toggleAcquistion,
+  updateCardData,
+} from "./googleSheets";
 // import { getCard, getCardsByName } from "./graphQL/tcgdex";
 import { getCachedCard, getCachedQueryByName } from "./redis/tcgdexCache";
 
@@ -66,6 +70,22 @@ app.post("/api/collection/acquired/:dexNumber", async (req, res) => {
     res
       .status(500)
       .json({ error: "Failed to update acquistion status of pokemon" });
+  }
+});
+
+app.post("/api/collection/card/:dexNumber", async (req, res) => {
+  console.log(req.body);
+
+  const cardData = req.body;
+
+  try {
+    const dexNumber = parseInt(req.params.dexNumber);
+    const collectionItem = await updateCardData(dexNumber, cardData);
+    res.json({ success: true, entry: collectionItem });
+  } catch (error) {
+    console.error(
+      `Error adding card to Collection row ${req.params.dexNumber}: ${error}`,
+    );
   }
 });
 

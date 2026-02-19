@@ -17,22 +17,31 @@ const auth = new google.auth.GoogleAuth({
 
 const sheets = google.sheets({ version: "v4", auth });
 
-export interface CollectionCard {
+export interface CollectionItem {
   dex_number: number;
   card_id: string;
+  acquired: boolean;
   card_name: string;
   set_name: string;
   rarity: string;
-  acquired_date: string;
-  cost: number;
-  notes: string;
-  upgrade_target: string;
-  acquired: boolean;
+  image: string;
+  acquired_date?: string;
+  cost?: number;
+  notes?: string;
+  upgrade_target?: string;
 }
 
 export interface CollectionData {
   num_acquired: number;
-  collection: CollectionCard[];
+  collection: CollectionItem[];
+}
+
+interface CardData {
+  cardId: string;
+  setName: string;
+  setNumber: string;
+  rarity: string;
+  image: string;
 }
 
 const nationalDexColumnMap = {
@@ -43,12 +52,11 @@ const nationalDexColumnMap = {
   setName: "E" as ColumnLetter,
   setNumber: "F" as ColumnLetter,
   rarity: "G" as ColumnLetter,
-  symbol: "H" as ColumnLetter,
-  image: "I" as ColumnLetter,
-  acquired_date: "J" as ColumnLetter,
-  cost: "K" as ColumnLetter,
-  notes: "L" as ColumnLetter,
-  upgrade_target: "M" as ColumnLetter,
+  image: "H" as ColumnLetter,
+  acquired_date: "I" as ColumnLetter,
+  cost: "J" as ColumnLetter,
+  notes: "K" as ColumnLetter,
+  upgrade_target: "L" as ColumnLetter,
 };
 
 export async function getCollection(): Promise<CollectionData> {
@@ -74,11 +82,10 @@ export async function getCollection(): Promise<CollectionData> {
       set_name: row[4] || "",
       set_number: row[5] || "",
       rarity: row[6] || "",
-      symbol: row[7] || "",
-      image: row[8] || "",
-      acquired_date: row[9] || "",
-      cost: parseFloat(row[10] || "0"),
-      notes: row[11] || "",
+      image: row[7] || "",
+      acquired_date: row[8] || "",
+      cost: parseFloat(row[9] || "0"),
+      notes: row[10] || "",
       upgrade_target: row[12] || "",
     };
   });
@@ -128,6 +135,72 @@ export async function updateCell(
   });
 }
 
+// Adding Card data from Query of TCG DEX
+export async function updateCardData(
+  dexNumber: number,
+  cardData: CardData,
+): Promise<CollectionItem> {
+  const rowNumber = dexNumber + 1;
+  const range = `MyCollection!D${rowNumber}:H${rowNumber}`;
+
+  await sheets.spreadsheets.values.update({
+    spreadsheetId: SPREADSHEET_ID,
+    range,
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values: [
+        [
+          cardData.cardId,
+          cardData.setName,
+          cardData.setNumber,
+          cardData.rarity,
+          cardData.image,
+        ],
+      ],
+    },
+  });
+
+  return await getCollectionEntry(dexNumber);
+}
+
+// Get row data for specific entry/pokemon
+export async function getCollectionEntry(
+  dexNumber: number,
+): Promise<CollectionItem> {
+  const rowNumber = dexNumber + 1;
+
+  const res = await sheets.spreadsheets.values.get({
+    spreadsheetId: SPREADSHEET_ID,
+    range: `MyCollection!${rowNumber}:${rowNumber}`,
+  });
+
+  const rawRowValues = res.data.values![0];
+
+  const {
+    0: dex_number,
+    1: card_name,
+    2: acquired,
+    3: card_id,
+    4: set_name,
+    5: set_number,
+    6: rarity,
+    7: image,
+  } = rawRowValues;
+
+  const collectionItem = {
+    dex_number: Number(dex_number),
+    card_name,
+    acquired: acquired == "TRUE" ? true : false,
+    card_id,
+    set_name,
+    set_number,
+    rarity,
+    image,
+  };
+
+  return collectionItem;
+}
+
 export async function updateCellAcquisition(
   dexNumber: number,
   acquired: boolean,
@@ -145,6 +218,7 @@ export async function updateCellAcquisition(
   });
 }
 
+// Toggle Acquistion value
 export async function toggleAcquistion(dexNumber: number): Promise<boolean> {
   const collectionData = await getCollection();
   const pokemon = collectionData.collection.find(
