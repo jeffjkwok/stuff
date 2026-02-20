@@ -1,48 +1,11 @@
+import { useState, useEffect } from "react";
+import { useResponsive } from "@/hooks/useResponsive";
+import CardProfile from "@/components/CardProfile/CardProfile";
 import NationalDexGrid from "@/components/NationalDexGrid/NationalDexGrid";
 import NationalDexGridMobile from "@/components/NationalDexGridMobile/NationalDexGridMobile";
-import { useState, useEffect } from "react";
-import styles from "./HomePage.module.scss";
-import { useResponsive } from "@/hooks/useResponsive";
 import SlidingPane from "@/components/SlidingPane/SlidingPane";
-import CardProfile from "@/components/CardProfile/CardProfile";
-
-export interface Pokemon {
-  id: string;
-  name: string;
-  generation: number;
-  region: string;
-  sprite: string;
-  originalArtwork: string;
-  acquired: boolean;
-}
-
-export interface CollectionData {
-  num_acquired: number;
-  collection: CollectionEntry[];
-}
-
-export interface CollectionEntry {
-  dex_number: number;
-  card_id: string;
-  card_name: string;
-  set_name: string;
-  rarity: string;
-  acquired_date: string;
-  cost: number;
-  notes: string;
-  upgrade_target: string;
-  acquired: boolean;
-}
-
-interface PokemonData {
-  id: string;
-  name: string;
-  generation?: number;
-  region?: string;
-  sprite?: string;
-  originalArtwork?: string;
-  [key: string]: unknown;
-}
+import type { CollectionData, CollectionEntry, Pokemon } from "@/types";
+import styles from "./HomePage.module.scss";
 
 export default function HomePage() {
   const [allPokemon, setAllPokemon] = useState<Pokemon[]>([]);
@@ -60,10 +23,7 @@ export default function HomePage() {
       fetch("/api/collection").then((res) => res.json()),
     ])
       .then(
-        ([nationaldexData, collectionData]: [
-          PokemonData[],
-          CollectionData,
-        ]) => {
+        ([nationaldexData, collectionData]: [Pokemon[], CollectionData]) => {
           // Create a map of dex_number -> acquired status for fast lookup
           const acquiredMap = new Map<number, boolean>();
           collectionData.collection.forEach((entry: CollectionEntry) => {
@@ -72,7 +32,7 @@ export default function HomePage() {
 
           // Merge collection data into pokemon data
           const mergedPokemon: Pokemon[] = nationaldexData.map(
-            (pokemon: PokemonData): Pokemon => ({
+            (pokemon: Pokemon): Pokemon => ({
               id: pokemon.id,
               name: pokemon.name,
               generation: (pokemon.generation as number) ?? 0,
