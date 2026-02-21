@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsx",
+    "build": "tsc",
     "start": "node dist/server.js",
     "fetch-cards": "tsx src/scripts/fetchWotcCards.ts",
     "fetch-sprites": "tsx src/scripts/fetchSprites.ts"
