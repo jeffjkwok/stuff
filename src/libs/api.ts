@@ -1,5 +1,6 @@
-import type { CollectionData } from "@/types";
 /* eslint-disable  @typescript-eslint/no-explicit-any */
+import type { CollectionData, CollectionEntry } from "@/types";
+
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 async function fetchAPI<T>(
@@ -30,11 +31,14 @@ export const collectionAPI = {
     rarity: string,
     image: string,
   ) =>
-    fetchAPI<{ success: boolean }>(`/api/collection/${dexNumber}/card`, {
+    fetchAPI<{ success: boolean }>(`/api/collection/card/${dexNumber}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ cardId, setName, setNumber, rarity, image }),
     }),
+
+  getEntry: (dexNumber: number) =>
+    fetchAPI<{ entry: CollectionEntry }>(`/api/collection/${dexNumber}`),
 };
 
 // Card Endpoint to get data from TCGDex

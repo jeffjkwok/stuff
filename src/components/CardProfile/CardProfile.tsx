@@ -1,115 +1,68 @@
-/* eslint-disable  @typescript-eslint/no-explicit-any */
 import styles from "./CardProfile.module.scss";
 import mysterSrc from "../../assets/mystery.png";
 import type { Pokemon } from "@/types/pokemon";
 import CardQuery from "../CardQuery/CardQuery";
-import { useState, useEffect } from "react";
+import {
+  useGetEntryInCollection,
+  useToggleAcquisitionStatus,
+} from "@/hooks/useCollection";
+import { cardAPI } from "@/libs/api";
 
 interface CardProfileProps {
   pokemon: Pokemon;
 }
 
 export default function CardProfile({ pokemon }: CardProfileProps) {
-  const [entryProfile, setEntryProfile] = useState<any>(null);
-  const [acquisitionState, setAcquisitionState] = useState<boolean>(false);
+  // 1. Fetch profile data (Hook handles the ID conversion and 'enabled' check)
+  const dexId = Number(pokemon.id);
+  const { data: profile, isLoading } = useGetEntryInCollection(dexId);
 
-  const fetchProfile = async (pokemonId: string) => {
-    try {
-      const res = await fetch(`/api/collection/${pokemonId}`);
-      if (!res.ok) throw new Error(res.statusText);
-      const data = await res.json();
-      setEntryProfile(data);
-      setAcquisitionState(data.acquired);
-    } catch (err) {
-      console.log("Failed to query cards: ", err);
-    }
-  };
+  // 2. Setup Mutations for actions
+  const toggleMutation = useToggleAcquisitionStatus();
 
-  useEffect(() => {
-    fetchProfile(pokemon.id);
-  }, [pokemon.id]);
+  // 3. Loading state guard
+  if (isLoading)
+    return <div className={styles.loading}>Loading Profile...</div>;
 
-  const queryForPokemon = async (pokemonName: string) => {
-    try {
-      const res = await fetch(`/api/search/${pokemonName}`);
-      if (!res.ok) throw new Error(res.statusText);
-      return await res.json();
-    } catch (err) {
-      console.log("Failed to query cards: ", err);
-    }
-  };
-
-  const unassignCardFromProfile = async (pokemonId: string) => {
-    try {
-      const res = await fetch(`/api/collection/remove/${pokemonId}`);
-      if (!res.ok) throw new Error(res.statusText);
-      setEntryProfile(null);
-      setAcquisitionState(false);
-    } catch (err) {
-      console.log("Failed to query cards: ", err);
-    }
-  };
-
-  const updateAcquistion = async (dexNumber: number) => {
-    try {
-      const response = await fetch(`/api/collection/acquired/${dexNumber}`, {
-        method: "POST",
-      });
-
-      await response.json();
-      // rudimentary update local state to true
-
-      setAcquisitionState(!acquisitionState);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  console.log(entryProfile);
   return (
     <>
       <div className={styles.cardProfileMobile}>
-        <h2>{pokemon!.name}</h2>
+        <h2>{pokemon.name}</h2>
+
         <img
-          className={`${acquisitionState ? styles.acquired : ""}`}
-          src={
-            entryProfile && entryProfile.image
-              ? entryProfile.image + "/high.webp"
-              : mysterSrc
-          }
-          alt=""
+          className={`${profile?.acquired ? styles.acquired : ""}`}
+          src={profile?.image ? `${profile.image}/high.webp` : mysterSrc}
+          alt={pokemon.name}
         />
 
-        {entryProfile && (
+        {profile?.acquired && (
           <div className={styles.cardProfileInfoMobile}>
-            {entryProfile.setName && <p>Set Name: {entryProfile.set_name}</p>}
-            {entryProfile.rarity && <p>Rarity: {entryProfile.rarity}</p>}
+            {profile.set_name && <p>Set Name: {profile.set_name}</p>}
+            {profile.rarity && <p>Rarity: {profile.rarity}</p>}
           </div>
         )}
+
         <div style={{ display: "flex", flexDirection: "row", gap: ".5rem" }}>
-          {
-            <button
-              onClick={() => {
-                updateAcquistion(Number(pokemon.id));
-              }}
-            >
-              {acquisitionState ? "Unacquire" : "Acquired"}{" "}
-            </button>
-          }
           <button
-            onClick={() => {
-              unassignCardFromProfile(pokemon.id);
-            }}
+            onClick={() => toggleMutation.mutate(dexId)}
+            disabled={toggleMutation.isPending}
           >
+            {profile?.acquired ? "Unacquire" : "Mark as Acquired"}
+          </button>
+
+          <button onClick={() => console.log("Remove logic here")}>
             Remove Entry?
           </button>
         </div>
       </div>
+
       <hr />
+
+      {/* Pass the cardAPI search function directly */}
       <CardQuery
-        nationalDexNumber={Number(pokemon.id)}
+        nationalDexNumber={dexId}
         nameQuery={pokemon.name}
-        queryFunction={queryForPokemon}
+        queryFunction={cardAPI.searchByName}
       />
     </>
   );

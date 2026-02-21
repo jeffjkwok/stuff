@@ -11,6 +11,16 @@ export function useCollection() {
   });
 }
 
+export function useGetEntryInCollection(dexNumber: number) {
+  return useQuery({
+    queryKey: ["collection", dexNumber],
+    queryFn: () => collectionAPI.getEntry(dexNumber),
+    // This handles both cases: if 'entry' exists, use it. Otherwise, use the whole object.
+    select: (data: any) => data,
+    enabled: !!dexNumber && !isNaN(dexNumber),
+  });
+}
+
 // Calculate progress stats from collection
 export function useCollectionProgress() {
   const { data, isLoading, isError } = useCollection();
@@ -107,50 +117,84 @@ export function useAddCardInfoToCollection() {
         image,
       ),
 
-    onMutate: async ({
-      dexNumber,
-      cardId,
-      setName,
-      setNumber,
-      rarity,
-      image,
-    }) => {
-      await queryClient.cancelQueries({ queryKey: ["collection"] });
+    onMutate: async (newCard) => {
+      const { dexNumber, cardId, setName, setNumber, rarity, image } = newCard;
 
-      const previousCollection = queryClient.getQueryData<any[]>([
+      // 1. Cancel outgoing refetches so they don't overwrite us
+      await queryClient.cancelQueries({ queryKey: ["collection"] });
+      await queryClient.cancelQueries({ queryKey: ["collection", dexNumber] });
+
+      // 2. Snapshot the previous values for rollback
+      const previousCollection = queryClient.getQueryData<CollectionData>([
         "collection",
       ]);
+      const previousEntry = queryClient.getQueryData(["collection", dexNumber]);
 
-      queryClient.setQueryData<any[]>(["collection"], (old) => {
-        if (!old) return old;
+      // 3. Update the MAIN LIST (The Grid and Progress Bar)
+      queryClient.setQueryData<CollectionData>(["collection"], (old) => {
+        // Fix: 'old' is an object { collection: [] }, not an array!
+        if (!old?.collection) return old;
 
-        return old.map((pokemon) =>
-          pokemon.dex_number === dexNumber
-            ? {
-                ...pokemon,
-                acquired: true,
-                card_id: cardId,
-                set_name: setName,
-                set_number: setNumber,
-                rarity: rarity,
-                image: image,
-              }
-            : pokemon,
-        );
+        return {
+          ...old,
+          collection: old.collection.map((pokemon) =>
+            pokemon.dex_number === dexNumber
+              ? {
+                  ...pokemon,
+                  acquired: true,
+                  card_id: cardId,
+                  set_name: setName,
+                  set_number: setNumber,
+                  rarity: rarity,
+                  image: image,
+                }
+              : pokemon,
+          ),
+        };
       });
 
-      return { previousCollection };
+      // 4. Update the INDIVIDUAL ENTRY (The Profile Pane)
+      queryClient.setQueryData(["collection", dexNumber], (old: any) => {
+        if (!old) return old;
+        // Depending on your API structure, 'old' might be the entry directly
+        // or { success: true, entry: { ... } }
+        const updatedEntry = {
+          ...(old.entry || old),
+          acquired: true,
+          card_id: cardId,
+          set_name: setName,
+          set_number: setNumber,
+          rarity: rarity,
+          image: image,
+        };
+
+        return old.entry ? { ...old, entry: updatedEntry } : updatedEntry;
+      });
+
+      return { previousCollection, previousEntry };
     },
 
     onError: (err, variables, context) => {
+      // Rollback to the previous state if the server call fails
       if (context?.previousCollection) {
         queryClient.setQueryData(["collection"], context.previousCollection);
       }
-      console.error("Failed to add card:", err, variables);
+      if (context?.previousEntry) {
+        queryClient.setQueryData(
+          ["collection", variables.dexNumber],
+          context.previousEntry,
+        );
+      }
+      console.error("Failed to add card info:", err);
     },
 
-    onSettled: () => {
+    onSettled: (data, error, variables) => {
+      // Always refetch after error or success to ensure we are in sync with Google Sheets
+      console.log(data, error);
       queryClient.invalidateQueries({ queryKey: ["collection"] });
+      queryClient.invalidateQueries({
+        queryKey: ["collection", variables.dexNumber],
+      });
     },
   });
 }
