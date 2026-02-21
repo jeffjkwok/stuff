@@ -4,16 +4,27 @@ let client: Redis | null;
 
 export function getRedisClient(): Redis {
   if (!client) {
-    client = new Redis({
-      host: process.env.REDIS_HOST || "127.0.0.1",
-      port: parseInt(process.env.REDIS_PORT || "6379"),
-      password: process.env.REDIS_PASSWORD || undefined,
-      retryStrategy: (times) => {
-        if (times > 3) return null;
-        return Math.min(times * 200, 1000);
-      },
-      lazyConnect: true,
-    });
+    // Check for Upstash URL first (production)
+    if (process.env.UPSTASH_REDIS_REST_URL) {
+      // Upstash uses REST API, convert to Redis protocol
+      const url = process.env.UPSTASH_REDIS_REST_URL.replace(
+        "https://",
+        "rediss://",
+      );
+      client = new Redis(url);
+    } else {
+      // Local development
+      client = new Redis({
+        host: process.env.REDIS_HOST || "127.0.0.1",
+        port: parseInt(process.env.REDIS_PORT || "6379"),
+        password: process.env.REDIS_PASSWORD || undefined,
+        retryStrategy: (times) => {
+          if (times > 3) return null;
+          return Math.min(times * 200, 1000);
+        },
+        lazyConnect: true,
+      });
+    }
 
     client.on("connect", () => console.log("[Redis] Connected to Redis"));
     client.on("error", (err) => console.error("[Redis] Error:", err.message));

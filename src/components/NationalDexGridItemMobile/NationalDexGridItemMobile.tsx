@@ -44,12 +44,15 @@ export default function NationalDexGridItemMobile({
           </button>
           {!acquisitionState && (
             <button
+              disabled={toggleMutation.isPending}
               onClick={() => {
+                // This triggers the mutation which updates the cache
+                // and makes the Progress Bar react!
                 toggleMutation.mutate(Number(pokemon.id));
-                setAcquisitionState(true);
+                setAcquisitionState(!acquisitionState);
               }}
             >
-              Acquired?
+              {toggleMutation.isPending ? "Saving..." : "Acquired?"}
             </button>
           )}
         </div>
