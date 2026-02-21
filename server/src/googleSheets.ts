@@ -11,39 +11,23 @@ dotenv.config({ path: path.join(__dirname, "../.env") });
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID;
 
-const auth = new google.auth.GoogleAuth({
-  keyFile: path.join(__dirname, "../credentials.json"),
-  scopes: SCOPES,
-});
+let auth;
+if (process.env.GOOGLE_CREDENTIALS) {
+  // Production: Use environment variable
+  const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
+  auth = new google.auth.GoogleAuth({
+    credentials,
+    scopes: SCOPES,
+  });
+} else {
+  // Local development: Use file
+  auth = new google.auth.GoogleAuth({
+    keyFile: path.join(__dirname, "../credentials.json"),
+    scopes: SCOPES,
+  });
+}
 
 const sheets = google.sheets({ version: "v4", auth });
-
-// export interface CollectionItem {
-//   dex_number: number;
-//   card_id: string;
-//   acquired: boolean;
-//   card_name: string;
-//   set_name: string;
-//   rarity: string;
-//   image: string;
-//   acquired_date?: string;
-//   cost?: number;
-//   notes?: string;
-//   upgrade_target?: string;
-// }
-
-// export interface CollectionData {
-//   num_acquired: number;
-//   collection: CollectionItem[];
-// }
-
-// interface CardData {
-//   cardId: string;
-//   setName: string;
-//   setNumber: string;
-//   rarity: string;
-//   image: string;
-// }
 
 const nationalDexColumnMap = {
   dexNumber: "A" as ColumnLetter,
