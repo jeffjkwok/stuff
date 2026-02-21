@@ -16,24 +16,34 @@ import { getCachedCard, getCachedQueryByName } from "./redis/tcgdexCache";
 const app = express();
 const PORT = 3001;
 
-const allowedOrigins = [
-  "http://localhost:5173", // Vite dev server
-  process.env.FRONTEND_URL, // Production frontend URL
-].filter(Boolean); // Remove undefined values
-
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (mobile apps, Postman, etc.)
-      if (!origin) return callback(null, true);
+      console.log("📨 Request from:", origin);
 
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+      // Allow requests with no origin (Postman, mobile apps)
+      if (!origin) {
+        console.log("✅ No origin - allowed");
+        return callback(null, true);
       }
+
+      // Allow localhost
+      if (origin.includes("localhost")) {
+        console.log("✅ Localhost - allowed");
+        return callback(null, true);
+      }
+
+      // Allow ALL Vercel domains
+      if (origin.endsWith(".vercel.app")) {
+        console.log("✅ Vercel domain - allowed");
+        return callback(null, true);
+      }
+
+      // Block everything else
+      console.log("❌ BLOCKED:", origin);
+      callback(new Error("Not allowed by CORS"));
     },
-    credentials: true, // If you need cookies/auth later
+    credentials: true,
   }),
 );
 
