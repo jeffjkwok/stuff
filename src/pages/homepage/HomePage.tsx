@@ -4,7 +4,7 @@ import CardProfile from "@/components/CardProfile/CardProfile";
 import NationalDexGridMobile from "@/components/NationalDexGridMobile/NationalDexGridMobile";
 import SlidingPane from "@/components/SlidingPane/SlidingPane";
 import type { Pokemon } from "@/types";
-import styles from "./HomePage.module.scss";
+import styles from "./homepage.module.scss";
 
 export default function HomePage() {
   const [isPaneOpen, setIsPaneOpen] = useState<boolean>(false);
