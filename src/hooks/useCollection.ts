@@ -146,7 +146,7 @@ export function useAddCardInfoToCollection() {
       if (context?.previousCollection) {
         queryClient.setQueryData(["collection"], context.previousCollection);
       }
-      console.error("Failed to add card:", err);
+      console.error("Failed to add card:", err, variables);
     },
 
     onSettled: () => {
