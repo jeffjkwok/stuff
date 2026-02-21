@@ -1,6 +1,7 @@
-import type { Pokemon } from "../../pages/homepage/HomePage";
-import styles from "./NationalDexGridItemMobile.module.scss";
 import { useState } from "react";
+import type { Pokemon } from "@/types";
+import styles from "./NationalDexGridItemMobile.module.scss";
+import { useToggleAcquisitionStatus } from "@/hooks/useCollection";
 
 interface NationalDexGridItemProps {
   pokemon: Pokemon;
@@ -11,25 +12,10 @@ export default function NationalDexGridItemMobile({
   pokemon,
   openPane,
 }: NationalDexGridItemProps) {
+  const toggleMutation = useToggleAcquisitionStatus();
   const [acquisitionState, setAcquisitionState] = useState<boolean>(
     pokemon.acquired,
   );
-
-  const updateAcquistion = async (dexNumber: number) => {
-    try {
-      const response = await fetch(`/api/collection/acquired/${dexNumber}`, {
-        method: "POST",
-      });
-
-      const data = await response.json();
-      // rudimentary update local state to true
-      if (data.acquired) {
-        setAcquisitionState(true);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <div
@@ -59,7 +45,8 @@ export default function NationalDexGridItemMobile({
           {!acquisitionState && (
             <button
               onClick={() => {
-                updateAcquistion(Number(pokemon.id));
+                toggleMutation.mutate(Number(pokemon.id));
+                setAcquisitionState(true);
               }}
             >
               Acquired?

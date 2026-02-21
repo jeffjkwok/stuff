@@ -1,23 +1,22 @@
 import { useState, useMemo } from "react";
 import NationalDexFilters from "../NationalDexFilters/NationalDexFilters";
-import ProgressBar from "../ProgressBar/ProgressBar";
+import CollectionProgress from "../CollectionProgress/CollectionProgress";
 import type { FilterState } from "../NationalDexFilters/NationalDexFilters";
-import styles from "./NationalDexGridMobile.module.scss";
-import type { Pokemon } from "../../pages/homepage/HomePage"; // move the interface/type to a type folder
 import NationalDexGridItemMobile from "../NationalDexGridItemMobile/NationalDexGridItemMobile";
+import { useMergedPokemon } from "@/hooks/useMergedLists";
+import type { Pokemon } from "@/types";
+import styles from "./NationalDexGridMobile.module.scss";
 
 interface NationalDexGridProps {
-  allPokemon: Pokemon[];
-  acquiredCount: number;
   openCardPaneCallback: (pokemon: Pokemon) => void;
 }
 
 export default function NationalDexGridMobile({
-  allPokemon,
-  acquiredCount,
   openCardPaneCallback,
 }: NationalDexGridProps) {
-  const [totalCount] = useState<number>(allPokemon.length);
+  // 1. Get status flags from the hook
+  const { data: mergedData, isLoading, isError } = useMergedPokemon();
+
   const [filters, setFilters] = useState<FilterState>({
     search: "",
     generations: [],
@@ -25,14 +24,15 @@ export default function NationalDexGridMobile({
     acquired: null,
   });
 
+  // 2. Use Optional Chaining (?.) and provide a fallback empty array ([])
   const filteredPokemon = useMemo(() => {
-    return allPokemon.filter((pokemon) => {
-      // Filter by acquired status
+    const list = mergedData?.pokemon || []; // Safe fallback
+
+    return list.filter((pokemon) => {
       if (filters.acquired !== null && pokemon.acquired !== filters.acquired) {
         return false;
       }
 
-      // Filter by search
       if (filters.search) {
         const searchLower = filters.search.toLowerCase();
         const matchesName = pokemon.name.toLowerCase().includes(searchLower);
@@ -42,23 +42,21 @@ export default function NationalDexGridMobile({
 
       return true;
     });
-  }, [allPokemon, filters]);
+  }, [mergedData, filters]);
+
+  // 3. Handle Loading and Error views
+  if (isLoading) return <div className={styles.loading}>Loading Dex...</div>;
+  if (isError) return <div className={styles.error}>Error loading data.</div>;
 
   return (
     <>
       <div className={styles.gridHeaderMobile}>
-        <div>
-          <div className={styles.gridProgressBarLabelMobile}>
-            <h2>Completion</h2>
-            <p>{`${acquiredCount}/${totalCount} - ${Math.floor((acquiredCount / totalCount) * 100)}%`}</p>
-          </div>
-          <ProgressBar
-            progress={Math.floor((acquiredCount / totalCount) * 100)}
-          />
-        </div>
+        <CollectionProgress />
+
         <NationalDexFilters
           onFilterChange={setFilters}
-          totalCount={totalCount}
+          // Access totalCount from the safe list
+          totalCount={mergedData?.pokemon.length || 0}
           filteredCount={filteredPokemon.length}
         />
       </div>

@@ -63,38 +63,27 @@ const nationalDexColumnMap = {
 export async function getCollection(): Promise<CollectionData> {
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
-    range: "MyCollection!A2:I",
+    range: "MyCollection!A2:I", // Excludes notes and targets
   });
 
   const rows = response.data.values || [];
-  let num_acquired = 0;
 
-  const collection = rows.map((row) => {
-    if (row[2] == "TRUE") {
-      num_acquired++;
-    }
+  const collection = rows.map((row) => ({
+    dex_number: parseInt(row[0] || "0"),
+    card_name: row[1] || "",
+    acquired: row[2] === "TRUE", // Simplified boolean check
+    card_id: row[3] || "",
+    set_name: row[4] || "",
+    set_number: row[5] || "",
+    rarity: row[6] || "",
+    image: row[7] || "",
+    acquired_date: row[8] || "",
+    cost: parseFloat(row[9] || "0"),
+    notes: row[10] || "",
+    upgrade_target: row[12] || "",
+  }));
 
-    // Card ID, Set Name, Set Number, Rarity, Image, Symbol come from TCGDex
-    return {
-      dex_number: parseInt(row[0] || "0"),
-      card_name: row[1] || "",
-      acquired: row[2] == "TRUE" ? true : false,
-      card_id: row[3] || "",
-      set_name: row[4] || "",
-      set_number: row[5] || "",
-      rarity: row[6] || "",
-      image: row[7] || "",
-      acquired_date: row[8] || "",
-      cost: parseFloat(row[9] || "0"),
-      notes: row[10] || "",
-      upgrade_target: row[12] || "",
-    };
-  });
-
-  return {
-    num_acquired: num_acquired,
-    collection,
-  };
+  return { collection };
 }
 
 export async function clearAcquisition(dexNumber: number): Promise<void> {
@@ -162,6 +151,22 @@ export async function updateCardData(
   });
 
   return await getCollectionEntry(dexNumber);
+}
+
+export async function deleteCardDataFromEntry(
+  dexNumber: number,
+): Promise<void> {
+  const rowNumber = dexNumber + 1;
+  const range = `MyCollection!C${rowNumber}:H${rowNumber}`;
+
+  await sheets.spreadsheets.values.update({
+    spreadsheetId: SPREADSHEET_ID,
+    range,
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values: [["FALSE", "", "", "", "", ""]],
+    },
+  });
 }
 
 // Get row data for specific entry/pokemon

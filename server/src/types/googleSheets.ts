@@ -13,7 +13,6 @@ export interface CollectionItem {
 }
 
 export interface CollectionData {
-  num_acquired: number;
   collection: CollectionItem[];
 }
 

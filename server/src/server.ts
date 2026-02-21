@@ -1,17 +1,41 @@
 import express from "express";
+import cors from "cors";
 import "dotenv/config";
 import mockCards from "./data/mock-cards.json";
 import nationalDex from "./data/updatedDex.json";
 import {
   getCollection,
+  getCollectionEntry,
   toggleAcquistion,
   updateCardData,
+  deleteCardDataFromEntry,
 } from "./googleSheets";
 // import { getCard, getCardsByName } from "./graphQL/tcgdex";
 import { getCachedCard, getCachedQueryByName } from "./redis/tcgdexCache";
 
 const app = express();
 const PORT = 3001;
+
+const allowedOrigins = [
+  "http://localhost:5173", // Vite dev server
+  process.env.FRONTEND_URL, // Production frontend URL
+].filter(Boolean); // Remove undefined values
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (mobile apps, Postman, etc.)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, // If you need cookies/auth later
+  }),
+);
 
 app.use(express.json());
 
@@ -56,7 +80,28 @@ app.get("/api/collection", async (req, res) => {
     res.json(collection);
   } catch (error) {
     console.error("Error fetching collection:", error);
-    res.status(500).json({ error: "Failed tofetch colleciton" });
+    res.status(500).json({ error: "Failed to fetch collection" });
+  }
+});
+
+app.get("/api/collection/:dexNumber", async (req, res) => {
+  try {
+    const dexNumber = parseInt(req.params.dexNumber);
+    const entry = await getCollectionEntry(dexNumber);
+    res.json(entry);
+  } catch (error) {
+    console.error("Error fetching entry in collection:", error);
+    res.status(500).json({ error: "Failed to fetch collection entry" });
+  }
+});
+
+app.get("/api/collection/remove/:dexNumber", async (req, res) => {
+  try {
+    const dexNumber = parseInt(req.params.dexNumber);
+    await deleteCardDataFromEntry(dexNumber);
+  } catch (error) {
+    console.error("Error fetching entry in collection:", error);
+    res.status(500).json({ error: "Failed to fetch collection entry" });
   }
 });
 
@@ -74,8 +119,6 @@ app.post("/api/collection/acquired/:dexNumber", async (req, res) => {
 });
 
 app.post("/api/collection/card/:dexNumber", async (req, res) => {
-  console.log(req.body);
-
   const cardData = req.body;
 
   try {

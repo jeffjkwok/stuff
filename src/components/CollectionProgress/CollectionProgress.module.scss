@@ -1,4 +1,4 @@
-.progressBar {
+.collectionProgressBar {
   // Pixel-art step: small = 1 unit, large = 2 units. Change --pixel-step to scale the look (e.g. 2px, 3px, 4px).
   --pixel-step: 2.5px;
   --pixel-step-2: calc(var(--pixel-step) * 2);
@@ -65,10 +65,31 @@
   }
 }
 
-.progressBarFill {
+.collectionProgressBarFill {
   height: 100%;
   transition: width 0.75s ease;
   position: relative;
   z-index: 2;
   clip-path: var(--clip-polygon);
+}
+
+.collectionProgressLabel {
+  display: flex;
+  flex-direction: "row";
+  justify-content: space-between;
+  align-items: baseline;
+
+  @media (min-width: 768px) {
+    max-width: 50%;
+  }
+
+  @media (min-width: 1440px) {
+    max-width: 25%;
+  }
+
+  h2 {
+    @media (max-width: 424px) {
+      font-size: 1.25rem;
+    }
+  }
 }

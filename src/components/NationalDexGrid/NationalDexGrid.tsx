@@ -1,10 +1,9 @@
 import { useState, useMemo } from "react";
 import NationalDexFilters from "../NationalDexFilters/NationalDexFilters";
 import NationalDexGridItem from "../NationalDexGridItem/NationalDexGridItem";
-import ProgressBar from "../ProgressBar/ProgressBar";
 import type { FilterState } from "../NationalDexFilters/NationalDexFilters";
 import styles from "../NationalDexGrid/NationalDexGrid.module.scss";
-import type { Pokemon } from "../../pages/homepage/HomePage"; // move the interface/type to a type folder
+import type { Pokemon } from "../../types";
 
 interface NationalDexGridProps {
   allPokemon: Pokemon[];
@@ -13,7 +12,7 @@ interface NationalDexGridProps {
 
 export default function NationalDexGrid({
   allPokemon,
-  acquiredCount,
+  // acquiredCount,
 }: NationalDexGridProps) {
   const [totalCount] = useState<number>(allPokemon.length);
   const [filters, setFilters] = useState<FilterState>({
@@ -45,22 +44,6 @@ export default function NationalDexGrid({
   return (
     <>
       <div className={styles.headers}>
-        <div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              gap: "1rem",
-              alignItems: "baseline",
-            }}
-          >
-            <h2>Completion</h2>
-            <p>{`${acquiredCount}/${totalCount} - ${Math.floor((acquiredCount / totalCount) * 100)}%`}</p>
-          </div>
-          <ProgressBar
-            progress={Math.floor((acquiredCount / totalCount) * 100)}
-          />
-        </div>
         <NationalDexFilters
           onFilterChange={setFilters}
           totalCount={totalCount}
