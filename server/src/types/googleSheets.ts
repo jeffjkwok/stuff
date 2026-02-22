@@ -1,4 +1,4 @@
-export interface CollectionItem {
+export interface CollectionEntry {
   dex_number: number;
   card_id: string;
   acquired: boolean;
@@ -6,14 +6,14 @@ export interface CollectionItem {
   set_name: string;
   rarity: string;
   image: string;
-  acquired_date?: string;
-  cost?: number;
-  notes?: string;
-  upgrade_target?: string;
+  language?: string;
+  illustrator?: string;
+  holo_reverse?: boolean;
+  cost?: string;
 }
 
 export interface CollectionData {
-  collection: CollectionItem[];
+  collection: CollectionEntry[];
 }
 
 export interface CardData {

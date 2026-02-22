@@ -40,6 +40,10 @@ const GET_CARDS_BY_NAME_QUERY = gql`
           official
         }
       }
+      variants {
+        holo
+        reverse
+      }
     }
   }
 `;

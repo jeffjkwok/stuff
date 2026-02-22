@@ -2,7 +2,7 @@ import { google } from "googleapis";
 import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
-import type { CollectionItem, CollectionData, CardData } from "./types";
+import type { CollectionEntry, CollectionData, CardData } from "./types";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -61,10 +61,10 @@ export async function getCollection(): Promise<CollectionData> {
     set_number: row[5] || "",
     rarity: row[6] || "",
     image: row[7] || "",
-    acquired_date: row[8] || "",
-    cost: parseFloat(row[9] || "0"),
-    notes: row[10] || "",
-    upgrade_target: row[12] || "",
+    language: row[8] || "",
+    illustrator: row[9] || "0",
+    holo_reverse: row[10] || "",
+    cost: row[12] || "",
   }));
 
   return { collection };
@@ -113,7 +113,7 @@ export async function updateCell(
 export async function updateCardData(
   dexNumber: number,
   cardData: CardData,
-): Promise<CollectionItem> {
+): Promise<CollectionEntry> {
   const rowNumber = dexNumber + 1;
   const range = `MyCollection!D${rowNumber}:H${rowNumber}`;
 
@@ -156,7 +156,7 @@ export async function deleteCardDataFromEntry(
 // Get row data for specific entry/pokemon
 export async function getCollectionEntry(
   dexNumber: number,
-): Promise<CollectionItem> {
+): Promise<CollectionEntry> {
   const rowNumber = dexNumber + 1;
 
   const res = await sheets.spreadsheets.values.get({
