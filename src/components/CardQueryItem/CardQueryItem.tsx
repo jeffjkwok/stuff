@@ -1,10 +1,10 @@
 import styles from "./CardQueryItem.module.scss";
 import cardbackSrc from "../../assets/pokemonback.png";
-import type { PokemonQueryData } from "../CardQuery/CardQuery";
+import type { TCGdexCard } from "@/types";
 import { useAddCardInfoToCollection } from "@/hooks/useCollection";
 
 interface CardQueryItemProps {
-  card: PokemonQueryData;
+  card: TCGdexCard;
   nationalDexNumber: number;
 }
 
@@ -30,6 +30,7 @@ export default function CardQueryItem({
   return (
     <div className={styles.cardQueryItemMobile}>
       <img
+        loading="lazy"
         className=""
         src={card.image ? `${card.image}/low.webp` : cardbackSrc}
         alt={card.name}

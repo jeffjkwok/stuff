@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { cardAPI, nationalDexAPI } from "../libs/api";
+import { cardAPI, nationalDexAPI } from "../lib/api";
+import type { CardSearchResponse, TCGdexCard } from "@/types";
 
 // Get single card by ID
 export function useGetCard(cardId: string | undefined) {
@@ -13,11 +14,12 @@ export function useGetCard(cardId: string | undefined) {
 
 // Search cards by name
 export function useCardSearch(name: string) {
-  return useQuery({
+  return useQuery<CardSearchResponse, Error, TCGdexCard[]>({
     queryKey: ["cardSearch", name],
     queryFn: () => cardAPI.searchByName(name),
     enabled: name.length > 0, // Only search if name provided
-    staleTime: 1000 * 60 * 60 * 24, // 24 hour
+    select: (data) => data.cards,
+    staleTime: 1000 * 60 * 60 * 24 * 7, // 1 week
   });
 }
 

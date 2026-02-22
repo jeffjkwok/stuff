@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useResponsive } from "@/hooks/useResponsive";
 import CardProfile from "@/components/CardProfile/CardProfile";
 import NationalDexGridMobile from "@/components/NationalDexGridMobile/NationalDexGridMobile";
 import SlidingPane from "@/components/SlidingPane/SlidingPane";
@@ -9,8 +8,6 @@ import styles from "./homepage.module.scss";
 export default function HomePage() {
   const [isPaneOpen, setIsPaneOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<Pokemon | null>(null);
-
-  const { isDesktop } = useResponsive();
 
   useEffect(() => {
     if (isPaneOpen) {
@@ -45,7 +42,7 @@ export default function HomePage() {
         </header>
         <NationalDexGridMobile openCardPaneCallback={openCardPane} />
       </div>
-      {selected && !isDesktop && (
+      {selected && (
         <SlidingPane
           isOpen={isPaneOpen}
           onClose={() => {

@@ -6,7 +6,7 @@ import {
   useGetEntryInCollection,
   useToggleAcquisitionStatus,
 } from "@/hooks/useCollection";
-import { cardAPI } from "@/libs/api";
+import { cardAPI } from "@/lib/api";
 
 interface CardProfileProps {
   pokemon: Pokemon;

@@ -1,6 +1,6 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { collectionAPI } from "../libs/api";
+import { collectionAPI } from "../lib/api";
 import type { CollectionData, CollectionEntry } from "@/types";
 
 // Fetch data from collection

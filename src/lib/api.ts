@@ -1,5 +1,9 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-import type { CollectionData, CollectionEntry } from "@/types";
+import type {
+  CardSearchResponse,
+  CollectionData,
+  CollectionEntry,
+} from "@/types";
 
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
@@ -45,7 +49,8 @@ export const collectionAPI = {
 export const cardAPI = {
   getById: (cardId: string) => fetchAPI<any>(`/api/card/${cardId}`),
 
-  searchByName: (name: string) => fetchAPI<any>(`/api/search/${name}`),
+  searchByName: (name: string) =>
+    fetchAPI<CardSearchResponse>(`/api/search/${name}`),
 };
 
 // National Dex information

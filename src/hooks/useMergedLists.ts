@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { nationalDexAPI, collectionAPI } from "@/libs/api";
+import { nationalDexAPI, collectionAPI } from "@/lib/api";
 
 export function useMergedPokemon() {
   return useQuery({

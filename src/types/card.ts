@@ -1,25 +1,19 @@
-export interface Card {
+export interface TCGdexCard {
   id: string;
-  localId: string;
   name: string;
-  image?: string;
-  dexId?: string[];
-  hp?: number;
-  types?: string[];
-  rarity?: string;
-  set?: {
+  image: string;
+  illustrator: string;
+  rarity: string;
+  localId: string;
+  set: {
     id: string;
     name: string;
-    logo?: string;
-  };
-  variants?: {
-    normal?: boolean;
-    reverse?: boolean;
-    holo?: boolean;
-    firstEdition?: boolean;
+    logo: string;
+    symbol: string;
+    cardCount: { official: string };
   };
 }
 
-export interface CardSearchResult {
-  cards: Card[];
+export interface CardSearchResponse {
+  cards: TCGdexCard[];
 }

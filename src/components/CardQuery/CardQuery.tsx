@@ -1,7 +1,8 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import styles from "./CardQuery.module.scss";
 import CardQueryItem from "@/components/CardQueryItem/CardQueryItem";
-import { useState, useEffect } from "react";
+import type { TCGdexCard } from "@/types";
+import { useCardSearch } from "@/hooks/useCards";
 
 interface CardQueryProps {
   nationalDexNumber: number;
@@ -9,47 +10,23 @@ interface CardQueryProps {
   queryFunction: any;
 }
 
-export interface PokemonQueryData {
-  id: string;
-  name: string;
-  image: string;
-  illustrator: string;
-  rarity: string;
-  localId: string;
-  set: PokemonSetQueryData;
-}
-
-interface PokemonSetQueryData {
-  id: string;
-  name: string;
-  logo: string;
-  symbol: string;
-  cardCount: { official: string };
-}
-
 export default function CardQuery({
   nationalDexNumber,
   nameQuery,
-  queryFunction,
 }: CardQueryProps) {
-  const [pokemonQuery, setPokemonQuery] = useState<PokemonQueryData[]>([]);
+  const { data: pokemonQuery, isLoading } = useCardSearch(nameQuery);
 
-  useEffect(() => {
-    const fetchCards = async () => {
-      try {
-        const query = await queryFunction(nameQuery);
-        setPokemonQuery(Array.isArray(query.cards) ? query.cards : []);
-      } catch (err) {
-        console.error("Failed to fetch Pokemon query:", err);
-      }
-    };
+  if (isLoading) {
+    return <>Loading...</>;
+  }
 
-    fetchCards();
-  }, [nameQuery, queryFunction]);
+  if (!pokemonQuery) {
+    return <>No results found.</>;
+  }
 
   return (
     <div className={styles.cardQueryMobile}>
-      {pokemonQuery.map((card) => (
+      {pokemonQuery.map((card: TCGdexCard) => (
         <CardQueryItem
           nationalDexNumber={nationalDexNumber}
           card={card}
