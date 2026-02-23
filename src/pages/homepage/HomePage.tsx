@@ -28,7 +28,6 @@ export default function HomePage() {
   const openCardPane = (pokemon: Pokemon) => {
     // await query
     // await collectionEntry
-
     setSelected(pokemon);
     setIsPaneOpen(true);
   };
@@ -42,17 +41,15 @@ export default function HomePage() {
         </header>
         <NationalDexGridMobile openCardPaneCallback={openCardPane} />
       </div>
-      {selected && (
-        <SlidingPane
-          isOpen={isPaneOpen}
-          onClose={() => {
-            setIsPaneOpen(false);
-            setSelected(null);
-          }}
-        >
-          <CardProfile pokemon={selected} />
-        </SlidingPane>
-      )}
+
+      <SlidingPane
+        isOpen={isPaneOpen}
+        onClose={() => {
+          setIsPaneOpen(false);
+        }}
+      >
+        {selected && <CardProfile pokemon={selected} />}
+      </SlidingPane>
     </>
   );
 }

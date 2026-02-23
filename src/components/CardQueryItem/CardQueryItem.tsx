@@ -58,7 +58,7 @@ export default function CardQueryItem({
             // 3. Provide UI feedback during the mutation
             disabled={addCardMutation.isPending}
           >
-            {addCardMutation.isPending ? "Adding..." : "Add to Collection?"}
+            {addCardMutation.isPending ? "Assigning..." : "Assign?"}
           </button>
 
           {/* Optional: Error feedback */}

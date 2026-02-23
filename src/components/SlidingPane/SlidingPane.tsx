@@ -16,14 +16,13 @@ export default function SlidingPane({
     <>
       <div
         className={`${styles.slidingPaneOverlay} ${isOpen ? styles.slidingPaneActive : ""}`}
+      ></div>
+      <aside
+        className={`${styles.slidingPane} ${isOpen ? styles.slidingPaneOpen : ""}`}
       >
-        <aside
-          className={`${styles.slidingPane} ${isOpen ? styles.slidingPaneOpen : ""}`}
-        >
-          <button onClick={onClose}>Close</button>
-          <div className={styles.slidingPaneContent}>{children}</div>
-        </aside>
-      </div>
+        <button onClick={onClose}>Close</button>
+        <div className={styles.slidingPaneContent}>{children}</div>
+      </aside>
     </>
   );
 }

@@ -42,7 +42,7 @@ export default function CardProfile({ pokemon }: CardProfileProps) {
           </div>
         )}
 
-        <div style={{ display: "flex", flexDirection: "row", gap: ".5rem" }}>
+        <div className={styles.cardProfileCTAs}>
           <button
             onClick={() => toggleMutation.mutate(dexId)}
             disabled={toggleMutation.isPending}
@@ -51,7 +51,7 @@ export default function CardProfile({ pokemon }: CardProfileProps) {
           </button>
 
           <button onClick={() => console.log("Remove logic here")}>
-            Remove Entry?
+            Remove Card?
           </button>
         </div>
       </div>

@@ -5,10 +5,14 @@
   margin-bottom: 2rem;
 
   img {
-    max-width: 33%;
+    max-width: 25%;
     height: auto;
     max-height: 250px;
     filter: grayscale(1);
+
+    @media (min-width: 425px) {
+      max-width: 33%;
+    }
   }
 }
 
@@ -23,4 +27,14 @@
 
 .acquired {
   filter: grayscale(0) !important;
+}
+
+.cardProfileCTAs {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+
+  button {
+    padding: 0 0.5rem;
+  }
 }

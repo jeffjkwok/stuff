@@ -19,8 +19,6 @@ export default function NationalDexGridMobile({
 
   const [filters, setFilters] = useState<FilterState>({
     search: "",
-    generations: [],
-    regions: [],
     acquired: null,
   });
 
