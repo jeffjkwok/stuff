@@ -17,8 +17,6 @@ export default function NationalDexGrid({
   const [totalCount] = useState<number>(allPokemon.length);
   const [filters, setFilters] = useState<FilterState>({
     search: "",
-    generations: [],
-    regions: [],
     acquired: null,
   });
 
