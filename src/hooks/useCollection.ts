@@ -112,10 +112,9 @@ export function useToggleHoloReverse() {
         return {
           ...old,
           collection: old.collection.map((pokemon: CollectionEntry) => {
-            const holoReverseStatus =
-              Boolean(pokemon.holoReverse) == true ? "TRUE" : "FALSE";
+            const holoReverseStatus = pokemon.holoReverse;
             return pokemon.dex_number === dexNumber
-              ? { ...pokemon, holoReverse: holoReverseStatus }
+              ? { ...pokemon, holoReverse: !holoReverseStatus }
               : pokemon;
           }),
         };
