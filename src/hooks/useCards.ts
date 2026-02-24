@@ -19,7 +19,26 @@ export function useCardSearch(name: string) {
     queryFn: () => cardAPI.searchByName(name),
     enabled: name.length > 0, // Only search if name provided
     select: (data) => data.cards,
-    staleTime: 1000 * 60 * 60 * 24 * 7, // 1 week
+    staleTime: 1000 * 60 * 60 * 24 * 14, // 2 weeks
+  });
+}
+
+export function useGetSearchFilters(name: string) {
+  return useQuery({
+    queryKey: ["cardSearch", name],
+    queryFn: () => cardAPI.searchByName(name),
+    select: (data) => {
+      const uniqueSets = [...new Set(data.cards.map((card) => card.set.name))];
+      const uniqueRarities = [
+        ...new Set(data.cards.map((card) => card.rarity)),
+      ];
+      return {
+        setFilter: uniqueSets,
+        rarityFilter: uniqueRarities,
+      };
+    },
+    enabled: name.length > 0,
+    staleTime: 1000 * 60 * 60 * 24 * 14, //2 weeks
   });
 }
 

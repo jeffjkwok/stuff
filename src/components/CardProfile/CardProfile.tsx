@@ -35,7 +35,7 @@ export default function CardProfile({ pokemon }: CardProfileProps) {
           alt={pokemon.name}
         />
 
-        {profile?.acquired && (
+        {profile?.card_id && (
           <div className={styles.cardProfileInfoMobile}>
             {profile.set_name && <p>Set Name: {profile.set_name}</p>}
             {profile.illustrator && <p>Artist: {profile.illustrator}</p>}
@@ -51,9 +51,11 @@ export default function CardProfile({ pokemon }: CardProfileProps) {
             {profile?.acquired ? "Unacquire" : "Mark as Acquired"}
           </button>
 
-          <button onClick={() => console.log("Remove logic here")}>
-            Remove Card?
-          </button>
+          {profile.card_id && (
+            <button onClick={() => console.log("Remove logic here")}>
+              Remove Card?
+            </button>
+          )}
         </div>
       </div>
 

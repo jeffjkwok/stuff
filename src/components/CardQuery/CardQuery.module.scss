@@ -13,11 +13,32 @@
 .cardQueryFilters {
   margin-top: 1rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: end;
 
-  b {
+  b,
+  label {
+    font-family: "undefined";
+    font-weight: 800;
     font-size: 0.75rem;
   }
+}
+
+.cardQuerySearchFilters {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  button {
+    margin-left: 0.5rem;
+  }
+}
+
+.cardQuerySelectFilters {
+  margin-top: 1rem;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
 }
