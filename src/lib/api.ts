@@ -27,19 +27,32 @@ export const collectionAPI = {
       method: "POST",
     }),
 
-  addCard: (
+  assignCard: (
     dexNumber: number,
     cardId: string,
     setName: string,
     setNumber: string,
     rarity: string,
     image: string,
-  ) =>
-    fetchAPI<{ success: boolean }>(`/api/collection/card/${dexNumber}`, {
+    illustrator: string,
+    language: string,
+    holoReverse: string,
+  ) => {
+    return fetchAPI<{ success: boolean }>(`/api/collection/card/${dexNumber}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ cardId, setName, setNumber, rarity, image }),
-    }),
+      body: JSON.stringify({
+        cardId,
+        setName,
+        setNumber,
+        rarity,
+        image,
+        illustrator,
+        holoReverse,
+        language,
+      }),
+    });
+  },
 
   getEntry: (dexNumber: number) =>
     fetchAPI<{ entry: CollectionEntry }>(`/api/collection/${dexNumber}`),

@@ -22,4 +22,7 @@ export interface CardData {
   setNumber: string;
   rarity: string;
   image: string;
+  illustrator: string;
+  language: string;
+  holoReverse: string;
 }

@@ -68,7 +68,6 @@ app.get("/api/search/:name", async (req, res) => {
 
 app.get("/api/card/:cardId", async (req, res) => {
   try {
-    console.log(req.params.cardId);
     const response = await getCachedCard(req.params.cardId);
     res.json(response);
   } catch (error) {
@@ -137,7 +136,7 @@ app.post("/api/collection/card/:dexNumber", async (req, res) => {
     res.json({ success: true, entry: collectionItem });
   } catch (error) {
     console.error(
-      `Error adding card to Collection row ${req.params.dexNumber}: ${error}`,
+      `Error assigning card to Collection row ${req.params.dexNumber}: ${error}`,
     );
   }
 });

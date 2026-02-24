@@ -89,7 +89,19 @@ export function useToggleAcquisitionStatus() {
   });
 }
 
-export function useAddCardInfoToCollection() {
+interface CardVariables {
+  dexNumber: number;
+  cardId: string;
+  setName: string;
+  setNumber: string;
+  rarity: string;
+  image: string;
+  illustrator: string;
+  language: string;
+  holoReverse: string;
+}
+
+export function useAssignCardToCollectionEntry() {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -100,25 +112,35 @@ export function useAddCardInfoToCollection() {
       setNumber,
       rarity,
       image,
-    }: {
-      dexNumber: number;
-      cardId: string;
-      setName: string;
-      setNumber: string;
-      rarity: string;
-      image: string;
-    }) =>
-      collectionAPI.addCard(
+      illustrator,
+      language,
+      holoReverse,
+    }: CardVariables) => {
+      return collectionAPI.assignCard(
         dexNumber,
         cardId,
         setName,
         setNumber,
         rarity,
         image,
-      ),
+        illustrator,
+        language,
+        holoReverse,
+      );
+    },
 
     onMutate: async (newCard) => {
-      const { dexNumber, cardId, setName, setNumber, rarity, image } = newCard;
+      const {
+        dexNumber,
+        cardId,
+        setName,
+        setNumber,
+        rarity,
+        image,
+        illustrator,
+        language,
+        holoReverse,
+      } = newCard;
 
       // 1. Cancel outgoing refetches so they don't overwrite us
       await queryClient.cancelQueries({ queryKey: ["collection"] });
@@ -147,6 +169,9 @@ export function useAddCardInfoToCollection() {
                   set_number: setNumber,
                   rarity: rarity,
                   image: image,
+                  illustrator: illustrator,
+                  language: language,
+                  holoReverse: holoReverse,
                 }
               : pokemon,
           ),
@@ -156,8 +181,6 @@ export function useAddCardInfoToCollection() {
       // 4. Update the INDIVIDUAL ENTRY (The Profile Pane)
       queryClient.setQueryData(["collection", dexNumber], (old: any) => {
         if (!old) return old;
-        // Depending on your API structure, 'old' might be the entry directly
-        // or { success: true, entry: { ... } }
         const updatedEntry = {
           ...(old.entry || old),
           acquired: true,
@@ -166,8 +189,10 @@ export function useAddCardInfoToCollection() {
           set_number: setNumber,
           rarity: rarity,
           image: image,
+          illustrator: illustrator,
+          language: language,
+          holoReverse: holoReverse,
         };
-
         return old.entry ? { ...old, entry: updatedEntry } : updatedEntry;
       });
 

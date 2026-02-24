@@ -1,7 +1,7 @@
 import styles from "./CardQueryItem.module.scss";
 import cardbackSrc from "../../assets/pokemonback.png";
 import type { TCGdexCard } from "@/types";
-import { useAddCardInfoToCollection } from "@/hooks/useCollection";
+import { useAssignCardToCollectionEntry } from "@/hooks/useCollection";
 
 interface CardQueryItemProps {
   card: TCGdexCard;
@@ -13,9 +13,9 @@ export default function CardQueryItem({
   nationalDexNumber,
 }: CardQueryItemProps) {
   // 1. Initialize the mutation hook
-  const addCardMutation = useAddCardInfoToCollection();
+  const addCardMutation = useAssignCardToCollectionEntry();
 
-  const handleAddCard = () => {
+  const handleAssignCard = () => {
     // 2. Call the mutation with the object structure defined in mutationFn
     addCardMutation.mutate({
       dexNumber: nationalDexNumber,
@@ -24,6 +24,9 @@ export default function CardQueryItem({
       setNumber: card.localId,
       rarity: card.rarity,
       image: card.image || "",
+      illustrator: card.illustrator,
+      language: "English", //Currently default to english TCG dex does not have good Ja
+      holoReverse: "False",
     });
   };
 
@@ -54,7 +57,7 @@ export default function CardQueryItem({
           </b>
 
           <button
-            onClick={handleAddCard}
+            onClick={handleAssignCard}
             // 3. Provide UI feedback during the mutation
             disabled={addCardMutation.isPending}
           >

@@ -8,11 +8,11 @@ export interface CollectionEntry {
   card_name: string;
   set_name: string;
   rarity: string;
-  acquired_date: string;
-  cost: number;
-  notes: string;
-  upgrade_target: string;
   acquired: boolean;
+  illustrator: string;
+  holoReverse: string;
+  language: string;
+  cost: number;
 }
 
 export interface CollectionPokemon {
@@ -34,8 +34,3 @@ export interface AcquistionToggleResponse {
   success: boolean;
   acquired: boolean;
 }
-
-// export interface AddCardPayload {
-//   dexNumber: number;
-//   cardId: string;
-// }

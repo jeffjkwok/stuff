@@ -38,9 +38,9 @@ const nationalDexColumnMap = {
   setNumber: "F" as ColumnLetter,
   rarity: "G" as ColumnLetter,
   image: "H" as ColumnLetter,
-  acquired_date: "I" as ColumnLetter,
-  cost: "J" as ColumnLetter,
-  notes: "K" as ColumnLetter,
+  illustrator: "I" as ColumnLetter,
+  language: "J" as ColumnLetter,
+  holoReverse: "K" as ColumnLetter,
   upgrade_target: "L" as ColumnLetter,
 };
 
@@ -61,10 +61,10 @@ export async function getCollection(): Promise<CollectionData> {
     set_number: row[5] || "",
     rarity: row[6] || "",
     image: row[7] || "",
-    language: row[8] || "",
-    illustrator: row[9] || "0",
+    illustrator: row[8] || "",
+    language: row[9] || "",
     holo_reverse: row[10] || "",
-    cost: row[12] || "",
+    cost: row[11] || "",
   }));
 
   return { collection };
@@ -87,8 +87,7 @@ type ColumnLetter =
   | "I"
   | "J"
   | "K"
-  | "L"
-  | "M";
+  | "L";
 
 /** Update a single cell in MyCollection by dex number and column. */
 export async function updateCell(
@@ -115,7 +114,9 @@ export async function updateCardData(
   cardData: CardData,
 ): Promise<CollectionEntry> {
   const rowNumber = dexNumber + 1;
-  const range = `MyCollection!D${rowNumber}:H${rowNumber}`;
+  const range = `MyCollection!D${rowNumber}:K${rowNumber}`;
+
+  console.log(cardData.language);
 
   await sheets.spreadsheets.values.update({
     spreadsheetId: SPREADSHEET_ID,
@@ -129,6 +130,9 @@ export async function updateCardData(
           cardData.setNumber,
           cardData.rarity,
           cardData.image,
+          cardData.illustrator || "",
+          cardData.language,
+          cardData.holoReverse,
         ],
       ],
     },
@@ -141,14 +145,14 @@ export async function deleteCardDataFromEntry(
   dexNumber: number,
 ): Promise<void> {
   const rowNumber = dexNumber + 1;
-  const range = `MyCollection!C${rowNumber}:H${rowNumber}`;
+  const range = `MyCollection!D${rowNumber}:K${rowNumber}`;
 
   await sheets.spreadsheets.values.update({
     spreadsheetId: SPREADSHEET_ID,
     range,
     valueInputOption: "USER_ENTERED",
     requestBody: {
-      values: [["FALSE", "", "", "", "", ""]],
+      values: [["", "", "", "", "", "", "", "", ""]],
     },
   });
 }
@@ -175,6 +179,9 @@ export async function getCollectionEntry(
     5: set_number,
     6: rarity,
     7: image,
+    8: illustrator,
+    9: language,
+    10: holo_reverse,
   } = rawRowValues;
 
   const collectionItem = {
@@ -186,6 +193,9 @@ export async function getCollectionEntry(
     set_number,
     rarity,
     image,
+    illustrator,
+    language,
+    holo_reverse,
   };
 
   return collectionItem;

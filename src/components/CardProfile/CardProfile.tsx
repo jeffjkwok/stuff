@@ -38,6 +38,7 @@ export default function CardProfile({ pokemon }: CardProfileProps) {
         {profile?.acquired && (
           <div className={styles.cardProfileInfoMobile}>
             {profile.set_name && <p>Set Name: {profile.set_name}</p>}
+            {profile.illustrator && <p>Artist: {profile.illustrator}</p>}
             {profile.rarity && <p>Rarity: {profile.rarity}</p>}
           </div>
         )}
