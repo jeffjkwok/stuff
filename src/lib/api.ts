@@ -22,8 +22,18 @@ async function fetchAPI<T>(
 export const collectionAPI = {
   getAll: () => fetchAPI<CollectionData>("/api/collection"),
 
-  toggle: (dexNumber: number) =>
+  toggleAcquistion: (dexNumber: number) =>
     fetchAPI<{ success: boolean }>(`/api/collection/acquired/${dexNumber}`, {
+      method: "POST",
+    }),
+
+  toggleLanguage: (dexNumber: number) =>
+    fetchAPI<{ success: boolean }>(`/api/collection/language/${dexNumber}`, {
+      method: "POST",
+    }),
+
+  toggleHoloReverseStatus: (dexNumber: number) =>
+    fetchAPI<{ success: boolean }>(`/api/collection/holo/${dexNumber}`, {
       method: "POST",
     }),
 
@@ -36,7 +46,6 @@ export const collectionAPI = {
     image: string,
     illustrator: string,
     language: string,
-    holoReverse: string,
   ) => {
     return fetchAPI<{ success: boolean }>(`/api/collection/card/${dexNumber}`, {
       method: "POST",
@@ -48,7 +57,6 @@ export const collectionAPI = {
         rarity,
         image,
         illustrator,
-        holoReverse,
         language,
       }),
     });

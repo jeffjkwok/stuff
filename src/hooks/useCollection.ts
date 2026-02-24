@@ -52,7 +52,8 @@ export function useToggleAcquisitionStatus() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (dexNumber: number) => collectionAPI.toggle(dexNumber),
+    mutationFn: (dexNumber: number) =>
+      collectionAPI.toggleAcquistion(dexNumber),
 
     onMutate: async (dexNumber) => {
       await queryClient.cancelQueries({ queryKey: ["collection"] });
@@ -80,7 +81,101 @@ export function useToggleAcquisitionStatus() {
       if (context?.previousCollection) {
         queryClient.setQueryData(["collection"], context.previousCollection);
       }
-      console.error(`Failed to toggle pokemon #${dexNumber}:`, err);
+      console.error(
+        `Failed to toggle acquistion status for entry #${dexNumber}:`,
+        err,
+      );
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["collection"] });
+    },
+  });
+}
+
+export function useToggleHoloReverse() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (dexNumber: number) =>
+      collectionAPI.toggleHoloReverseStatus(dexNumber),
+
+    onMutate: async (dexNumber) => {
+      await queryClient.cancelQueries({ queryKey: ["collection"] });
+
+      const previousCollection = queryClient.getQueryData<CollectionData>([
+        "collection",
+      ]);
+
+      queryClient.setQueryData<CollectionData>(["collection"], (old) => {
+        if (!old) return old;
+        return {
+          ...old,
+          collection: old.collection.map((pokemon: CollectionEntry) => {
+            const holoReverseStatus =
+              Boolean(pokemon.holoReverse) == true ? "TRUE" : "FALSE";
+            return pokemon.dex_number === dexNumber
+              ? { ...pokemon, holoReverse: holoReverseStatus }
+              : pokemon;
+          }),
+        };
+      });
+
+      return { previousCollection };
+    },
+
+    onError: (err, dexNumber, context) => {
+      if (context?.previousCollection) {
+        queryClient.setQueryData(["collection"], context.previousCollection);
+      }
+      console.error(
+        `Failed to toggle Holo/Reverse Status for entry #${dexNumber}:`,
+        err,
+      );
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["collection"] });
+    },
+  });
+}
+
+export function useToggleLanguage() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (dexNumber: number) => collectionAPI.toggleLanguage(dexNumber),
+
+    onMutate: async (dexNumber) => {
+      await queryClient.cancelQueries({ queryKey: ["collection"] });
+
+      const previousCollection = queryClient.getQueryData<CollectionData>([
+        "collection",
+      ]);
+
+      queryClient.setQueryData<CollectionData>(["collection"], (old) => {
+        if (!old) return old;
+        return {
+          ...old,
+          collection: old.collection.map((pokemon: CollectionEntry) => {
+            const lang = !pokemon.language.includes("English")
+              ? "English"
+              : "Japanese";
+            return pokemon.dex_number === dexNumber
+              ? { ...pokemon, language: lang }
+              : pokemon;
+          }),
+        };
+      });
+
+      return { previousCollection };
+    },
+
+    onError: (err, dexNumber, context) => {
+      if (context?.previousCollection) {
+        queryClient.setQueryData(["collection"], context.previousCollection);
+      }
+      console.error(`Failed to change Language for entry #${dexNumber}:`, err);
     },
 
     onSettled: () => {
@@ -98,7 +193,6 @@ interface CardVariables {
   image: string;
   illustrator: string;
   language: string;
-  holoReverse: string;
 }
 
 export function useAssignCardToCollectionEntry() {
@@ -114,7 +208,6 @@ export function useAssignCardToCollectionEntry() {
       image,
       illustrator,
       language,
-      holoReverse,
     }: CardVariables) => {
       return collectionAPI.assignCard(
         dexNumber,
@@ -125,7 +218,6 @@ export function useAssignCardToCollectionEntry() {
         image,
         illustrator,
         language,
-        holoReverse,
       );
     },
 
@@ -139,7 +231,6 @@ export function useAssignCardToCollectionEntry() {
         image,
         illustrator,
         language,
-        holoReverse,
       } = newCard;
 
       // 1. Cancel outgoing refetches so they don't overwrite us
@@ -171,7 +262,6 @@ export function useAssignCardToCollectionEntry() {
                   image: image,
                   illustrator: illustrator,
                   language: language,
-                  holoReverse: holoReverse,
                 }
               : pokemon,
           ),
@@ -191,7 +281,6 @@ export function useAssignCardToCollectionEntry() {
           image: image,
           illustrator: illustrator,
           language: language,
-          holoReverse: holoReverse,
         };
         return old.entry ? { ...old, entry: updatedEntry } : updatedEntry;
       });

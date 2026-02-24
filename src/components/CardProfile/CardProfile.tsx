@@ -5,6 +5,8 @@ import CardQuery from "../CardQuery/CardQuery";
 import {
   useGetEntryInCollection,
   useToggleAcquisitionStatus,
+  useToggleHoloReverse,
+  useToggleLanguage,
 } from "@/hooks/useCollection";
 import { cardAPI } from "@/lib/api";
 
@@ -18,7 +20,9 @@ export default function CardProfile({ pokemon }: CardProfileProps) {
   const { data: profile, isLoading } = useGetEntryInCollection(dexId);
 
   // 2. Setup Mutations for actions
-  const toggleMutation = useToggleAcquisitionStatus();
+  const toggleAcquisitionMutation = useToggleAcquisitionStatus();
+  const toggleLanguageMutation = useToggleLanguage();
+  const toggleHoloReverseMutation = useToggleHoloReverse();
 
   // 3. Loading state guard
   if (isLoading)
@@ -36,6 +40,23 @@ export default function CardProfile({ pokemon }: CardProfileProps) {
         />
 
         {profile?.card_id && (
+          <div className={styles.cardProfileToggles}>
+            <button
+              onClick={() => toggleLanguageMutation.mutate(dexId)}
+              disabled={toggleLanguageMutation.isPending}
+            >
+              {profile?.language.includes("English") ? "ENG 🇺🇸" : "JPN 🇯🇵"}
+            </button>
+            <button
+              onClick={() => toggleHoloReverseMutation.mutate(dexId)}
+              disabled={toggleHoloReverseMutation.isPending}
+            >
+              {profile?.holo_reverse ? "Holo/Rev ✨" : "Base"}
+            </button>
+          </div>
+        )}
+
+        {profile?.card_id && (
           <div className={styles.cardProfileInfoMobile}>
             {profile.set_name && <p>Set Name: {profile.set_name}</p>}
             {profile.illustrator && <p>Artist: {profile.illustrator}</p>}
@@ -45,12 +66,11 @@ export default function CardProfile({ pokemon }: CardProfileProps) {
 
         <div className={styles.cardProfileCTAs}>
           <button
-            onClick={() => toggleMutation.mutate(dexId)}
-            disabled={toggleMutation.isPending}
+            onClick={() => toggleAcquisitionMutation.mutate(dexId)}
+            disabled={toggleAcquisitionMutation.isPending}
           >
             {profile?.acquired ? "Unacquire" : "Mark as Acquired"}
           </button>
-
           {profile.card_id && (
             <button onClick={() => console.log("Remove logic here")}>
               Remove Card?

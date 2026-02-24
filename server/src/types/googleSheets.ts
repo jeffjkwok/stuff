@@ -24,5 +24,5 @@ export interface CardData {
   image: string;
   illustrator: string;
   language: string;
-  holoReverse: string;
+  holoReverse: boolean;
 }

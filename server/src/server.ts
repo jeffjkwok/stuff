@@ -9,6 +9,8 @@ import {
   toggleAcquistion,
   updateCardData,
   deleteCardDataFromEntry,
+  toggleLanguage,
+  toggleHoloReverseStatus,
 } from "./googleSheets";
 // import { getCard, getCardsByName } from "./graphQL/tcgdex";
 import { getCachedCard, getCachedQueryByName } from "./redis/tcgdexCache";
@@ -120,10 +122,34 @@ app.post("/api/collection/acquired/:dexNumber", async (req, res) => {
     const newStatus = await toggleAcquistion(dexNumber);
     res.json({ success: true, acquired: newStatus });
   } catch (error) {
-    console.error("Error toggling pokemon:", error);
+    console.error("Error toggling acquistion status for entry:", error);
     res
       .status(500)
-      .json({ error: "Failed to update acquistion status of pokemon" });
+      .json({ error: "Failed to update acquistion status of entry" });
+  }
+});
+
+app.post("/api/collection/language/:dexNumber", async (req, res) => {
+  try {
+    const dexNumber = parseInt(req.params.dexNumber);
+    const newStatus = await toggleLanguage(dexNumber);
+    res.json({ success: true, language: newStatus });
+  } catch (error) {
+    console.error("Error toggling langauge for entry:", error);
+    res.status(500).json({ error: "Failed to update language of entry" });
+  }
+});
+
+app.post("/api/collection/holo/:dexNumber", async (req, res) => {
+  try {
+    const dexNumber = parseInt(req.params.dexNumber);
+    const newStatus = await toggleHoloReverseStatus(dexNumber);
+    res.json({ success: true, holoReverse: newStatus });
+  } catch (error) {
+    console.error("Error toggling holo/reverse status for entry:", error);
+    res
+      .status(500)
+      .json({ error: "Failed to update holo/reverse status of entry" });
   }
 });
 

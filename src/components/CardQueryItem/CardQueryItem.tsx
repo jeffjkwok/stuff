@@ -25,8 +25,7 @@ export default function CardQueryItem({
       rarity: card.rarity,
       image: card.image || "",
       illustrator: card.illustrator,
-      language: "English", //Currently default to english TCG dex does not have good Ja
-      holoReverse: "False",
+      language: "English", //Currently default to english TCG dex does not have good coverage
     });
   };
 

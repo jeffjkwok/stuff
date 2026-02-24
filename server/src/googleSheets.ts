@@ -47,7 +47,7 @@ const nationalDexColumnMap = {
 export async function getCollection(): Promise<CollectionData> {
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
-    range: "MyCollection!A2:I", // Excludes notes and targets
+    range: "MyCollection!A2:K", // Excludes notes and targets
   });
 
   const rows = response.data.values || [];
@@ -63,7 +63,7 @@ export async function getCollection(): Promise<CollectionData> {
     image: row[7] || "",
     illustrator: row[8] || "",
     language: row[9] || "",
-    holo_reverse: row[10] || "",
+    holo_reverse: row[10] === "TRUE", // Simplified boolean check
     cost: row[11] || "",
   }));
 
@@ -103,7 +103,7 @@ export async function updateCell(
     range,
     valueInputOption: "USER_ENTERED",
     requestBody: {
-      values: [[String(value)]],
+      values: [[value]],
     },
   });
 }
@@ -115,8 +115,6 @@ export async function updateCardData(
 ): Promise<CollectionEntry> {
   const rowNumber = dexNumber + 1;
   const range = `MyCollection!D${rowNumber}:K${rowNumber}`;
-
-  console.log(cardData.language);
 
   await sheets.spreadsheets.values.update({
     spreadsheetId: SPREADSHEET_ID,
@@ -132,7 +130,6 @@ export async function updateCardData(
           cardData.image,
           cardData.illustrator || "",
           cardData.language,
-          cardData.holoReverse,
         ],
       ],
     },
@@ -187,7 +184,7 @@ export async function getCollectionEntry(
   const collectionItem = {
     dex_number: Number(dex_number),
     card_name,
-    acquired: acquired == "TRUE" ? true : false,
+    acquired: acquired === "TRUE",
     card_id,
     set_name,
     set_number,
@@ -195,27 +192,10 @@ export async function getCollectionEntry(
     image,
     illustrator,
     language,
-    holo_reverse,
+    holo_reverse: holo_reverse === "TRUE",
   };
 
   return collectionItem;
-}
-
-export async function updateCellAcquisition(
-  dexNumber: number,
-  acquired: boolean,
-): Promise<void> {
-  const rowNumber = dexNumber + 1;
-  const range = `MyCollection!C${rowNumber}`;
-
-  await sheets.spreadsheets.values.update({
-    spreadsheetId: SPREADSHEET_ID,
-    range,
-    valueInputOption: "USER_ENTERED",
-    requestBody: {
-      values: [[acquired.toString()]],
-    },
-  });
 }
 
 // Toggle Acquistion value
@@ -226,12 +206,52 @@ export async function toggleAcquistion(dexNumber: number): Promise<boolean> {
   );
 
   if (!pokemon) {
-    throw new Error(`Pokeon #${dexNumber} not found`);
+    throw new Error(`Pokemon #${dexNumber} not found`);
   }
 
   const newStatus = !pokemon.acquired;
 
-  await updateCellAcquisition(dexNumber, newStatus);
+  await updateCell(dexNumber, "C", newStatus);
 
   return newStatus;
+}
+
+// Toggle Acquistion value
+export async function toggleLanguage(dexNumber: number): Promise<string> {
+  const collectionData = await getCollection();
+  const pokemon = collectionData.collection.find(
+    (p) => p.dex_number == dexNumber,
+  );
+
+  if (!pokemon) {
+    throw new Error(`Pokemon #${dexNumber} not found`);
+  }
+
+  const newLanguage = pokemon.language.includes("English")
+    ? "Japanese"
+    : "English";
+
+  await updateCell(dexNumber, "J", newLanguage);
+
+  return newLanguage;
+}
+
+// Toggle Acquistion value
+export async function toggleHoloReverseStatus(
+  dexNumber: number,
+): Promise<boolean> {
+  const collectionData = await getCollection();
+  const pokemon = collectionData.collection.find(
+    (p) => p.dex_number == dexNumber,
+  );
+
+  if (!pokemon) {
+    throw new Error(`Pokemon #${dexNumber} not found`);
+  }
+
+  const newHoloStatus = !pokemon.holo_reverse;
+
+  await updateCell(dexNumber, "K", newHoloStatus);
+
+  return newHoloStatus;
 }
