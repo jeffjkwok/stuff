@@ -112,7 +112,7 @@ export function useToggleHoloReverse() {
         return {
           ...old,
           collection: old.collection.map((pokemon: CollectionEntry) => {
-            const holoReverseStatus = pokemon.holoReverse;
+            const holoReverseStatus = pokemon.holo_reverse;
             return pokemon.dex_number === dexNumber
               ? { ...pokemon, holoReverse: !holoReverseStatus }
               : pokemon;
