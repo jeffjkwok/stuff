@@ -6,4 +6,8 @@ export interface Pokemon {
   sprite: string;
   originalArtwork: string;
   acquired: boolean;
+  rarity?: string;
+  language: string;
+  holo_reverse: boolean;
+  cardAssigned: boolean;
 }

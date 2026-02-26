@@ -10,7 +10,7 @@ export interface CollectionEntry {
   rarity: string;
   acquired: boolean;
   illustrator: string;
-  holoReverse: boolean;
+  holo_reverse: boolean;
   language: string;
   cost: number;
 }

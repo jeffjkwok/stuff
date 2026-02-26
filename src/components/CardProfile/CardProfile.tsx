@@ -19,6 +19,8 @@ export default function CardProfile({ pokemon }: CardProfileProps) {
   const dexId = Number(pokemon.id);
   const { data: profile, isLoading } = useGetEntryInCollection(dexId);
 
+  const holoReverseInclusion = ["Common", "Uncommon", "Rare"];
+
   // 2. Setup Mutations for actions
   const toggleAcquisitionMutation = useToggleAcquisitionStatus();
   const toggleLanguageMutation = useToggleLanguage();
@@ -47,12 +49,15 @@ export default function CardProfile({ pokemon }: CardProfileProps) {
             >
               {profile?.language.includes("English") ? "ENG 🇺🇸" : "JPN 🇯🇵"}
             </button>
-            <button
-              onClick={() => toggleHoloReverseMutation.mutate(dexId)}
-              disabled={toggleHoloReverseMutation.isPending}
-            >
-              {profile?.holo_reverse ? "Holo/Rev ✨" : "Base"}
-            </button>
+
+            {holoReverseInclusion.includes(profile.rarity) && (
+              <button
+                onClick={() => toggleHoloReverseMutation.mutate(dexId)}
+                disabled={toggleHoloReverseMutation.isPending}
+              >
+                {profile?.holo_reverse ? "Holo/Rev ✨" : "Base"}
+              </button>
+            )}
           </div>
         )}
 

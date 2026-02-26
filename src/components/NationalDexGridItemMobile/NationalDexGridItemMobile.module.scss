@@ -13,6 +13,10 @@
   flex: 1;
   min-width: 165px;
 
+  @media (min-width: 540px) {
+    min-width: 220px;
+  }
+
   button {
     width: 100%;
     background-color: transparent;
@@ -41,6 +45,7 @@
 .itemImageContainerMobile {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -86,4 +91,10 @@ button {
     border-bottom: var(--corner-width) solid #000;
     border-left: var(--corner-width) solid #000;
   }
+}
+
+.itemCardSymbol {
+  height: 0.75rem;
+  width: auto;
+  margin-right: 0.25rem;
 }

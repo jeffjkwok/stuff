@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Pokemon } from "@/types";
 import styles from "./NationalDexGridItemMobile.module.scss";
 import { useToggleAcquisitionStatus } from "@/hooks/useCollection";
+import { getRarityImage } from "@/utils/rarityUtils";
 
 interface NationalDexGridItemProps {
   pokemon: Pokemon;
@@ -16,6 +17,9 @@ export default function NationalDexGridItemMobile({
   const [acquisitionState, setAcquisitionState] = useState<boolean>(
     pokemon.acquired,
   );
+
+  const renderLang = pokemon.language.includes("English") ? "ENG" : "JPN";
+  const rarity = pokemon.rarity || "";
 
   return (
     <div
@@ -42,7 +46,7 @@ export default function NationalDexGridItemMobile({
           >
             View
           </button>
-          {!acquisitionState && (
+          {!acquisitionState ? (
             <button
               disabled={toggleMutation.isPending}
               onClick={() => {
@@ -54,6 +58,17 @@ export default function NationalDexGridItemMobile({
             >
               {toggleMutation.isPending ? "Saving..." : "Acquired?"}
             </button>
+          ) : (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <b>
+                {pokemon.cardAssigned && `${renderLang} - `}
+                <img
+                  className={styles.itemCardSymbol}
+                  src={getRarityImage(rarity) ?? undefined}
+                />
+                {`${pokemon.holo_reverse ? "✨" : ""}`}
+              </b>
+            </div>
           )}
         </div>
       </div>

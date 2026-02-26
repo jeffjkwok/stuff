@@ -1,37 +1,45 @@
 import { useQuery } from "@tanstack/react-query";
 import { nationalDexAPI, collectionAPI } from "@/lib/api";
+import type { CollectionEntry } from "@/types";
 
 export function useMergedPokemon() {
   return useQuery({
     queryKey: ["pokemon", "merged"],
     queryFn: async () => {
-      // Replaces Promise.all
       const [nationalDex, collectionData] = await Promise.all([
         nationalDexAPI.getAll(),
         collectionAPI.getAll(),
       ]);
       return { nationalDex, collectionData };
     },
-    // The "select" function is where the magic happens
     select: ({ nationalDex, collectionData }) => {
-      // 1. Create the Map for O(1) lookup speed
-      const acquiredMap = new Map<number, boolean>();
+      // 1. Map now stores the entire entry for rich data lookup
+      const collectionMap = new Map<number, CollectionEntry>();
+
       collectionData.collection.forEach((entry) => {
-        acquiredMap.set(entry.dex_number, entry.acquired || false);
+        collectionMap.set(entry.dex_number, entry);
       });
 
       // 2. Merge the data
-      const mergedPokemon = nationalDex.map((pokemon) => ({
-        ...pokemon,
-        id: pokemon.id,
-        name: pokemon.name,
-        generation: pokemon.generation ?? 0,
-        region: pokemon.region ?? "",
-        sprite: pokemon.sprite ?? "",
-        originalArtwork: pokemon.originalArtwork ?? "",
-        // Look up acquisition status from our map
-        acquired: acquiredMap.get(Number(pokemon.id)) ?? false,
-      }));
+      const mergedPokemon = nationalDex.map((pokemon) => {
+        const userCard = collectionMap.get(Number(pokemon.id));
+
+        return {
+          ...pokemon,
+          id: pokemon.id,
+          name: pokemon.name,
+          generation: pokemon.generation ?? 0,
+          region: pokemon.region ?? "",
+          sprite: pokemon.sprite ?? "",
+          originalArtwork: pokemon.originalArtwork ?? "",
+          // New merged fields
+          acquired: !!userCard?.acquired,
+          rarity: userCard?.rarity ?? "", // Default fallback
+          language: userCard?.language ?? "English",
+          holo_reverse: userCard?.holo_reverse ?? false,
+          cardAssigned: userCard?.card_id ? true : false,
+        };
+      });
 
       return {
         pokemon: mergedPokemon,
