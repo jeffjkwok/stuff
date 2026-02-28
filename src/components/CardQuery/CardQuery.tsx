@@ -96,6 +96,7 @@ export default function CardQuery({
               type="text"
               placeholder="e.g. Set, Number, Artist"
               value={filters.search}
+              onFocus={() => setFilters({ ...filters, search: "" })}
               onChange={(e) =>
                 setFilters({ ...filters, search: e.target.value })
               }
