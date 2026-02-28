@@ -12,12 +12,14 @@ import shinyUltraRare from "@/assets/rarity/shiny_ultra_rare.png";
 import specialIllustrationRare from "@/assets/rarity/special_illustration_rare.png";
 import ultraRare from "@/assets/rarity/ultra_rare.png";
 import uncommon from "@/assets/rarity/uncommon.png";
+import blackStarPromo from "@/assets/rarity/black_star_promo.png";
 
 const RARITY_IMAGE_MAP: Record<string, string | null> = {
   // ── Direct matches ──────────────────────────────────────────────
   "ACE SPEC Rare": ultraRare,
   "Amazing Rare": rare,
   "Black White Rare": blackWhiteRare,
+  "Black Star Promo": blackStarPromo,
   "Classic Collection": blackWhiteRare,
   Common: common,
   Crown: megaHyperRare,
@@ -56,6 +58,10 @@ const RARITY_IMAGE_MAP: Record<string, string | null> = {
   Uncommon: uncommon,
 };
 
-export const getRarityImage = (rarity: string): string | null => {
+export const getRarityImage = (
+  rarity: string,
+  setName: string = "",
+): string | null => {
+  rarity = setName.includes("promo") ? "Black Star Promo" : rarity;
   return RARITY_IMAGE_MAP[rarity] ?? null;
 };

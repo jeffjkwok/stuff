@@ -24,6 +24,10 @@ export function useMergedPokemon() {
       const mergedPokemon = nationalDex.map((pokemon) => {
         const userCard = collectionMap.get(Number(pokemon.id));
 
+        const rarity = userCard?.set_name.includes("Promos")
+          ? "Black Star Promo"
+          : userCard?.rarity;
+
         return {
           ...pokemon,
           id: pokemon.id,
@@ -34,7 +38,7 @@ export function useMergedPokemon() {
           originalArtwork: pokemon.originalArtwork ?? "",
           // New merged fields
           acquired: !!userCard?.acquired,
-          rarity: userCard?.rarity ?? "", // Default fallback
+          rarity: rarity ?? "", // Default fallback
           language: userCard?.language ?? "English",
           holo_reverse: userCard?.holo_reverse ?? false,
           cardAssigned: userCard?.card_id ? true : false,

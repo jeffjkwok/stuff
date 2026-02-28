@@ -3,6 +3,7 @@ import mysterSrc from "../../assets/mystery.png";
 import type { Pokemon } from "@/types/pokemon";
 import CardQuery from "../CardQuery/CardQuery";
 import {
+  useAssignCardToCollectionEntry,
   useGetEntryInCollection,
   useToggleAcquisitionStatus,
   useToggleHoloReverse,
@@ -25,6 +26,21 @@ export default function CardProfile({ pokemon }: CardProfileProps) {
   const toggleAcquisitionMutation = useToggleAcquisitionStatus();
   const toggleLanguageMutation = useToggleLanguage();
   const toggleHoloReverseMutation = useToggleHoloReverse();
+
+  const addCardMutation = useAssignCardToCollectionEntry();
+
+  const handleCardRemoval = () => {
+    addCardMutation.mutate({
+      dexNumber: dexId,
+      cardId: "",
+      setName: "",
+      setNumber: "",
+      rarity: "",
+      image: "",
+      illustrator: "",
+      language: "", //Currently default to english TCG dex does not have good coverage
+    });
+  };
 
   // 3. Loading state guard
   if (isLoading)
@@ -86,7 +102,7 @@ export default function CardProfile({ pokemon }: CardProfileProps) {
           {profile.card_id && (
             <button
               className={styles.cardProfileRemoveButton}
-              onClick={() => console.log("Remove logic here")}
+              onClick={() => handleCardRemoval()}
             >
               Remove Card?
             </button>
