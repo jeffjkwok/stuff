@@ -5,6 +5,7 @@ import type { TCGdexCard } from "@/types";
 import { useCardSearch, useGetSearchFilters } from "@/hooks/useCards";
 import { useState, useMemo } from "react";
 import SelectComponent from "../SelectComponent/SelectComponent";
+import { useResponsive } from "@/hooks/useResponsive";
 
 interface CardQueryProps {
   nationalDexNumber: number;
@@ -27,12 +28,14 @@ export default function CardQuery({
 
   const setFiltersOptions = searchFilters?.setFilter || [];
   const rarityFiltersOptions = searchFilters?.rarityFilter || [];
+  const { isMobile } = useResponsive();
 
   const [filters, setFilters] = useState<CardQueryFilterState>({
     search: "",
     set: null,
     rarity: null,
   });
+  const [filterKey, setFilterKey] = useState(0);
 
   const filteredCards = useMemo(() => {
     const list = pokemonQuery || [];
@@ -52,7 +55,7 @@ export default function CardQuery({
         const matchesArtist = card.illustrator
           ?.toLowerCase()
           .includes(searchLower);
-        const matchesSetNumber = String(card.set.cardCount.official)
+        const matchesSetNumber = String(card.localId)
           .toLowerCase()
           .includes(searchLower);
         if (!matchesSet && !matchesSetNumber && !matchesArtist) return false;
@@ -65,6 +68,7 @@ export default function CardQuery({
     filters.search || filters.set !== null || filters.rarity !== null;
 
   const clearAllFilters = () => {
+    setFilterKey((k) => k + 1);
     setFilters({
       search: "",
       set: null,
@@ -103,16 +107,18 @@ export default function CardQuery({
         </div>
         <div className={styles.cardQuerySelectFilters}>
           <SelectComponent
+            key={`set-${filterKey}`}
             options={setFiltersOptions}
-            labelText={"Filter by Set: "}
+            labelText={isMobile ? "Set: " : "Filter by Set: "}
             inputId={"setFilters"}
             changeCallback={(value: string) =>
               setFilters({ ...filters, set: value })
             }
           />
           <SelectComponent
+            key={`rarity-${filterKey}`}
             options={rarityFiltersOptions}
-            labelText={"Filter by Rarity: "}
+            labelText={isMobile ? "Rarity: " : "Filter by Rarity: "}
             inputId={"rarityFilters"}
             changeCallback={(value: string) =>
               setFilters({ ...filters, rarity: value })

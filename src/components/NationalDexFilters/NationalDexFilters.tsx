@@ -43,7 +43,7 @@ export default function NationalDexFilters({
         <div className={styles.nationalDexHeader}>
           <h2>Filters</h2>
           <span>
-            Showing {filteredCount} of {totalCount} Pokemon
+            {filteredCount} of {totalCount} Pokemon
           </span>
         </div>
         <div className={styles.nationalDexAcquiredFilter}>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { Pokemon } from "@/types";
 import styles from "./NationalDexGridItemMobile.module.scss";
 import { useToggleAcquisitionStatus } from "@/hooks/useCollection";
@@ -14,9 +13,6 @@ export default function NationalDexGridItemMobile({
   openPane,
 }: NationalDexGridItemProps) {
   const toggleMutation = useToggleAcquisitionStatus();
-  const [acquisitionState, setAcquisitionState] = useState<boolean>(
-    pokemon.acquired,
-  );
 
   const renderLang = pokemon.language.includes("English") ? "ENG" : "JPN";
   const rarity = pokemon.rarity || "";
@@ -24,7 +20,7 @@ export default function NationalDexGridItemMobile({
   return (
     <div
       key={pokemon.id}
-      className={`${styles.itemCardMobile} ${acquisitionState ? styles.acquired : ""} ${styles.twoCorners}`}
+      className={`${styles.itemCardMobile} ${pokemon.acquired ? styles.acquired : ""} ${styles.twoCorners}`}
     >
       <div className={""} style={{ width: "100%" }}>
         <div className={styles.itemCardInfoMobile}>
@@ -46,14 +42,14 @@ export default function NationalDexGridItemMobile({
           >
             View
           </button>
-          {!acquisitionState ? (
+          {!pokemon.acquired ? (
             <button
+              className={styles.itemCardAcquireButton}
               disabled={toggleMutation.isPending}
               onClick={() => {
                 // This triggers the mutation which updates the cache
                 // and makes the Progress Bar react!
                 toggleMutation.mutate(Number(pokemon.id));
-                setAcquisitionState(!acquisitionState);
               }}
             >
               {toggleMutation.isPending ? "Saving..." : "Acquired?"}

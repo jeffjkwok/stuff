@@ -20,9 +20,13 @@
 }
 
 .gridHeadersMobile {
+  position: sticky;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  top: 0;
+  z-index: 100;
+  background-color: #fff;
+  padding-bottom: 1rem;
 }
 
 .gridProgressBarLabelMobile {

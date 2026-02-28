@@ -89,6 +89,7 @@ export function useToggleAcquisitionStatus() {
 
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["collection"] });
+      queryClient.invalidateQueries({ queryKey: ["pokemon", "merged"] });
     },
   });
 }
@@ -114,7 +115,7 @@ export function useToggleHoloReverse() {
           collection: old.collection.map((pokemon: CollectionEntry) => {
             const holoReverseStatus = pokemon.holo_reverse;
             return pokemon.dex_number === dexNumber
-              ? { ...pokemon, holoReverse: !holoReverseStatus }
+              ? { ...pokemon, holo_reverse: !holoReverseStatus }
               : pokemon;
           }),
         };
@@ -135,6 +136,7 @@ export function useToggleHoloReverse() {
 
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["collection"] });
+      queryClient.invalidateQueries({ queryKey: ["pokemon", "merged"] });
     },
   });
 }
@@ -179,6 +181,7 @@ export function useToggleLanguage() {
 
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["collection"] });
+      queryClient.invalidateQueries({ queryKey: ["pokemon", "merged"] });
     },
   });
 }
@@ -308,6 +311,7 @@ export function useAssignCardToCollectionEntry() {
       queryClient.invalidateQueries({
         queryKey: ["collection", variables.dexNumber],
       });
+      queryClient.invalidateQueries({ queryKey: ["pokemon", "merged"] });
     },
   });
 }

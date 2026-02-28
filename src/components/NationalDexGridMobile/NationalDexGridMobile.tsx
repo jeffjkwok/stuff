@@ -48,7 +48,7 @@ export default function NationalDexGridMobile({
 
   return (
     <>
-      <div className={styles.gridHeaderMobile}>
+      <div className={styles.gridHeadersMobile}>
         <CollectionProgress />
 
         <NationalDexFilters

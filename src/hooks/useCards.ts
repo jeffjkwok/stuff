@@ -28,10 +28,12 @@ export function useGetSearchFilters(name: string) {
     queryKey: ["cardSearch", name],
     queryFn: () => cardAPI.searchByName(name),
     select: (data) => {
-      const uniqueSets = [...new Set(data.cards.map((card) => card.set.name))];
+      const uniqueSets = [
+        ...new Set(data.cards.map((card) => card.set.name)),
+      ].sort();
       const uniqueRarities = [
         ...new Set(data.cards.map((card) => card.rarity)),
-      ];
+      ].sort();
       return {
         setFilter: uniqueSets,
         rarityFilter: uniqueRarities,

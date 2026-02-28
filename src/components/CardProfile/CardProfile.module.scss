@@ -9,13 +9,12 @@
   img {
     max-width: 25%;
     height: auto;
-    max-height: 250px;
+    max-height: 150px;
     filter: grayscale(1);
+  }
 
-    @media (min-width: 425px) {
-      max-width: 33%;
-      max-height: 185px;
-    }
+  button {
+    color: black;
   }
 }
 
@@ -47,11 +46,60 @@
   flex-direction: column;
   gap: 0.5rem;
   right: 0;
-  top: 2rem;
+  top: 3rem;
+
+  @media (min-width: 426px) {
+    top: 2rem;
+  }
 
   button {
     padding: 0 0.5rem;
     min-width: 105px;
     background-color: transparent;
   }
+}
+
+%pixelButton {
+  padding: 10px 24px;
+  background-color: #d4d0c8;
+  cursor: pointer;
+  color: black;
+
+  /* The magic — different colors per side, CSS handles the diagonal corner automatically */
+  border-width: 2px;
+  border-style: solid;
+  border-color: #ffffff #6b6b7a #6b6b7a #ffffff; /* top right bottom left */
+
+  /* Optional: double border for the classic Win98 look */
+  outline: 1px solid;
+  outline-color: #b0adb8 #2d2d3a #2d2d3a #b0adb8;
+
+  &:active {
+    border-color: #b0adb8 #2d2d3a #2d2d3a #b0adb8;
+    outline-color: #6b6b7a #ffffff #ffffff #6b6b7a;
+    transform: grayscale(1);
+  }
+}
+
+.cardProfileToggleButton {
+  @extend %pixelButton;
+}
+
+.cardProfileRemoveButton {
+  @extend %pixelButton;
+  color: #fff !important;
+  background-color: #c9251d !important;
+  outline-color: #000;
+}
+
+.cardProfileUnassignButton {
+  @extend %pixelButton;
+  background-color: #ecb431 !important;
+}
+
+.cardProfileAssignButton {
+  @extend %pixelButton;
+  background-color: #1c9715 !important;
+  outline-color: #000;
+  color: #fff !important;
 }

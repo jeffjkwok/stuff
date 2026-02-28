@@ -98,3 +98,25 @@ button {
   width: auto;
   margin-right: 0.25rem;
 }
+
+.itemCardAcquireButton {
+  padding: 10px 24px;
+  background-color: #d4d0c8;
+  cursor: pointer;
+  color: black;
+
+  /* The magic — different colors per side, CSS handles the diagonal corner automatically */
+  border-width: 2px;
+  border-style: solid;
+  border-color: #ffffff #6b6b7a #6b6b7a #ffffff; /* top right bottom left */
+
+  /* Optional: double border for the classic Win98 look */
+  outline: 1px solid;
+  outline-color: #b0adb8 #2d2d3a #2d2d3a #b0adb8;
+
+  &:active {
+    border-color: #b0adb8 #2d2d3a #2d2d3a #b0adb8;
+    outline-color: #6b6b7a #ffffff #ffffff #6b6b7a;
+    transform: grayscale(1);
+  }
+}

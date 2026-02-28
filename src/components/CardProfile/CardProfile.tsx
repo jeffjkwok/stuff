@@ -33,7 +33,7 @@ export default function CardProfile({ pokemon }: CardProfileProps) {
   return (
     <>
       <div className={styles.cardProfileMobile}>
-        <h2>{pokemon.name}</h2>
+        <h2>{`${pokemon.name} #${pokemon.id}`}</h2>
 
         <img
           className={`${profile?.acquired ? styles.acquired : ""}`}
@@ -44,6 +44,7 @@ export default function CardProfile({ pokemon }: CardProfileProps) {
         {profile?.card_id && (
           <div className={styles.cardProfileToggles}>
             <button
+              className={styles.cardProfileToggleButton}
               onClick={() => toggleLanguageMutation.mutate(dexId)}
               disabled={toggleLanguageMutation.isPending}
             >
@@ -52,6 +53,7 @@ export default function CardProfile({ pokemon }: CardProfileProps) {
 
             {holoReverseInclusion.includes(profile.rarity) && (
               <button
+                className={styles.cardProfileToggleButton}
                 onClick={() => toggleHoloReverseMutation.mutate(dexId)}
                 disabled={toggleHoloReverseMutation.isPending}
               >
@@ -71,13 +73,21 @@ export default function CardProfile({ pokemon }: CardProfileProps) {
 
         <div className={styles.cardProfileCTAs}>
           <button
+            className={
+              profile?.acquired
+                ? styles.cardProfileUnassignButton
+                : styles.cardProfileAssignButton
+            }
             onClick={() => toggleAcquisitionMutation.mutate(dexId)}
             disabled={toggleAcquisitionMutation.isPending}
           >
             {profile?.acquired ? "Unacquire" : "Mark as Acquired"}
           </button>
           {profile.card_id && (
-            <button onClick={() => console.log("Remove logic here")}>
+            <button
+              className={styles.cardProfileRemoveButton}
+              onClick={() => console.log("Remove logic here")}
+            >
               Remove Card?
             </button>
           )}

@@ -4,7 +4,7 @@ import type { CollectionEntry } from "@/types";
 
 export function useMergedPokemon() {
   return useQuery({
-    queryKey: ["pokemon", "merged"],
+    queryKey: ["pokemon", "merged", "collection"],
     queryFn: async () => {
       const [nationalDex, collectionData] = await Promise.all([
         nationalDexAPI.getAll(),
