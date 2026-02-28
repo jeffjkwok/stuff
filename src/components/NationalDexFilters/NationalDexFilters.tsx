@@ -83,6 +83,7 @@ export default function NationalDexFilters({
           <input
             type="text"
             placeholder="e.g. Pikachu or 25"
+            onFocus={() => setFilters({ ...filters, search: "" })}
             value={filters.search}
             onChange={(e) => updateFilters({ search: e.target.value })}
           />
