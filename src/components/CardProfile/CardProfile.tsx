@@ -12,6 +12,7 @@ import {
 } from "@/hooks/useCollection";
 import { useMergedPokemon } from "@/hooks/useMergedLists";
 import { cardAPI } from "@/lib/api";
+import { resolveCardImageUrl } from "@/utils/imageUrl";
 
 interface CardProfileProps {
   pokemon: Pokemon;
@@ -75,7 +76,7 @@ export default function CardProfile({ pokemon, onSelect }: CardProfileProps) {
 
         <img
           className={`${entry?.acquired ? styles.acquired : ""}`}
-          src={entry?.image ? `${entry.image}/high.webp` : mysterSrc}
+          src={resolveCardImageUrl(entry?.image) ?? mysterSrc}
           alt={pokemon.name}
         />
 

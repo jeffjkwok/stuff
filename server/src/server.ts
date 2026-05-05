@@ -15,6 +15,7 @@ import {
 // import { getCard, getCardsByName } from "./graphQL/tcgdex";
 import { getCachedCard, getCachedQueryByName } from "./redis/tcgdexCache";
 import { pingRedis } from "./redis/redis";
+import { ensureCardImage, isSupabaseConfigured } from "./storage/supabase";
 
 const app = express();
 const PORT = 3001;
@@ -162,12 +163,27 @@ app.post("/api/collection/card/:dexNumber", async (req, res) => {
 
   try {
     const dexNumber = parseInt(req.params.dexNumber);
+
+    // Mirror the image to Supabase and store *that* URL in the sheet so we
+    // never depend on TCGdex's CDN at view time.
+    if (cardData.cardId && cardData.image && isSupabaseConfigured()) {
+      try {
+        cardData.image = await ensureCardImage(cardData.cardId, cardData.image);
+      } catch (err) {
+        console.error(
+          `[Supabase] mirror failed for ${cardData.cardId}, keeping TCGdex URL:`,
+          err,
+        );
+      }
+    }
+
     const collectionItem = await updateCardData(dexNumber, cardData);
     res.json({ success: true, entry: collectionItem });
   } catch (error) {
     console.error(
       `Error assigning card to Collection row ${req.params.dexNumber}: ${error}`,
     );
+    res.status(500).json({ error: "Failed to assign card" });
   }
 });
 

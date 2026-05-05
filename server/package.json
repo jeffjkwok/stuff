@@ -8,9 +8,11 @@
     "dev": "tsx watch src/server.ts",
     "start": "tsx src/server.ts",
     "fetch-cards": "tsx src/scripts/fetchWotcCards.ts",
-    "fetch-sprites": "tsx src/scripts/fetchSprites.ts"
+    "fetch-sprites": "tsx src/scripts/fetchSprites.ts",
+    "migrate-images": "tsx src/scripts/migrateCardImages.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.105.3",
     "cors": "^2.8.6",
     "dotenv": "^17.2.4",
     "express": "^5.2.1",
