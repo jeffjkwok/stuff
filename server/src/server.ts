@@ -16,6 +16,10 @@ import {
 import { getCachedCard, getCachedQueryByName } from "./redis/tcgdexCache";
 import { pingRedis } from "./redis/redis";
 import { ensureCardImage, isSupabaseConfigured } from "./storage/supabase";
+import {
+  getOrFetch as getOrFetchImage,
+  stats as imageProxyStats,
+} from "./storage/imageProxyCache";
 
 const app = express();
 const PORT = 3001;
@@ -187,30 +191,48 @@ app.post("/api/collection/card/:dexNumber", async (req, res) => {
   }
 });
 
-app.get("/api/image-proxy", async (req, res) => {
-  const { url } = req.query;
+const ALLOWED_IMAGE_HOSTS = new Set(["assets.tcgdex.net"]);
 
-  // Validate it's from the expected asset host
+app.get("/api/image-proxy", async (req, res) => {
+  const rawUrl = req.query.url;
+  if (typeof rawUrl !== "string" || !rawUrl) {
+    return res.status(400).json({ error: "Missing url param" });
+  }
+
+  let parsed: URL;
   try {
-    const parsed = new URL(url);
-    if (parsed.hostname !== "assets.tcgdex.net") {
-      // swap in the actual hostname
-      return res.status(403).json({ error: "Blocked" });
-    }
+    parsed = new URL(rawUrl);
   } catch {
     return res.status(400).json({ error: "Invalid URL" });
   }
+  if (!ALLOWED_IMAGE_HOSTS.has(parsed.hostname)) {
+    return res.status(403).json({ error: "Blocked host" });
+  }
 
   try {
-    const response = await fetch(url);
-    const buffer = await response.arrayBuffer();
+    const { entry, hit } = await getOrFetchImage(rawUrl, async () => {
+      const upstream = await fetch(rawUrl);
+      if (!upstream.ok) {
+        throw new Error(`upstream ${upstream.status}`);
+      }
+      return {
+        body: Buffer.from(await upstream.arrayBuffer()),
+        contentType: upstream.headers.get("content-type") || "image/webp",
+      };
+    });
 
-    res.set("Content-Type", response.headers.get("content-type"));
-    res.set("Cache-Control", "public, max-age=86400");
-    res.send(Buffer.from(buffer));
+    res.set("Content-Type", entry.contentType);
+    res.set("Cache-Control", "public, max-age=31536000, immutable");
+    res.set("X-Cache", hit ? "HIT" : "MISS");
+    return res.send(entry.body);
   } catch (err) {
-    res.status(500).json({ error: `Image fetch failed, ${err}` });
+    console.error("[image-proxy]", rawUrl, (err as Error).message);
+    return res.status(502).json({ error: "Image fetch failed" });
   }
+});
+
+app.get("/api/image-proxy/stats", (_req, res) => {
+  res.json(imageProxyStats());
 });
 
 app.listen(PORT, () => {
