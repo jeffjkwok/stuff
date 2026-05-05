@@ -18,6 +18,28 @@
   }
 }
 
+.cardProfileNav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.5rem;
+
+  button {
+    flex: 1;
+    padding: 0.25rem 0.5rem;
+    background-color: transparent;
+    font-size: 0.75rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
 .cardProfileInfoMobile {
   p {
     font-family: "undefined" !important;

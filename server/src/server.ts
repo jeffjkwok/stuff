@@ -167,6 +167,32 @@ app.post("/api/collection/card/:dexNumber", async (req, res) => {
   }
 });
 
+app.get("/api/image-proxy", async (req, res) => {
+  const { url } = req.query;
+
+  // Validate it's from the expected asset host
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname !== "assets.tcgdex.net") {
+      // swap in the actual hostname
+      return res.status(403).json({ error: "Blocked" });
+    }
+  } catch {
+    return res.status(400).json({ error: "Invalid URL" });
+  }
+
+  try {
+    const response = await fetch(url);
+    const buffer = await response.arrayBuffer();
+
+    res.set("Content-Type", response.headers.get("content-type"));
+    res.set("Cache-Control", "public, max-age=86400");
+    res.send(Buffer.from(buffer));
+  } catch (err) {
+    res.status(500).json({ error: `Image fetch failed, ${err}` });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
   console.log(`Mock data loaded! `);

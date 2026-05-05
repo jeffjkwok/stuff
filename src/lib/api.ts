@@ -1,8 +1,9 @@
-/* eslint-disable  @typescript-eslint/no-explicit-any */
 import type {
+  AssignCardVariables,
   CardSearchResponse,
   CollectionData,
   CollectionEntry,
+  TCGdexCard,
 } from "@/types";
 
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3001";
@@ -37,30 +38,12 @@ export const collectionAPI = {
       method: "POST",
     }),
 
-  assignCard: (
-    dexNumber: number,
-    cardId: string,
-    setName: string,
-    setNumber: string,
-    rarity: string,
-    image: string,
-    illustrator: string,
-    language: string,
-  ) => {
-    return fetchAPI<{ success: boolean }>(`/api/collection/card/${dexNumber}`, {
+  assignCard: ({ dexNumber, ...cardData }: AssignCardVariables) =>
+    fetchAPI<{ success: boolean }>(`/api/collection/card/${dexNumber}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        cardId,
-        setName,
-        setNumber,
-        rarity,
-        image,
-        illustrator,
-        language,
-      }),
-    });
-  },
+      body: JSON.stringify(cardData),
+    }),
 
   getEntry: (dexNumber: number) =>
     fetchAPI<{ entry: CollectionEntry }>(`/api/collection/${dexNumber}`),
@@ -68,13 +51,22 @@ export const collectionAPI = {
 
 // Card Endpoint to get data from TCGDex
 export const cardAPI = {
-  getById: (cardId: string) => fetchAPI<any>(`/api/card/${cardId}`),
+  getById: (cardId: string) => fetchAPI<TCGdexCard>(`/api/card/${cardId}`),
 
   searchByName: (name: string) =>
     fetchAPI<CardSearchResponse>(`/api/search/${name}`),
 };
 
-// National Dex information
+// National Dex information — minimal shape needed by the client.
+interface NationalDexEntry {
+  id: string;
+  name: string;
+  generation?: number;
+  region?: string;
+  sprite?: string;
+  originalArtwork?: string;
+}
+
 export const nationalDexAPI = {
-  getAll: () => fetchAPI<any[]>(`/api/nationaldex`),
+  getAll: () => fetchAPI<NationalDexEntry[]>(`/api/nationaldex`),
 };

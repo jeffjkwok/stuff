@@ -48,7 +48,7 @@ export default function HomePage() {
           setIsPaneOpen(false);
         }}
       >
-        {selected && <CardProfile pokemon={selected} />}
+        {selected && <CardProfile pokemon={selected} onSelect={setSelected} />}
       </SlidingPane>
     </>
   );

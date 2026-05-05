@@ -1,6 +1,7 @@
 import type { Pokemon } from "@/types";
 import styles from "./NationalDexGridItem.module.scss";
 import { useEffect, useRef, useState } from "react";
+import { useToggleAcquisitionStatus } from "@/hooks/useCollection";
 
 interface NationalDexGridItemProps {
   pokemon: Pokemon;
@@ -14,31 +15,13 @@ export default function NationalDexGridItem({
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [dynamicClipPathValue, setDynamicClipPathValue] = useState<number>(0);
 
-  const [acquisitionState, setAcquisitionState] = useState<boolean>(
-    pokemon.acquired,
-  );
+  const toggleAcquisition = useToggleAcquisitionStatus();
 
   const getClipPathValue = function () {
     if (cardRef.current && imageRef.current) {
       setDynamicClipPathValue(
         imageRef.current.clientWidth - cardRef.current.clientWidth,
       );
-    }
-  };
-
-  const updateAcquistion = async (dexNumber: number) => {
-    try {
-      const response = await fetch(`/api/collection/acquired/${dexNumber}`, {
-        method: "POST",
-      });
-
-      const data = await response.json();
-      // rudimentary update local state to true
-      if (data.acquired) {
-        setAcquisitionState(true);
-      }
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -66,12 +49,7 @@ export default function NationalDexGridItem({
   return (
     <div
       key={pokemon.id}
-      className={`${styles.card} ${acquisitionState ? styles.acquired : ""}`}
-      onClick={() => {
-        console.log(
-          `This should open a modal/drawer #${pokemon.id}, ${pokemon.name} `,
-        );
-      }}
+      className={`${styles.card} ${pokemon.acquired ? styles.acquired : ""}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       ref={cardRef}
@@ -79,11 +57,10 @@ export default function NationalDexGridItem({
       <div className={styles.cardInfo}>
         <h3 className={styles.cardName}>{pokemon.name}</h3>
         <p className={styles.cardNumber}>#{pokemon.id}</p>
-        {!acquisitionState && (
+        {!pokemon.acquired && (
           <button
-            onClick={() => {
-              updateAcquistion(Number(pokemon.id));
-            }}
+            disabled={toggleAcquisition.isPending}
+            onClick={() => toggleAcquisition.mutate(Number(pokemon.id))}
           >
             Acquired?
           </button>

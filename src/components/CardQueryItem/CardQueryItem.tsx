@@ -1,5 +1,4 @@
 import styles from "./CardQueryItem.module.scss";
-import cardbackSrc from "../../assets/pokemonback.png";
 import type { TCGdexCard } from "@/types";
 import { useAssignCardToCollectionEntry } from "@/hooks/useCollection";
 
@@ -31,12 +30,12 @@ export default function CardQueryItem({
 
   return (
     <div className={styles.cardQueryItemMobile}>
-      <img
+      {/* <img
         loading="lazy"
         className=""
         src={card.image ? `${card.image}/low.webp` : cardbackSrc}
         alt={card.name}
-      />
+      /> */}
       <div className={styles.cardQueryItemInfoMobile}>
         <div style={{ flex: "1" }}>
           <b className={styles.cardQueryItemSetName} title={card.set.name}>
