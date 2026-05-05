@@ -14,6 +14,7 @@ import {
 } from "./googleSheets";
 // import { getCard, getCardsByName } from "./graphQL/tcgdex";
 import { getCachedCard, getCachedQueryByName } from "./redis/tcgdexCache";
+import { pingRedis } from "./redis/redis";
 
 const app = express();
 const PORT = 3001;
@@ -51,10 +52,11 @@ app.use(
 
 app.use(express.json());
 
-app.get("/api/health", (req, res) => {
-  res.json({
-    status: "ok",
-    message: "Server is running!",
+app.get("/api/health", async (_req, res) => {
+  const redis = await pingRedis();
+  res.status(redis.ok ? 200 : 503).json({
+    status: redis.ok ? "ok" : "degraded",
+    redis,
     timestamp: new Date().toISOString(),
   });
 });
@@ -64,7 +66,8 @@ app.get("/api/search/:name", async (req, res) => {
     const response = await getCachedQueryByName(req.params.name);
     res.json(response);
   } catch (error) {
-    console.log(error);
+    console.error("Error searching cards:", error);
+    res.status(502).json({ error: "Upstream search failed" });
   }
 });
 
@@ -73,7 +76,8 @@ app.get("/api/card/:cardId", async (req, res) => {
     const response = await getCachedCard(req.params.cardId);
     res.json(response);
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching card:", error);
+    res.status(502).json({ error: "Upstream card fetch failed" });
   }
 });
 
