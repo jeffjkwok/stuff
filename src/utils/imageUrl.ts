@@ -2,13 +2,23 @@
  * Resolve an `image` field stored on a card or collection entry to a usable URL.
  *
  * Handles:
- *  - TCGdex base path (no extension) — appends `/high.webp`.
+ *  - TCGdex base path (no extension) — appends `/${quality}.webp`.
  *  - Self-hosted full URL (Supabase, R2, etc.) — returned unchanged.
  */
 export function resolveCardImageUrl(
   image: string | undefined | null,
+  quality: "low" | "high" = "high",
 ): string | null {
   if (!image) return null;
   if (/\.(webp|png|jpe?g)$/i.test(image)) return image;
-  return `${image}/high.webp`;
+  return `${image}/${quality}.webp`;
+}
+
+export function viaImageProxy(url: string | null): string | null {
+  if (!url) return null;
+  // If the URL is from TCGdex assets, proxy it through our backend to cache it
+  if (url.includes("assets.tcgdex.net")) {
+    return `/api/image-proxy?url=${encodeURIComponent(url)}`;
+  }
+  return url;
 }
