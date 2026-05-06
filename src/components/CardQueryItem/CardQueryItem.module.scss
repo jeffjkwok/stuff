@@ -1,3 +1,5 @@
+@import "../../styles/buttons";
+
 .cardQueryItemMobile {
   display: flex;
   flex-direction: column;
@@ -8,24 +10,46 @@
     width: 150px;
     flex: 0 0 150px;
   }
+}
+
+.cardImageContainer {
+  position: relative;
+  height: 250px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 0.5rem;
 
   img {
     width: 100%;
-    max-height: 250px;
+    max-height: 100%;
     border-radius: 0.5rem;
     object-fit: contain;
+  }
+}
+
+.cardQueryItemLink {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  &:hover {
+    opacity: 0.9;
   }
 }
 
 .cardQueryItemInfoMobile {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  justify-content: space-between;
   flex: 1;
 
-  b,
-  button {
+  * {
+    font-family: "undefined" !important;
+  }
+
+  b {
     font-size: 0.75rem;
   }
 }
@@ -33,7 +57,11 @@
 .cardQueryItemMeta {
   display: flex;
   flex-direction: column;
-  gap: 0.125rem;
+  gap: 0.25rem;
+
+  * {
+    font-weight: bold !important;
+  }
 }
 
 .cardQueryItemName {
@@ -43,23 +71,24 @@
 }
 
 .cardQueryItemSetName {
+  font-size: 0.75rem;
   white-space: normal;
   overflow-wrap: anywhere;
   word-break: break-word;
   max-width: 100%;
   display: block;
-  opacity: 0.85;
-}
-
-.cardQueryItemRarity {
-  font-size: 0.7rem;
   opacity: 0.8;
 }
 
-.cardQueryItemArtist {
-  font-size: 0.7rem;
-  font-style: italic;
+.cardQueryItemDetails,
+.cardQueryItemRarity {
+  font-size: 0.65rem;
   opacity: 0.7;
+}
+
+.cardQueryItemArtist {
+  font-size: 0.65rem;
+  opacity: 0.6;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -70,4 +99,11 @@
   flex-direction: column;
   gap: 0.5rem;
   margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.cardAssignButton {
+  @extend %pixelButton;
+  padding: 0.25rem 0.5rem !important;
+  font-size: 0.65rem;
 }
