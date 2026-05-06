@@ -77,7 +77,35 @@ export default function CardQuery({
   };
 
   if (isLoading) {
-    return <>Loading...</>;
+    return (
+      <div className={styles.cardQueryMobile}>
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div
+            key={i}
+            style={{
+              width: "120px",
+              flex: "0 0 120px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.5rem",
+            }}
+          >
+            <div
+              className="skeleton"
+              style={{ width: "100%", height: "160px", borderRadius: "8px" }}
+            />
+            <div
+              className="skeleton"
+              style={{ width: "80%", height: "16px", borderRadius: "4px" }}
+            />
+            <div
+              className="skeleton"
+              style={{ width: "60%", height: "16px", borderRadius: "4px" }}
+            />
+          </div>
+        ))}
+      </div>
+    );
   }
 
   if (!pokemonQuery) {

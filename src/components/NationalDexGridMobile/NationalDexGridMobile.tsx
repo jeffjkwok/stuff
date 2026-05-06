@@ -43,7 +43,19 @@ export default function NationalDexGridMobile({
   }, [mergedData, filters]);
 
   // 3. Handle Loading and Error views
-  if (isLoading) return <div className={styles.loading}>Loading Dex...</div>;
+  if (isLoading) {
+    return (
+      <div className={styles.gridMobile}>
+        {Array.from({ length: 12 }).map((_, i) => (
+          <div
+            key={i}
+            className="skeleton"
+            style={{ width: "100%", height: "260px", borderRadius: "10px" }}
+          />
+        ))}
+      </div>
+    );
+  }
   if (isError) return <div className={styles.error}>Error loading data.</div>;
 
   return (
