@@ -63,7 +63,9 @@ export default function CardProfile({ pokemon, onSelect }: CardProfileProps) {
   return (
     <>
       <div className={styles.cardProfileMobile}>
-        <h2>{`${pokemon.name} #${pokemon.id}`}</h2>
+        <h2>
+          {entry?.card_name || pokemon.name} #{pokemon.id}
+        </h2>
 
         <div className={styles.cardProfileMainDisplay}>
           <div className={styles.navContainerLeft}>
