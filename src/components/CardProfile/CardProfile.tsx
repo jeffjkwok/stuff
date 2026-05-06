@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import styles from "./CardProfile.module.scss";
 import mysterSrc from "../../assets/mystery.png";
 import type { Pokemon } from "@/types/pokemon";
@@ -25,6 +25,9 @@ export default function CardProfile({ pokemon, onSelect }: CardProfileProps) {
   const dexId = Number(pokemon.id);
   const { data: profile, isLoading } = useGetEntryInCollection(dexId);
   const { data: mergedData } = useMergedPokemon();
+
+  const [loadedImageId, setLoadedImageId] = useState<string | null>(null);
+  const imageLoaded = loadedImageId === String(pokemon.id);
 
   const toggleAcquisitionMutation = useToggleAcquisitionStatus();
   const toggleLanguageMutation = useToggleLanguage();
@@ -53,9 +56,6 @@ export default function CardProfile({ pokemon, onSelect }: CardProfileProps) {
     });
   };
 
-  if (isLoading)
-    return <div className={styles.loading}>Loading Profile...</div>;
-
   // useGetEntryInCollection may return either { entry } or the entry directly.
   const entry =
     profile && "entry" in profile ? profile.entry : (profile ?? null);
@@ -65,20 +65,74 @@ export default function CardProfile({ pokemon, onSelect }: CardProfileProps) {
       <div className={styles.cardProfileMobile}>
         <h2>{`${pokemon.name} #${pokemon.id}`}</h2>
 
-        <div className={styles.cardProfileNav}>
-          <button onClick={() => prev && onSelect(prev)} disabled={!prev}>
-            ← {prev ? `#${prev.id} ${prev.name}` : "Start"}
-          </button>
-          <button onClick={() => next && onSelect(next)} disabled={!next}>
-            {next ? `#${next.id} ${next.name}` : "End"} →
-          </button>
-        </div>
+        <div className={styles.cardProfileMainDisplay}>
+          <div className={styles.navContainerLeft}>
+            <button
+              className={styles.navButton}
+              onClick={() => prev && onSelect(prev)}
+              disabled={!prev}
+            >
+              <span className={styles.navDesktop}>
+                ← {prev ? `#${prev.id} ${prev.name}` : "Start"}
+              </span>
+              <span className={styles.navMobile}>←</span>
+            </button>
+          </div>
 
-        <img
-          className={`${entry?.acquired ? styles.acquired : ""}`}
-          src={resolveCardImageUrl(entry?.image) ?? mysterSrc}
-          alt={pokemon.name}
-        />
+          <div
+            style={{
+              position: "relative",
+              width: "108px",
+              height: "150px",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            {(isLoading || !imageLoaded) && (
+              <div
+                className="skeleton"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "8px",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  zIndex: 1,
+                }}
+              />
+            )}
+
+            {!isLoading && (
+              <img
+                className={`${entry?.acquired ? styles.acquired : ""}`}
+                src={resolveCardImageUrl(entry?.image) ?? mysterSrc}
+                alt={pokemon.name}
+                onLoad={() => setLoadedImageId(String(pokemon.id))}
+                style={{
+                  opacity: imageLoaded ? 1 : 0,
+                  transition: "opacity 0.2s ease-in-out",
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain",
+                }}
+              />
+            )}
+          </div>
+
+          <div className={styles.navContainerRight}>
+            <button
+              className={styles.navButton}
+              onClick={() => next && onSelect(next)}
+              disabled={!next}
+            >
+              <span className={styles.navDesktop}>
+                {next ? `#${next.id} ${next.name}` : "End"} →
+              </span>
+              <span className={styles.navMobile}>→</span>
+            </button>
+          </div>
+        </div>
 
         {entry?.card_id && (
           <div className={styles.cardProfileToggles}>
@@ -102,35 +156,67 @@ export default function CardProfile({ pokemon, onSelect }: CardProfileProps) {
           </div>
         )}
 
-        {entry?.card_id && (
-          <div className={styles.cardProfileInfoMobile}>
-            {entry.set_name && <p>Set Name: {entry.set_name}</p>}
-            {entry.illustrator && <p>Artist: {entry.illustrator}</p>}
-            {entry.rarity && <p>Rarity: {entry.rarity}</p>}
+        {isLoading ? (
+          <div
+            className={styles.cardProfileInfoMobile}
+            style={{ alignItems: "center" }}
+          >
+            <div
+              className="skeleton"
+              style={{
+                width: "120px",
+                height: "16px",
+                marginBottom: "8px",
+                borderRadius: "4px",
+              }}
+            />
+            <div
+              className="skeleton"
+              style={{
+                width: "100px",
+                height: "16px",
+                marginBottom: "8px",
+                borderRadius: "4px",
+              }}
+            />
+            <div
+              className="skeleton"
+              style={{ width: "80px", height: "16px", borderRadius: "4px" }}
+            />
           </div>
+        ) : (
+          entry?.card_id && (
+            <div className={styles.cardProfileInfoMobile}>
+              {entry.set_name && <p>Set Name: {entry.set_name}</p>}
+              {entry.illustrator && <p>Artist: {entry.illustrator}</p>}
+              {entry.rarity && <p>Rarity: {entry.rarity}</p>}
+            </div>
+          )
         )}
 
-        <div className={styles.cardProfileCTAs}>
-          <button
-            className={
-              entry?.acquired
-                ? styles.cardProfileUnassignButton
-                : styles.cardProfileAssignButton
-            }
-            onClick={() => toggleAcquisitionMutation.mutate(dexId)}
-            disabled={toggleAcquisitionMutation.isPending}
-          >
-            {entry?.acquired ? "Unacquire" : "Mark as Acquired"}
-          </button>
-          {entry?.card_id && (
+        {!isLoading && (
+          <div className={styles.cardProfileCTAs}>
             <button
-              className={styles.cardProfileRemoveButton}
-              onClick={handleCardRemoval}
+              className={
+                entry?.acquired
+                  ? styles.cardProfileUnassignButton
+                  : styles.cardProfileAssignButton
+              }
+              onClick={() => toggleAcquisitionMutation.mutate(dexId)}
+              disabled={toggleAcquisitionMutation.isPending}
             >
-              Remove Card?
+              {entry?.acquired ? "Unacquire" : "Mark as Acquired"}
             </button>
-          )}
-        </div>
+            {entry?.card_id && (
+              <button
+                className={styles.cardProfileRemoveButton}
+                onClick={handleCardRemoval}
+              >
+                Remove Card?
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
       <hr />
