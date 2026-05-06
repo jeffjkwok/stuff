@@ -14,11 +14,13 @@ export function resolveCardImageUrl(
   return `${image}/${quality}.webp`;
 }
 
+const API_BASE = import.meta.env.VITE_API_URL || "";
+
 export function viaImageProxy(url: string | null): string | null {
   if (!url) return null;
   // If the URL is from TCGdex assets, proxy it through our backend to cache it
   if (url.includes("assets.tcgdex.net")) {
-    return `/api/image-proxy?url=${encodeURIComponent(url)}`;
+    return `${API_BASE}/api/image-proxy?url=${encodeURIComponent(url)}`;
   }
   return url;
 }
