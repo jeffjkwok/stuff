@@ -24,6 +24,7 @@ export default function CardQueryItem({
     addCardMutation.mutate({
       dexNumber: nationalDexNumber,
       cardId: card.id,
+      cardName: card.name,
       setName: card.set.name,
       setNumber: card.localId,
       rarity: card.rarity,

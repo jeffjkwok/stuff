@@ -31,6 +31,7 @@ export interface AcquistionToggleResponse {
 export interface AssignCardVariables {
   dexNumber: number;
   cardId: string;
+  cardName: string;
   setName: string;
   setNumber: string;
   rarity: string;

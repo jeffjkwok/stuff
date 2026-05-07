@@ -18,6 +18,7 @@ export interface CollectionData {
 
 export interface CardData {
   cardId: string;
+  cardName: string;
   setName: string;
   setNumber: string;
   rarity: string;

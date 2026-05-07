@@ -3,6 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import type { CollectionEntry, CollectionData, CardData } from "./types";
+import nationalDex from "./data/updatedDex.json";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -114,6 +115,16 @@ export async function updateCardData(
   cardData: CardData,
 ): Promise<CollectionEntry> {
   const rowNumber = dexNumber + 1;
+
+  await sheets.spreadsheets.values.update({
+    spreadsheetId: SPREADSHEET_ID,
+    range: `MyCollection!B${rowNumber}`,
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values: [[cardData.cardName]],
+    },
+  });
+
   const range = `MyCollection!D${rowNumber}:K${rowNumber}`;
 
   await sheets.spreadsheets.values.update({
@@ -142,6 +153,21 @@ export async function deleteCardDataFromEntry(
   dexNumber: number,
 ): Promise<void> {
   const rowNumber = dexNumber + 1;
+
+  const basePokemon = nationalDex.find(
+    (p: { id: string; name: string }) => parseInt(p.id) === dexNumber,
+  );
+  const baseName = basePokemon ? basePokemon.name : "";
+
+  await sheets.spreadsheets.values.update({
+    spreadsheetId: SPREADSHEET_ID,
+    range: `MyCollection!B${rowNumber}`,
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values: [[baseName]],
+    },
+  });
+
   const range = `MyCollection!D${rowNumber}:K${rowNumber}`;
 
   await sheets.spreadsheets.values.update({
